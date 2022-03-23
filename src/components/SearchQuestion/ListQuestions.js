@@ -3,9 +3,13 @@ import { useRecoilValue } from 'recoil';
 import { resQues } from '../../atoms';
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../atoms";
+import MCQ from "./MCQ"
+import Match from "./Match"
 
 // MUI
 import { Box } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import Divider from '@mui/material/Divider';
 
 const ListQuestions = () => {
 
@@ -23,10 +27,14 @@ const ListQuestions = () => {
 
     return (
         <Box>
-            {<pre>{JSON.stringify(questions, null, 4)}</pre>}
             {questions.map((ques) => (
-                <Box key={ques.id}>
-
+                <Box key={ques.id} sx={{ mx: 1, my: 2 }}>
+                    <Typography variant="body1" gutterBottom sx={{ fontWeight: 'bold' }}>
+                        {ques.question_data.title}
+                    </Typography>
+                    {(ques.question_data.type === 'a') && <MCQ data={ques.option_data} />}
+                    {(ques.question_data.type === 'd') && <Match data={ques.match_data} />}
+                    <Divider />
                 </Box>
             ))}
         </Box>
