@@ -17,6 +17,7 @@ import { question } from "../../atoms";
 
 const EnterQuestion = ({ qType }) => {
   const [ques, setQues] = useRecoilState(question);
+  const [tags, setTags] = useState([]);
 
   const handleQuesChange = (e) => {
     console.log(ques.title);
@@ -25,47 +26,6 @@ const EnterQuestion = ({ qType }) => {
       title: e.target.value,
     }));
   };
-
-  // const handleCorrectMCQChange = (e) => {
-  //   setQues((ques) => ({
-  //     // console.log(ques.options);
-  //     // const opts = ques.options.map((o) => {
-  //     //   let newO = {};
-  //     //   if (o.correct) {
-  //     //     newO.option = e.target.value;
-  //     //     newO.correct = o.correct;
-  //     //     return newO;
-  //     //   }
-  //     //   return o;
-  //     // });
-
-  //     ...ques,
-  //     option: e.target.value,
-  //   }));
-  // };
-
-  // const handleWrongMCQChange = (e) => {
-  //   setQues((ques) => {
-  //     console.log(ques.options);
-  //     const opts = ques.options.map((o) => {
-  //       let newO = {};
-  //       if (o.correct) {
-  //         newO.option = e.target.value;
-  //         newO.correct = o.correct;
-  //         return newO;
-  //       }
-  //       return o;
-  //     });
-
-  //     const newQues = {
-  //       title: ques.title,
-  //       options: opts,
-  //     };
-
-  //     return newQues;
-  //   });
-  // };
-  // console.log(question);
 
   const handleTextAnsChange = (e) => {
     setQues((q) => ({
@@ -101,7 +61,7 @@ const EnterQuestion = ({ qType }) => {
         <Grid item xs={12}>
           {qType === "a" ? (
             <>
-              {/* <TextField
+              <TextField
                 required
                 id="corr-option"
                 name="corr-option"
@@ -109,17 +69,15 @@ const EnterQuestion = ({ qType }) => {
                 value={ques.option}
                 fullWidth
                 variant="standard"
-                onChange={handleCorrectMCQChange}
+                // onChange={handleCorrectMCQChange}
               />
               <Box sx={{ mt: 4 }}>
                 <ReactTagInput
-                  tags={ques.wrongOptions}
-                  onChange={(newTags) =>
-                    setQues((q) => ({ ...q, wrongOptions: newTags }))
-                  }
+                  tags={tags}
+                  onChange={(newTags) => setTags(newTags)}
                   placeholder="Type wrong options and press enter"
                 />
-              </Box> */}
+              </Box>
             </>
           ) : qType === "c" || qType === "b" ? (
             <TextField

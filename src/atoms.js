@@ -41,3 +41,9 @@ export const question = atom({
     ],
   },
 });
+
+export const resQues = atom({
+  key: "resQues",
+  default: [],
+  effects_UNSTABLE: [localStorageEffect("resQues")],
+});
