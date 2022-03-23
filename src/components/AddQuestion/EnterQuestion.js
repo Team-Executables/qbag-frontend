@@ -2,6 +2,7 @@ import { difficulty, questionTypes } from "../../utils";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 
+import { useRecoilState } from "recoil";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -12,18 +13,72 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { question } from "../../atoms";
 
-const EnterQuestion = ({ qType, question, setQuestion }) => {
-  const [MCQoptions, setMCQOptions] = useState([]);
+const EnterQuestion = ({ qType }) => {
+  const [ques, setQues] = useRecoilState(question);
 
-  const handleMCQChange = (e) => {
-    setQuestion({
-      title: e.target.value.trim(),
-      options: {},
-    });
+  const handleQuesChange = (e) => {
+    console.log(ques.title);
+    setQues((ques) => ({
+      ...ques,
+      title: e.target.value,
+    }));
   };
 
-  // const handleChange =
+  // const handleCorrectMCQChange = (e) => {
+  //   setQues((ques) => ({
+  //     // console.log(ques.options);
+  //     // const opts = ques.options.map((o) => {
+  //     //   let newO = {};
+  //     //   if (o.correct) {
+  //     //     newO.option = e.target.value;
+  //     //     newO.correct = o.correct;
+  //     //     return newO;
+  //     //   }
+  //     //   return o;
+  //     // });
+
+  //     ...ques,
+  //     option: e.target.value,
+  //   }));
+  // };
+
+  // const handleWrongMCQChange = (e) => {
+  //   setQues((ques) => {
+  //     console.log(ques.options);
+  //     const opts = ques.options.map((o) => {
+  //       let newO = {};
+  //       if (o.correct) {
+  //         newO.option = e.target.value;
+  //         newO.correct = o.correct;
+  //         return newO;
+  //       }
+  //       return o;
+  //     });
+
+  //     const newQues = {
+  //       title: ques.title,
+  //       options: opts,
+  //     };
+
+  //     return newQues;
+  //   });
+  // };
+  // console.log(question);
+
+  const handleTextAnsChange = (e) => {
+    setQues((q) => ({
+      ...q,
+      options: [
+        {
+          option: e.target.value,
+          correct: true,
+        },
+      ],
+    }));
+    console.log(ques.options);
+  };
 
   return (
     <>
@@ -34,34 +89,37 @@ const EnterQuestion = ({ qType, question, setQuestion }) => {
         <Grid item xs={12}>
           <TextField
             required
-            id="question"
+            id="title"
             name="title"
             label="Question"
             fullWidth
             variant="standard"
-            value={question.title}
-            // onChange={handleChange}
+            value={ques.title}
+            onChange={handleQuesChange}
           />
         </Grid>
         <Grid item xs={12}>
           {qType === "a" ? (
             <>
-              <TextField
+              {/* <TextField
                 required
                 id="corr-option"
                 name="corr-option"
                 label="Correct Option"
+                value={ques.option}
                 fullWidth
                 variant="standard"
-                onChange={handleMCQChange}
+                onChange={handleCorrectMCQChange}
               />
               <Box sx={{ mt: 4 }}>
                 <ReactTagInput
-                  tags={MCQoptions}
-                  onChange={(newTags) => setMCQOptions(newTags)}
+                  tags={ques.wrongOptions}
+                  onChange={(newTags) =>
+                    setQues((q) => ({ ...q, wrongOptions: newTags }))
+                  }
                   placeholder="Type wrong options and press enter"
                 />
-              </Box>
+              </Box> */}
             </>
           ) : qType === "c" || qType === "b" ? (
             <TextField
@@ -71,7 +129,8 @@ const EnterQuestion = ({ qType, question, setQuestion }) => {
               label="Answer"
               fullWidth
               variant="standard"
-              // onChange={handleChange}
+              value={ques.options[0].option}
+              onChange={handleTextAnsChange}
             />
           ) : (
             ""

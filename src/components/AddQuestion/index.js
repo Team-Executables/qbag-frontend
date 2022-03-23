@@ -1,6 +1,10 @@
 import { useState } from "react";
 import QuestionDetails from "./QuestionDetails";
 import EnterQuestion from "./EnterQuestion";
+import ReviewQuestion from "./ReviewQuestion";
+import axiosInstance from "../../axios";
+import { useRecoilValue } from "recoil";
+import { question } from "../../atoms";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -17,7 +21,7 @@ const steps = ["Question Details", "Enter Question", "Review question"];
 export default function AddQuestion() {
   const initialQuestionDetails = {
     type: "a",
-    class: "",
+    grade: "",
     board: "",
     marks: "",
     difficulty: "",
@@ -25,18 +29,43 @@ export default function AddQuestion() {
     keywords: [],
   };
 
-  const initialQuestion = {
-    title: "",
-  };
+  // const initialQuestion = {
+  //   title: "",
+  //   options: [],
+  // };
 
   const [activeStep, setActiveStep] = useState(0);
   const [questionDetails, setQuestionDetails] = useState(
     initialQuestionDetails
   );
-  const [question, setQuestion] = useState(initialQuestion);
+  // const [question, setQuestion] = useState(initialQuestion);
   const [kwords, setKwords] = useState([]);
+  const q = useRecoilValue(question);
 
-  const handleNext = () => setActiveStep(activeStep + 1);
+  const handleNext = () => {
+    if (activeStep + 1 === steps.length) {
+      let objToSend = {
+        ...questionDetails,
+        ...q,
+        match: [],
+      };
+      console.log(objToSend);
+      axiosInstance
+        .post(`questions/create`, objToSend)
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 400) {
+            console.log(err);
+          }
+        });
+    } else {
+      setActiveStep(activeStep + 1);
+    }
+  };
 
   const handleBack = () => setActiveStep(activeStep - 1);
 
@@ -50,11 +79,11 @@ export default function AddQuestion() {
         }
         return false;
       case 1:
-        return true;
+        return false;
       case 2:
         return false;
       default:
-        return true;
+        return false;
     }
   };
 
@@ -73,12 +102,12 @@ export default function AddQuestion() {
         return (
           <EnterQuestion
             qType={questionDetails.type}
-            question={question}
-            setQuestion={setQuestion}
+            // question={question}
+            // setQuestion={setQuestion}
           />
         );
       case 2:
-        return <div>Review your question</div>;
+        return <ReviewQuestion />;
       default:
         throw new Error("Unknown step");
     }
@@ -110,7 +139,7 @@ export default function AddQuestion() {
             {activeStep === steps.length ? (
               <>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Thank you for your Question.
                 </Typography>
                 <Typography variant="subtitle1">
                   Your order number is #2001539. We have emailed your order

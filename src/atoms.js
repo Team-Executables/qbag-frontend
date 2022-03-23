@@ -28,3 +28,16 @@ export const isLoggedIn = atom({
   default: false,
   effects_UNSTABLE: [localStorageEffect("isLoggedIn")],
 });
+
+export const question = atom({
+  key: "question",
+  default: {
+    title: "",
+    options: [
+      {
+        option: "",
+        correct: true,
+      },
+    ],
+  },
+});
