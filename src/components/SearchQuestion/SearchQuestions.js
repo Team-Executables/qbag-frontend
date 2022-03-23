@@ -3,6 +3,8 @@ import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../atoms";
 import axiosInstance from "../../axios";
+import { useRecoilState } from "recoil";
+import { resQues } from "../../atoms";
 
 //MUI
 import Avatar from "@mui/material/Avatar";
@@ -36,6 +38,8 @@ const SearchQuestions = () => {
 
   const [formData, updateFormData] = useState(initialFormData);
 
+  const [resQ, setResQ] = useRecoilState(resQues);
+
   const handleChange = (e) => {
 
     const newState = {
@@ -59,7 +63,9 @@ const SearchQuestions = () => {
       .post(`questions/retrieve`, formData)
       .then((res) => {
         console.log(res);
+        setResQ(res.data);
         console.log(res.data);
+        navigate("/dashboard/question/list");
       })
       .catch((err) => {
         console.log(err);
