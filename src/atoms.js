@@ -57,3 +57,14 @@ export const resQues = atom({
   default: [],
   effects_UNSTABLE: [localStorageEffect("resQues")],
 });
+
+export const matchPairs = atom({
+  key: "matchPairs",
+  default: [
+    {
+      key: "",
+      value: ""
+    }
+  ],
+  effects_UNSTABLE: [localStorageEffect("matchPairs")],
+});

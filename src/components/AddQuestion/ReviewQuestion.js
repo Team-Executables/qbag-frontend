@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { question, MCQoptions } from "../../atoms";
+import { question, MCQoptions, matchPairs } from "../../atoms";
 import ReactTagInput from "@pathofdev/react-tag-input";
 
 import Grid from "@mui/material/Grid";
@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 const ReviewQuestion = ({ qType }) => {
   const ques = useRecoilValue(question);
   const mcqs = useRecoilValue(MCQoptions);
+  const matchFields = useRecoilValue(matchPairs);
   const tagz = mcqs.map((m) => m.option);
 
   return (
@@ -61,7 +62,27 @@ const ReviewQuestion = ({ qType }) => {
           />
         </Grid>
       ) : (
-        ""
+        <div className="container">
+          {
+            matchFields.map((data, index) => {
+              const {key, value} = data;
+                return(
+                  <div className="row my-3" key={index}>
+                    <div className="col">
+                      <div className="form-group">
+                        <input type="text" value={key} name="key" className="form-control" placeholder="Key" />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="form-group">
+                        <input type="text" value={value} name="value" className="form-control" placeholder="value" />
+                      </div>
+                    </div>
+                  </div>
+                )
+              })
+          }
+        </div>
       )}
     </Grid>
   );

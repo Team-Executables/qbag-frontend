@@ -4,7 +4,7 @@ import EnterQuestion from "./EnterQuestion";
 import ReviewQuestion from "./ReviewQuestion";
 import axiosInstance from "../../axios";
 import { useRecoilValue } from "recoil";
-import { question } from "../../atoms";
+import { question, matchPairs } from "../../atoms";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -43,6 +43,7 @@ export default function AddQuestion() {
   const [kwords, setKwords] = useState([]);
   const [respons, setRespons] = useState([]);
   const q = useRecoilValue(question);
+  const mp = useRecoilValue(matchPairs);
 
   const handleNext = () => {
     if (questionDetails.type === "a") {
@@ -77,6 +78,35 @@ export default function AddQuestion() {
           ...questionDetails,
           ...q,
           match: [],
+        };
+        console.log(objToSend);
+        axiosInstance
+          .post(`questions/create`, objToSend)
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status === 409) {
+              console.log(err.response);
+              setRespons(err.response);
+            }
+            if (err.response.status === 400) {
+              console.log(err);
+            }
+          });
+      }
+    }
+    if (questionDetails.type === "d") {
+      let que = JSON.parse(JSON.stringify(q))
+      que['options'] = []
+
+      if (activeStep + 1 === steps.length) {
+        let objToSend = {
+          ...questionDetails,
+          ...que,
+          match: mp,
         };
         console.log(objToSend);
         axiosInstance

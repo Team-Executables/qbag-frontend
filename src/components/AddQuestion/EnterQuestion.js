@@ -13,13 +13,38 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { question, MCQoptions } from "../../atoms";
+import { question, MCQoptions, matchPairs } from "../../atoms";
 
 const EnterQuestion = ({ qType }) => {
   const [ques, setQues] = useRecoilState(question);
   const [mcqs, setMcqs] = useRecoilState(MCQoptions);
   const tagz = mcqs.map((m) => m.option);
   const [tags, setTags] = useState([...tagz.splice(1)]);
+  const [matchFields, setMatchFields] = useRecoilState(matchPairs);
+ 
+  const addMatchField = () => {
+    setMatchFields([
+      ...matchFields,
+      {
+        key: '',
+        value: ''
+      }
+    ])
+  }
+
+  const removeMatchFields = (index)=>{
+    const rows = [...matchFields];
+    rows.splice(index, 1);
+    setMatchFields(rows);
+  }
+
+  const handleMatchChange = (index, evnt)=>{  
+    const { name, value } = evnt.target;
+    let list = [...JSON.parse(JSON.stringify(matchFields))];
+    list[index][name] = value;
+    console.log(list);
+    setMatchFields(list);
+  }
 
   const handleQuesChange = (e) => {
     console.log(ques.title);
@@ -119,7 +144,39 @@ const EnterQuestion = ({ qType }) => {
               onChange={handleTextAnsChange}
             />
           ) : (
-            ""
+            <div className="container">
+              {
+                matchFields.map((data, index) => {
+                  const {key, value} = data;
+                    return(
+                      <div className="row my-3" key={index}>
+                        <div className="col">
+                          <div className="form-group">
+                            <input type="text" onChange={(evnt)=>handleMatchChange(index, evnt)} value={key} name="key" className="form-control" placeholder="Key" />
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div className="form-group">
+                            <input type="text" onChange={(evnt)=>handleMatchChange(index, evnt)} value={value} name="value" className="form-control" placeholder="value" />
+                          </div>
+                        </div>
+                        <div className="col">
+                          {
+                            (matchFields.length !== 1) ?
+                              <button className="btn btn-outline-danger" onClick={removeMatchFields}>Remove</button> :
+                              ''
+                          }
+                        </div>
+                      </div>
+                    )
+                  })
+              }
+              <div className="row">
+                <div className="col-sm-12">
+                  <button className="btn btn-outline-success" onClick={addMatchField}>Add New</button>
+                </div>
+              </div>
+            </div>
           )}
         </Grid>
       </Grid>
