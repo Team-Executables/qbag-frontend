@@ -11,9 +11,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import ReactTagInput from "@pathofdev/react-tag-input";
 
-const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
-  const [kwords, setKwords] = useState([]);
-
+const QuestionDetails = ({
+  questionDetails,
+  setQuestionDetails,
+  kwords,
+  setKwords,
+}) => {
   const handleChange = (e) => {
     setQuestionDetails((ques) => ({
       ...ques,
@@ -65,28 +68,27 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
           />
         </Grid>
         <Grid item xs={12}>
-          {/* <FormControl variant="outlined" fullWidth> */}
-          <InputLabel id="select-label">Question Type</InputLabel>
-          <Select
-            name="type"
-            labelId="select-label"
-            id="select"
-            value={questionDetails.type}
-            label="Question Type"
-            required
-            onChange={handleChange}
-          >
-            {Object.entries(questionTypes).map((type) => (
-              <MenuItem key={type[0]} value={type[1]}>
-                {type[0]}
-              </MenuItem>
-            ))}
-          </Select>
-          {/* </FormControl> */}
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel id="select-label">Question Type</InputLabel>
+            <Select
+              name="type"
+              labelId="select-label"
+              id="select"
+              value={questionDetails.type}
+              label="Question Type"
+              required
+              onChange={handleChange}
+            >
+              {Object.entries(questionTypes).map((type) => (
+                <MenuItem key={type[0]} value={type[1]}>
+                  {type[0]}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>
-          {/* <FormControl variant="outlined" fullWidth> */}
-          <Box sx={{ w: "" }}>
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="select-labell">Difficulty</InputLabel>
             <Select
               name="difficulty"
@@ -103,8 +105,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
                 </MenuItem>
               ))}
             </Select>
-          </Box>
-          {/* </FormControl> */}
+          </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -134,7 +135,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
         <Grid item xs={12}>
           <Box sx={{ mt: 4 }}>
             <ReactTagInput
-              tags={kwords}
+              tags={questionDetails.keywords}
               onChange={(newWords) => setKwords(newWords)}
               removeOnBackspace
               placeholder="Type keywords and press enter"

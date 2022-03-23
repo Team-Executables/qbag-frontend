@@ -34,6 +34,7 @@ export default function AddQuestion() {
     initialQuestionDetails
   );
   const [question, setQuestion] = useState(initialQuestion);
+  const [kwords, setKwords] = useState([]);
 
   const handleNext = () => setActiveStep(activeStep + 1);
 
@@ -64,6 +65,8 @@ export default function AddQuestion() {
           <QuestionDetails
             questionDetails={questionDetails}
             setQuestionDetails={setQuestionDetails}
+            kwords={kwords}
+            setKwords={setKwords}
           />
         );
       case 1:
