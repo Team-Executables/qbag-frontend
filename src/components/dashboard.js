@@ -27,7 +27,7 @@ const Dashboard = ({ mobileOpen, handleDrawerToggle }) => {
   const log = useRecoilValue(isLoggedIn);
   const uData = useRecoilValue(userData);
   const navigate = useNavigate();
-  console.log(uData);
+
   useEffect(() => {
     if (!log) {
       navigate("/");

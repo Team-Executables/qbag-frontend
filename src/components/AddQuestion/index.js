@@ -22,7 +22,7 @@ export default function AddQuestion() {
     marks: "",
     difficulty: "",
     subject: "",
-    keywords: "",
+    keywords: [],
   };
 
   const initialQuestion = {
@@ -44,7 +44,7 @@ export default function AddQuestion() {
       case 0:
         for (let [key, value] of Object.entries(questionDetails)) {
           if (value.length === 0) {
-            return false;
+            return true;
           }
         }
         return false;

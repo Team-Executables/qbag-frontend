@@ -116,7 +116,7 @@ export default function LMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={() => navigate("/dashboard/add-question")}>
+        <MenuItem onClick={() => navigate("/dashboard/question/")}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

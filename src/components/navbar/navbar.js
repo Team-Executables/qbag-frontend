@@ -33,7 +33,7 @@ const classes = {
 export default function Navbar({ handleDrawerToggle }) {
   const login = useRecoilValue(isLoggedIn);
   const navigate = useNavigate();
-  console.log(window.location);
+
   return (
     <div sx={classes.root}>
       <AppBar

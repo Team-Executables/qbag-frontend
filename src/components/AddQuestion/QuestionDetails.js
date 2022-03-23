@@ -15,28 +15,28 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
   const [kwords, setKwords] = useState([]);
 
   const handleChange = (e) => {
-    setQuestionDetails({
-      ...questionDetails,
+    setQuestionDetails((ques) => ({
+      ...ques,
       [e.target.name]:
         typeof e.target.value === "string"
           ? e.target.value.trim()
           : e.target.value,
-    });
+    }));
     console.log(questionDetails);
   };
 
   useEffect(() => {
-    setQuestionDetails({
-      ...questionDetails,
+    setQuestionDetails((ques) => ({
+      ...ques,
       keywords: kwords,
-    });
+    }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kwords]);
 
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Question Details
+        Question Details{console.log(kwords)}
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -48,6 +48,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
             fullWidth
             variant="standard"
             onChange={handleChange}
+            value={questionDetails.board}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -60,30 +61,32 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
             type="number"
             variant="standard"
             onChange={handleChange}
+            value={questionDetails.class}
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="select-label">Question Type</InputLabel>
-            <Select
-              name="type"
-              labelId="select-label"
-              id="select"
-              value={questionDetails.type}
-              label="Question Type"
-              required
-              onChange={handleChange}
-            >
-              {Object.entries(questionTypes).map((type) => (
-                <MenuItem key={type[0]} value={type[1]}>
-                  {type[0]}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          {/* <FormControl variant="outlined" fullWidth> */}
+          <InputLabel id="select-label">Question Type</InputLabel>
+          <Select
+            name="type"
+            labelId="select-label"
+            id="select"
+            value={questionDetails.type}
+            label="Question Type"
+            required
+            onChange={handleChange}
+          >
+            {Object.entries(questionTypes).map((type) => (
+              <MenuItem key={type[0]} value={type[1]}>
+                {type[0]}
+              </MenuItem>
+            ))}
+          </Select>
+          {/* </FormControl> */}
         </Grid>
         <Grid item xs={12}>
-          <FormControl variant="outlined" fullWidth>
+          {/* <FormControl variant="outlined" fullWidth> */}
+          <Box sx={{ w: "" }}>
             <InputLabel id="select-labell">Difficulty</InputLabel>
             <Select
               name="difficulty"
@@ -100,7 +103,8 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </Box>
+          {/* </FormControl> */}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -112,6 +116,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
             type="number"
             variant="standard"
             onChange={handleChange}
+            value={questionDetails.marks}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -123,6 +128,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
             fullWidth
             variant="standard"
             onChange={handleChange}
+            value={questionDetails.subject}
           />
         </Grid>
         <Grid item xs={12}>
@@ -130,6 +136,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
             <ReactTagInput
               tags={kwords}
               onChange={(newWords) => setKwords(newWords)}
+              removeOnBackspace
               placeholder="Type keywords and press enter"
               id="Topic/Keywords"
               name="keywords"
