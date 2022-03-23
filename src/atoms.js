@@ -42,6 +42,16 @@ export const question = atom({
   },
 });
 
+export const MCQoptions = atom({
+  key: "MCQoptions",
+  default: [
+    {
+      option: "",
+      correct: true,
+    },
+  ],
+});
+
 export const resQues = atom({
   key: "resQues",
   default: [],

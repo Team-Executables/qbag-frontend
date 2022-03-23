@@ -13,11 +13,13 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { question } from "../../atoms";
+import { question, MCQoptions } from "../../atoms";
 
 const EnterQuestion = ({ qType }) => {
   const [ques, setQues] = useRecoilState(question);
-  const [tags, setTags] = useState([]);
+  const [mcqs, setMcqs] = useRecoilState(MCQoptions);
+  const tagz = mcqs.map((m) => m.option);
+  const [tags, setTags] = useState([...tagz.splice(1)]);
 
   const handleQuesChange = (e) => {
     console.log(ques.title);
@@ -38,6 +40,32 @@ const EnterQuestion = ({ qType }) => {
       ],
     }));
     console.log(ques.options);
+  };
+
+  const handleCorrectMCQChange = (e) => {
+    setMcqs((m) => {
+      let newM = [...JSON.parse(JSON.stringify(m))];
+      newM[0].option = e.target.value;
+      console.log(newM);
+      return newM;
+    });
+  };
+
+  const handleWrongMCQChange = (newTags) => {
+    console.log(newTags);
+    const newWrongMcq = newTags.map((m) => ({
+      option: m,
+      correct: false,
+    }));
+    console.log(newWrongMcq);
+    setMcqs((m) => {
+      let newM = [];
+      newM[0] = JSON.parse(JSON.stringify(m[0]));
+      newM = newM.concat(newWrongMcq);
+      console.log(newM);
+      return newM;
+    });
+    setTags(newTags);
   };
 
   return (
@@ -66,15 +94,15 @@ const EnterQuestion = ({ qType }) => {
                 id="corr-option"
                 name="corr-option"
                 label="Correct Option"
-                value={ques.option}
+                value={mcqs[0].option}
                 fullWidth
                 variant="standard"
-                // onChange={handleCorrectMCQChange}
+                onChange={handleCorrectMCQChange}
               />
               <Box sx={{ mt: 4 }}>
                 <ReactTagInput
                   tags={tags}
-                  onChange={(newTags) => setTags(newTags)}
+                  onChange={(newTags) => handleWrongMCQChange(newTags)}
                   placeholder="Type wrong options and press enter"
                 />
               </Box>

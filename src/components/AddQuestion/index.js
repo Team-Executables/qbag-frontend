@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import QuestionDetails from "./QuestionDetails";
 import EnterQuestion from "./EnterQuestion";
 import ReviewQuestion from "./ReviewQuestion";
@@ -14,6 +14,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
 import CssBaseline from "@mui/material/CssBaseline";
 
 const steps = ["Question Details", "Enter Question", "Review question"];
@@ -40,31 +41,63 @@ export default function AddQuestion() {
   );
   // const [question, setQuestion] = useState(initialQuestion);
   const [kwords, setKwords] = useState([]);
+  const [respons, setRespons] = useState([]);
   const q = useRecoilValue(question);
 
   const handleNext = () => {
-    if (activeStep + 1 === steps.length) {
-      let objToSend = {
-        ...questionDetails,
-        ...q,
-        match: [],
-      };
-      console.log(objToSend);
-      axiosInstance
-        .post(`questions/create`, objToSend)
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response.status === 400) {
-            console.log(err);
-          }
-        });
-    } else {
-      setActiveStep(activeStep + 1);
+    if (questionDetails.type === "a") {
+      if (activeStep + 1 === steps.length) {
+        let objToSend = {
+          ...questionDetails,
+          ...q,
+        };
+        console.log(objToSend);
+        axiosInstance
+          .post(`questions/create`, objToSend)
+          .then((res) => {
+            console.log(res);
+            // console.log(res.data);
+            setRespons(res);
+          })
+          .catch((err) => {
+            // console.log(err);
+            if (err.response.status === 409) {
+              console.log(err.response);
+              setRespons(err.response);
+            }
+            if (err.response.status === 400) {
+              console.log(err);
+            }
+          });
+      }
     }
+    if (questionDetails.type === "b" || questionDetails.type === "c") {
+      if (activeStep + 1 === steps.length) {
+        let objToSend = {
+          ...questionDetails,
+          ...q,
+          match: [],
+        };
+        console.log(objToSend);
+        axiosInstance
+          .post(`questions/create`, objToSend)
+          .then((res) => {
+            console.log(res);
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+            if (err.response.status === 409) {
+              console.log(err.response);
+              setRespons(err.response);
+            }
+            if (err.response.status === 400) {
+              console.log(err);
+            }
+          });
+      }
+    }
+    setActiveStep(activeStep + 1);
   };
 
   const handleBack = () => setActiveStep(activeStep - 1);
@@ -99,15 +132,9 @@ export default function AddQuestion() {
           />
         );
       case 1:
-        return (
-          <EnterQuestion
-            qType={questionDetails.type}
-            // question={question}
-            // setQuestion={setQuestion}
-          />
-        );
+        return <EnterQuestion qType={questionDetails.type} />;
       case 2:
-        return <ReviewQuestion />;
+        return <ReviewQuestion qType={questionDetails.type} />;
       default:
         throw new Error("Unknown step");
     }
@@ -138,14 +165,27 @@ export default function AddQuestion() {
           <>
             {activeStep === steps.length ? (
               <>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your Question.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
+                {respons.status === 201 ? (
+                  <>
+                    <Typography variant="h5" gutterBottom>
+                      Thank you for your Question.
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      {respons.data.question_data.title}
+                    </Typography>
+                  </>
+                ) : respons.status === 409 ? (
+                  <>
+                    <Typography variant="h5" gutterBottom>
+                      OOPS! a similar question already exists!
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      {respons.data.similar_question_data.title}
+                    </Typography>
+                  </>
+                ) : (
+                  <Skeleton variant="text" />
+                )}
               </>
             ) : (
               <>
