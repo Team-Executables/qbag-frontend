@@ -23,7 +23,12 @@ const ListQuestions = () => {
 
     return (
         <Box>
-            <pre>{JSON.stringify(questions, null, 4) }</pre>
+            {<pre>{JSON.stringify(questions, null, 4)}</pre>}
+            {questions.map((ques) => (
+                <Box key={ques.id}>
+
+                </Box>
+            ))}
         </Box>
     );
 }
