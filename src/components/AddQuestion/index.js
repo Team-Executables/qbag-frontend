@@ -22,7 +22,7 @@ export default function AddQuestion() {
     marks: "",
     difficulty: "",
     subject: "",
-    keywords: "",
+    keywords: [],
   };
 
   const initialQuestion = {
@@ -34,6 +34,7 @@ export default function AddQuestion() {
     initialQuestionDetails
   );
   const [question, setQuestion] = useState(initialQuestion);
+  const [kwords, setKwords] = useState([]);
 
   const handleNext = () => setActiveStep(activeStep + 1);
 
@@ -44,7 +45,7 @@ export default function AddQuestion() {
       case 0:
         for (let [key, value] of Object.entries(questionDetails)) {
           if (value.length === 0) {
-            return false;
+            return true;
           }
         }
         return false;
@@ -64,6 +65,8 @@ export default function AddQuestion() {
           <QuestionDetails
             questionDetails={questionDetails}
             setQuestionDetails={setQuestionDetails}
+            kwords={kwords}
+            setKwords={setKwords}
           />
         );
       case 1:
