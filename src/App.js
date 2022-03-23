@@ -10,6 +10,7 @@ import NotFound from "./components/NotFound";
 import Navbar from "./components/navbar/navbar";
 import AddQuestion from "./components/AddQuestion";
 import SearchQuestions from "./components/SearchQuestion/SearchQuestions";
+import ListQuestions from "./components/SearchQuestion/ListQuestions";
 import GeneratePaper from "./components/GeneratePaper";
 
 // MUI
@@ -52,6 +53,7 @@ function App() {
         >
           <Route path="" element={<AddQuestion />} />
           <Route path="search" element={<SearchQuestions />} />
+          <Route path="list" element={<ListQuestions />} />
           <Route path="paper" element={<GeneratePaper />} />
         </Route>
         <Route path="/register" element={<Register />} />
