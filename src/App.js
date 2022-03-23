@@ -9,7 +9,7 @@ import ResetPassword from "./components/resetpassword";
 import NotFound from "./components/NotFound";
 import Navbar from "./components/navbar/navbar";
 import AddQuestion from "./components/AddQuestion";
-import SearchQuestions from "./components/SearchQuestions";
+import SearchQuestions from "./components/SearchQuestion/SearchQuestions";
 import GeneratePaper from "./components/GeneratePaper";
 
 // MUI
