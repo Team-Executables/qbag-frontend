@@ -153,7 +153,7 @@ export default function SignIn() {
 
           setLogin(true);
 
-          navigate("/dashboard");
+          navigate("/dashboard/question");
         })
         .catch((err) => {
           console.log(err);
@@ -181,7 +181,7 @@ export default function SignIn() {
 
   useEffect(() => {
     if (login) {
-      navigate("/dashboard");
+      navigate("/dashboard/add-question");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

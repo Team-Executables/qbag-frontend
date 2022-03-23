@@ -38,7 +38,7 @@ export default function Register() {
 
   useEffect(() => {
     if (log) {
-      navigate("/dashboard");
+      navigate("/dashboard/question");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

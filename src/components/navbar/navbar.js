@@ -39,7 +39,7 @@ export default function Navbar({ handleDrawerToggle }) {
       <AppBar
         position="static"
         sx={
-          window.location.pathname.match("/dashboard")
+          window.location.pathname.match("/dashboard/question")
             ? {
                 width: { sm: `calc(100% - ${drawerWidth}px)` },
                 ml: { sm: `${drawerWidth}px` },

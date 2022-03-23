@@ -9,6 +9,8 @@ import ResetPassword from "./components/resetpassword";
 import NotFound from "./components/NotFound";
 import Navbar from "./components/navbar/navbar";
 import AddQuestion from "./components/AddQuestion";
+import SearchQuestions from "./components/SearchQuestions";
+import GeneratePaper from "./components/GeneratePaper";
 
 // MUI
 import { teal, amber } from "@mui/material/colors";
@@ -40,7 +42,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/question"
           element={
             <Dashboard
               mobileOpen={mobileOpen}
@@ -48,9 +50,9 @@ function App() {
             />
           }
         >
-          <Route path="add-question" element={<AddQuestion />} />
-          <Route path="search-questions" element={<div>search-question</div>} />
-          <Route path="generate-paper" element={<div>generate-paper</div>} />
+          <Route path="" element={<AddQuestion />} />
+          <Route path="search" element={<SearchQuestions />} />
+          <Route path="paper" element={<GeneratePaper />} />
         </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

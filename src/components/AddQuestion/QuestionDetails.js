@@ -30,6 +30,7 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
       ...questionDetails,
       keywords: kwords,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kwords]);
 
   return (
@@ -134,15 +135,6 @@ const QuestionDetails = ({ questionDetails, setQuestionDetails }) => {
               name="keywords"
             />
           </Box>
-          <TextField
-            required
-            id="Topic/Keywords"
-            name="keywords"
-            label="Topic / Keywords"
-            fullWidth
-            variant="standard"
-            onChange={handleChange}
-          />
         </Grid>
       </Grid>
     </>

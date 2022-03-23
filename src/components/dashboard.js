@@ -1,6 +1,6 @@
 import { useNavigate, Outlet } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { isLoggedIn } from "../atoms";
+import { isLoggedIn, userData } from "../atoms";
 import { useEffect } from "react";
 
 //MUI
@@ -18,15 +18,16 @@ import Toolbar from "@mui/material/Toolbar";
 const drawerWidth = 240;
 
 const buttons = [
-  { text: "Add Question", route: "add-question" },
-  { text: "Search Questions", route: "search-questions" },
-  { text: "Generate Question Paper", route: "generate-paper" },
+  { text: "Add Question", route: "question" },
+  { text: "Search Questions", route: "question/search" },
+  { text: "Generate Question Paper", route: "question/paper" },
 ];
 
 const Dashboard = ({ mobileOpen, handleDrawerToggle }) => {
   const log = useRecoilValue(isLoggedIn);
+  const uData = useRecoilValue(userData);
   const navigate = useNavigate();
-
+  console.log(uData);
   useEffect(() => {
     if (!log) {
       navigate("/");
@@ -38,20 +39,35 @@ const Dashboard = ({ mobileOpen, handleDrawerToggle }) => {
       <Toolbar sx={{ bgcolor: "primary.main" }} />
       <Divider />
       <List>
-        {buttons.map((btn, index) => (
-          <div key={btn.route}>
+        {uData.user_type === "teacher" ? (
+          buttons.map((btn, index) => (
+            <div key={btn.route}>
+              <ListItem
+                button
+                onClick={() => navigate(`/dashboard/${btn.route}`)}
+              >
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={btn.text} />
+              </ListItem>
+              {index % 2 === 0 ? <Divider /> : null}
+            </div>
+          ))
+        ) : (
+          <>
             <ListItem
               button
-              onClick={() => navigate(`/dashboard/${btn.route}`)}
+              onClick={() => navigate(`/dashboard/${buttons[0].route}`)}
             >
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <InboxIcon />
               </ListItemIcon>
-              <ListItemText primary={btn.text} />
+              <ListItemText primary={buttons[0].text} />
             </ListItem>
-            {index % 2 !== 0 ? <Divider /> : null}
-          </div>
-        ))}
+            <Divider />
+          </>
+        )}
       </List>
     </div>
   );
