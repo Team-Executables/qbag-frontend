@@ -28,6 +28,7 @@ const Match = (props) => {
                 <TableHead>
                 <TableRow>
                     <TableCell>Column A</TableCell>
+                    <TableCell>Answers</TableCell>
                     <TableCell>Column B</TableCell>
                 </TableRow>
                 </TableHead>
@@ -35,6 +36,7 @@ const Match = (props) => {
                     {keys.map((key, i) => (
                         <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell component="th" scope="row">{key}</TableCell>
+                            <TableCell component="th" scope="row">{values[i]}</TableCell>
                             <TableCell component="th" scope="row">{shuffledValues[i]}</TableCell>
                         </TableRow>
                     ))}
