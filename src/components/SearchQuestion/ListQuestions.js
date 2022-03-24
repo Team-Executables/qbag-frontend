@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { resQues } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../atoms";
@@ -26,7 +26,9 @@ import axiosInstance from "../../axios";
 const ListQuestions = () => {
     const navigate = useNavigate();
     const uData = useRecoilValue(userData);
-    const questions = useRecoilValue(resQues);
+    // const questions = useRecoilValue(resQues);
+    const [questions, setQuestions] = useRecoilState(resQues);
+
 
     function getKeyByValue(object, value) {
         return Object.keys(object).find((key) => object[key] === value);
@@ -41,6 +43,14 @@ const ListQuestions = () => {
                 })
                 .then((res) => {
                     console.log(res);
+                    // setQuestions((q)=> {
+                    //     let newQ = [...JSON.parse(JSON.stringify(q))];
+                    //     let objToUpdate = newQ.filter(nQ => nQ.id == id);
+                    //     objToUpdate[0].upvote+=1;
+                    //     let arrToAppend = newQ.filter(nQ => nQ.id != id);
+                    //     let finArr = arrToAppend.concat(objToUpdate);
+                    //     return finArr;
+                    // })
                     console.log(res.data);
                 })
                 .catch((err) => {
@@ -73,7 +83,7 @@ const ListQuestions = () => {
 
     return (
         <Box>
-            {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
+            <pre>{JSON.stringify(questions, null, 4)}</pre>
             <Box sx={{ mt: 3, mb: 3 }}>
                 {questions && questions.length > 0 && (
                     <Typography variant="h5">{`Board: ${questions[0].question_data.board}`}</Typography>
