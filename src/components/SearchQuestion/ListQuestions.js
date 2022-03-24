@@ -15,6 +15,7 @@ import {
     Paper,
     RadioGroup,
     IconButton,
+    Button,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -83,22 +84,27 @@ const ListQuestions = () => {
 
     return (
         <Box>
-            <pre>{JSON.stringify(questions, null, 4)}</pre>
-            <Box sx={{ mt: 3, mb: 3 }}>
-                {questions && questions.length > 0 && (
-                    <Typography variant="h5">{`Board: ${questions[0].question_data.board}`}</Typography>
-                )}
-                {questions && questions.length > 0 && (
-                    <Typography variant="h5">{`Grade: ${questions[0].question_data.grade}`}</Typography>
-                )}
-                {questions && questions.length > 0 && (
-                    <Typography variant="h5">
-                        {`Subject: ${questions[0].question_data.subject}`}
-                    </Typography>
-                )}
-                {questions && questions.length > 0 && (
-                    <Typography variant="h5">{`No. of questions: ${questions.length}`}</Typography>
-                )}
+            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
+                {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
+                <Box sx={{ mt: 3, mb: 3 }}>
+                    {questions && questions.length > 0 && (
+                        <Typography variant="h5">{`Board: ${questions[0].question_data.board}`}</Typography>
+                    )}
+                    {questions && questions.length > 0 && (
+                        <Typography variant="h5">{`Grade: ${questions[0].question_data.grade}`}</Typography>
+                    )}
+                    {questions && questions.length > 0 && (
+                        <Typography variant="h5">
+                            {`Subject: ${questions[0].question_data.subject}`}
+                        </Typography>
+                    )}
+                    {questions && questions.length > 0 && (
+                        <Typography variant="h5">{`No. of questions: ${questions.length}`}</Typography>
+                    )}
+                </Box>
+                <Box displayPrint= "none">
+                    <Button variant="contained" onClick={() => window.print()} >Export PDF</Button>
+                </Box>
             </Box>
             <Divider />
             {questions && questions.length > 0
@@ -107,7 +113,7 @@ const ListQuestions = () => {
                         <Box p={2} mt={3}>
                             <Box>
                                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                                    <Typography variant="h5" sx={{m: 0, p: 0}}>
+                                    <Typography variant="h5" sx={{ m: 0, p: 0 }}>
                                         {"Question " + (key + 1)}
                                     </Typography>
                                     <Box sx={{ display: "flex" }}>
@@ -129,7 +135,7 @@ const ListQuestions = () => {
                                     </Box>
                                 </Box>
                                 <Box sx={{ display: "flex" }}>
-                                    <Typography variant="h6" sx={{ mr: 2, mt: 0 , mb: 1 }}>
+                                    <Typography variant="h6" sx={{ mr: 2, mt: 0, mb: 1 }}>
                                         {q.question_data.marks}{" "}
                                         {q.question_data.marks > 1 ? <>marks</> : <>mark</>} {" "} &nbsp;
                                         {getKeyByValue(difficulty, q.question_data.difficulty)}

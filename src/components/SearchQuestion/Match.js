@@ -24,7 +24,7 @@ const Match = (props) => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650, my: 1 }}>
+            <Table sx={{ my: 1 }}>
                 <TableHead>
                 <TableRow>
                     <TableCell>Column A</TableCell>
