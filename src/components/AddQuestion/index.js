@@ -86,6 +86,7 @@ export default function AddQuestion() {
           .post(`questions/create`, objToSend)
           .then((res) => {
             console.log(res);
+            setRespons(res);
             console.log(res.data);
           })
           .catch((err) => {
@@ -115,6 +116,7 @@ export default function AddQuestion() {
           .post(`questions/create`, objToSend)
           .then((res) => {
             console.log(res);
+            setRespons(res);
             console.log(res.data);
           })
           .catch((err) => {

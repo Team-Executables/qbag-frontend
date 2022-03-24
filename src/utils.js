@@ -8,5 +8,5 @@ export const questionTypes = {
   MCQ: "a",
   "One Word/Sentence": "b",
   "Fill in the blanks": "c",
-  "Match the column": "d",
+  "Match the following": "d",
 };
