@@ -1,10 +1,10 @@
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import QuestionDetails from "./QuestionDetails";
 import EnterQuestion from "./EnterQuestion";
 import ReviewQuestion from "./ReviewQuestion";
 import axiosInstance from "../../axios";
 import { useRecoilValue } from "recoil";
-import { question, matchPairs } from "../../atoms";
+import { question, matchPairs, MCQoptions } from "../../atoms";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -44,15 +44,17 @@ export default function AddQuestion() {
   const [respons, setRespons] = useState([]);
   const q = useRecoilValue(question);
   const mp = useRecoilValue(matchPairs);
+  const mcqs = useRecoilValue(MCQoptions);
 
   const handleNext = () => {
     if (questionDetails.type === "a") {
       if (activeStep + 1 === steps.length) {
         let objToSend = {
           ...questionDetails,
-          ...q,
+          title: q.title,
+          options: mcqs,
         };
-        console.log(objToSend);
+        console.log({ objToSend });
         axiosInstance
           .post(`questions/create`, objToSend)
           .then((res) => {
@@ -99,8 +101,8 @@ export default function AddQuestion() {
       }
     }
     if (questionDetails.type === "d") {
-      let que = JSON.parse(JSON.stringify(q))
-      que['options'] = []
+      let que = JSON.parse(JSON.stringify(q));
+      que["options"] = [];
 
       if (activeStep + 1 === steps.length) {
         let objToSend = {

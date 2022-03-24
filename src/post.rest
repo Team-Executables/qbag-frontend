@@ -1,0 +1,30 @@
+POST http://127.0.0.1:8000/questions/create HTTP/1.1
+content-type: application/json
+
+{
+  "type": "a",
+  "grade": "10",
+  "board": "CBSE",
+  "marks": "5",
+  "difficulty": "b",
+  "subject": "Maths",
+  "keywords": [
+      "ng",
+      "gk,"
+  ],
+  "title": "ukuykuykk",
+  "options": [
+      {
+          "option": "tdyjdtyjtdyj",
+          "correct": true
+      },
+      {
+          "option": "yuk",
+          "correct": false
+      },
+      {
+          "option": "fyt",
+          "correct": false
+      }
+  ]
+}
