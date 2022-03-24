@@ -95,56 +95,54 @@ const ListQuestions = () => {
                 ? questions.map((q, key) => (
                     <Paper elevation={3} style={{ backgroundColor: "#e8f5e9" }}>
                         <Box p={2} mt={3}>
-                            <Box
-                                style={{ display: "flex", justifyContent: "space-between" }}
-                            >
-                                <div>
-                                    <Typography variant="body1">
+                            <Box>
+                                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                    <Typography variant="h5" sx={{m: 0, p: 0}}>
                                         {"Question " + (key + 1)}
                                     </Typography>
-                                </div>
-                                <Box sx={{ display: "flex" }}>
-                                    <Typography variant="h6" sx={{ mr: 2, mt: 1 }}>
-                                        {q.question_data.marks}{" "}
-                                        {q.question_data.marks > 1 ? <>marks</> : <>mark</>}
-                                    </Typography>
-                                    <Typography variant="h6" sx={{ mr: 2, mt: 1 }}>
-                                        {getKeyByValue(difficulty, q.question_data.difficulty)}
-                                    </Typography>
-                                    <Box sx={{ mr: 1, mt: 1 }}>
-                                        <IconButton color="primary">
-                                            {q.question_data.setbyTeacher ? <VerifiedIcon /> : ""}
-                                        </IconButton>
-                                    </Box>
-                                    <Box>
-                                        <IconButton color="primary" aria-label="upvote" component="span" onClick={() => handleVote("up", q.id)}>
-                                            <ThumbUpIcon />&nbsp;<span>{q.upvote}</span>
-                                        </IconButton>
-                                    </Box>
-                                    <Box>
-                                        <IconButton color="primary" aria-label="downvote" component="span" onClick={() => handleVote("down", q.id)}>
-                                            <ThumbDownIcon />&nbsp;<span>{q.downvote}</span>
-                                        </IconButton>
+                                    <Box sx={{ display: "flex" }}>
+                                        <Box sx={{ mr: 1, mt: 1 }}>
+                                            <IconButton color="primary">
+                                                {q.question_data.setbyTeacher ? <VerifiedIcon /> : ""}
+                                            </IconButton>
+                                        </Box>
+                                        <Box>
+                                            <IconButton color="primary" aria-label="upvote" component="span" onClick={() => handleVote("up", q.id)}>
+                                                <ThumbUpIcon />&nbsp;<span>{q.upvote}</span>
+                                            </IconButton>
+                                        </Box>
+                                        <Box>
+                                            <IconButton color="primary" aria-label="downvote" component="span" onClick={() => handleVote("down", q.id)}>
+                                                <ThumbDownIcon />&nbsp;<span>{q.downvote}</span>
+                                            </IconButton>
+                                        </Box>
                                     </Box>
                                 </Box>
+                                <Box sx={{ display: "flex" }}>
+                                    <Typography variant="h6" sx={{ mr: 2, mt: 0 , mb: 1 }}>
+                                        {q.question_data.marks}{" "}
+                                        {q.question_data.marks > 1 ? <>marks</> : <>mark</>} {" "} &nbsp;
+                                        {getKeyByValue(difficulty, q.question_data.difficulty)}
+                                    </Typography>
+                                </Box>
                             </Box>
-                            <Typography variant="h5">{q.question_data.title}</Typography>
-                            { q.question_data.type === 'd' && <Match data={q.match_data} />}
-                            {(q.question_data.type === 'b' || q.question_data.type === 'c') && 
-                              <Typography variant="h6"><b>Ans</b>: {q.option_data[0].option}</Typography>
+                            <Typography variant="h6">{q.question_data.title}</Typography>
+                            {q.question_data.type === 'd' && <Match data={q.match_data} />}
+                            {(q.question_data.type === 'b' || q.question_data.type === 'c') &&
+                                <Typography variant="h6"><b>Ans</b>: {q.option_data[0].option}</Typography>
                             }
                             {
-                              q.question_data.type === 'a' && <FormControl component="fieldset">
-                                <RadioGroup value={q.option_data[0].option}>
-                                  {q.option_data.map((l) => (
-                                    <FormControlLabel
-                                      value={l.option}
-                                      control={<Radio />}
-                                      label={l.option}
-                                    />
-                                  ))}
-                                </RadioGroup>
-                              </FormControl>
+                                q.question_data.type === 'a' && <FormControl component="fieldset">
+                                    <RadioGroup value={q.option_data[0].option}>
+                                        {q.option_data.map((l) => (
+                                            <FormControlLabel
+                                                value={l.option}
+                                                control={<Radio />}
+                                                label={l.option}
+                                            />
+                                        ))}
+                                    </RadioGroup>
+                                </FormControl>
                             }
                         </Box>
                     </Paper>
