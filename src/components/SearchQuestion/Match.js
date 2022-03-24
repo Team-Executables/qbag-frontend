@@ -1,10 +1,11 @@
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
 const Match = (props) => {
 
@@ -16,21 +17,41 @@ const Match = (props) => {
         keys.push(pair.key)
         values.push(pair.value)
     })
-    
+
     const shuffledValues = [...values].sort((a, b) => 0.5 - Math.random());
 
     console.log(keys);
     console.log(shuffledValues);
 
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+        [`&.${tableCellClasses.head}`]: {
+            backgroundColor: "#1b5e20",
+            color: theme.palette.common.white,
+        },
+        [`&.${tableCellClasses.body}`]: {
+            fontSize: 14,
+        },
+    }));
+
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.action.hover,
+        },
+        // hide last border
+        '&:last-child td, &:last-child th': {
+          border: 0,
+        },
+      }));
+
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ mt: 2 }}>
             <Table sx={{ my: 1 }}>
                 <TableHead>
-                <TableRow>
-                    <TableCell>Column A</TableCell>
-                    <TableCell>Answers</TableCell>
-                    <TableCell>Column B</TableCell>
-                </TableRow>
+                    <TableRow >
+                        <StyledTableCell>Column A</StyledTableCell>
+                        <StyledTableCell>Answers</StyledTableCell>
+                        <StyledTableCell>Column B</StyledTableCell>
+                    </TableRow>
                 </TableHead>
                 <TableBody>
                     {keys.map((key, i) => (
@@ -45,5 +66,5 @@ const Match = (props) => {
         </TableContainer>
     );
 }
- 
+
 export default Match;
