@@ -17,7 +17,7 @@ const Match = (props) => {
         values.push(pair.value)
     })
     
-    const shuffledValues = values.sort((a, b) => 0.5 - Math.random());
+    const shuffledValues = [...values].sort((a, b) => 0.5 - Math.random());
 
     console.log(keys);
     console.log(shuffledValues);
