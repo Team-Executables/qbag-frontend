@@ -19,6 +19,9 @@ const Match = (props) => {
     
     const shuffledValues = values.sort((a, b) => 0.5 - Math.random());
 
+    console.log(keys);
+    console.log(shuffledValues);
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650, my: 1 }}>
@@ -30,7 +33,7 @@ const Match = (props) => {
                 </TableHead>
                 <TableBody>
                     {keys.map((key, i) => (
-                        <TableRow key={data[i].id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+                        <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell component="th" scope="row">{key}</TableCell>
                             <TableCell component="th" scope="row">{shuffledValues[i]}</TableCell>
                         </TableRow>

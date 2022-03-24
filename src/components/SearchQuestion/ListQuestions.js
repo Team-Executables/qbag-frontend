@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 import { resQues } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../../atoms";
-import MCQ from "./MCQ";
 import Match from "./Match";
 import { difficulty } from "../../utils";
 
@@ -40,8 +39,8 @@ const ListQuestions = () => {
 
   return (
     <Box>
-      <pre>{JSON.stringify(questions, null, 4)}</pre>
-      {/* {questions.map((ques) => (
+      {/* <pre>{JSON.stringify(questions, null, 4)}</pre>
+      {questions.map((ques) => (
         <Box key={ques.id} sx={{ mx: 1, my: 2 }}>
           <Typography variant="body1" gutterBottom sx={{ fontWeight: "bold" }}>
             {ques.question_data.title}
@@ -75,7 +74,7 @@ const ListQuestions = () => {
                 <Box
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <div>
+                <div>
                     <Typography variant="body1">
                       {"Question " + (key + 1)}
                     </Typography>
@@ -91,18 +90,21 @@ const ListQuestions = () => {
                     {q.question_data.setbyTeacher ? <VerifiedIcon /> : ""}
                   </Box>
                 </Box>
-                <Typography variant="h5">{q.question_data.title}</Typography>
-                <FormControl component="fieldset">
-                  <RadioGroup value={q.option_data[0].option}>
-                    {q.option_data.map((l) => (
-                      <FormControlLabel
-                        value={l.option}
-                        control={<Radio />}
-                        label={l.option}
-                      />
-                    ))}
-                  </RadioGroup>
-                </FormControl>
+              <Typography variant="h5">{q.question_data.title}</Typography>
+                { q.question_data.type === 'd' && <Match data={q.match_data} />}
+                {
+                  q.question_data.type !== 'd' && <FormControl component="fieldset">
+                    <RadioGroup value={q.option_data[0].option}>
+                      {q.option_data.map((l) => (
+                        <FormControlLabel
+                          value={l.option}
+                          control={<Radio />}
+                          label={l.option}
+                        />
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                }
               </Box>
             </Paper>
           ))
