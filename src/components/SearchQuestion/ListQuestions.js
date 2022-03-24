@@ -130,8 +130,11 @@ const ListQuestions = () => {
                             </Box>
                             <Typography variant="h5">{q.question_data.title}</Typography>
                             { q.question_data.type === 'd' && <Match data={q.match_data} />}
+                            {(q.question_data.type === 'b' || q.question_data.type === 'c') && 
+                              <Typography variant="h6">{q.option_data[0].option}</Typography>
+                            }
                             {
-                              q.question_data.type !== 'd' && <FormControl component="fieldset">
+                              q.question_data.type === 'a' && <FormControl component="fieldset">
                                 <RadioGroup value={q.option_data[0].option}>
                                   {q.option_data.map((l) => (
                                     <FormControlLabel
