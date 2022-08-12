@@ -1,11 +1,15 @@
+import React, { useState, useEffect } from 'react';
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../atoms";
+import LanguageDialog from './languageDialog';
+
+//Images
 import study from '../images/home/study.jpg'
 import crowdSource from '../images/home/crowdSource.svg'
 import checks from '../images/home/checks.svg'
 import folder from '../images/home/folder.svg'
 import xport from '../images/home/xport.svg'
 import exam from '../images/home/exam.svg'
-import { useRecoilValue } from "recoil";
-import { multilingual } from "../atoms";
 
 //MUI
 import Container from '@mui/material/Container';
@@ -48,6 +52,25 @@ const Home = () => {
     const height = useMediaQuery('(min-width:960px)') ? 400 : 200
 
     const multi = useRecoilValue(multilingual);
+
+
+    //Language Modal
+    const [open, setOpen] = useState(false);
+    const [selectedValue, setSelectedValue] = useState("English");
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (value) => {
+        setOpen(false);
+        setSelectedValue(value);
+    };
+
+    useEffect(() => {
+        handleClickOpen()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
     const infoarray = [
@@ -220,6 +243,11 @@ const Home = () => {
                 </Grid>
                 <Divider />
             </Box>
+            <LanguageDialog
+                selectedValue={selectedValue}
+                open={open}
+                onClose={handleClose}
+            />
         </Container >
     );
 }

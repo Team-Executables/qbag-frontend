@@ -1,5 +1,7 @@
 export const multilingualSupport = {
     "English": {
+        "language": "Change Language",
+
         "qbag": "Question Bank Generator",
 
         "qbagDescp1": "Question Bank Generator uses a crowd sourcing model to prepare question banks from a large pool of objective questions. QBaG provides an interface for paper setters and academicians to generate reliable question papers using our automated and robust system. The questions can be selected based on a range of parameters and can be exported to your desired format within minutes. Each question contributed is passed through a number of checks and is also vetted by experts.",
@@ -83,7 +85,6 @@ export const multilingualSupport = {
         "enterQuestion": "Enter Question",
         "enterQuestionSuccess": "Thank you for your Question.",
         "enterQuestionError": "OOPS! a similar question already exists!",
-        "searchQuestion": "Search Question",
         "search": "Search",
         "exportPDF": "Export PDF",
         "reviewQuestion": "Review Question",
@@ -121,7 +122,8 @@ export const multilingualSupport = {
         "forgotPasswordAlertTitle": "Reset Password Link",
         "forgotPasswordAlertDescription": "A reset password link has been sent on the given email address.\nPlease click on the link to set your new password.\nReset link is valid for 24 hrs"
     },
-    "Hindi": {
+    "हिन्दी": {
+        'language': 'भाषा बदलें',
         'qbag': 'प्रश्न बैंक जेनरेटर',
         'qbagDescp1': 'प्रश्न बैंक जेनरेटर वस्तुनिष्ठ प्रश्नों के एक बड़े पूल से प्रश्न बैंक तैयार करने के लिए क्राउड सोर्सिंग मॉडल का उपयोग करता है। QBaG हमारे स्वचालित और मजबूत सिस्टम का उपयोग करके विश्वसनीय प्रश्न पत्र तैयार करने के लिए पेपर सेटर्स और शिक्षाविदों के लिए एक इंटरफ़ेस प्रदान करता है। प्रश्नों को कई मापदंडों के आधार पर चुना जा सकता है और मिनटों के भीतर आपके वांछित प्रारूप में निर्यात किया जा सकता है। योगदान किए गए प्रत्येक प्रश्न को कई जांचों के माध्यम से पारित किया जाता है और विशेषज्ञों द्वारा इसकी जांच भी की जाती है।',
         'qbagDescp2': 'यह ऐप टीम एक्जीक्यूटेबल्स द्वारा बनाया गया है',
@@ -223,7 +225,8 @@ export const multilingualSupport = {
         'forgotPasswordAlertTitle': 'पासवर्ड लिंक रीसेट करें',
         'forgotPasswordAlertDescription': 'दिए गए ईमेल पते पर एक रीसेट पासवर्ड लिंक भेजा गया है।\nअपना नया पासवर्ड सेट करने के लिए कृपया लिंक पर क्लिक करें।\nरीसेट लिंक 24 घंटे के लिए वैध है'
     },
-    "Gujarati": {
+    "ગુજરાતી": {
+        'language': 'ભાષા બદલો',
         'qbag': 'પ્રશ્ન બેંક જનરેટર',
         'qbagDescp1': 'પ્રશ્ન બેંક જનરેટર ઉદ્દેશ્ય પ્રશ્નોના વિશાળ પૂલમાંથી પ્રશ્ન બેંક તૈયાર કરવા માટે ક્રાઉડ સોર્સિંગ મોડેલનો ઉપયોગ કરે છે. QBaG પેપર સેટર્સ અને શિક્ષણવિદો માટે અમારી સ્વચાલિત અને મજબૂત સિસ્ટમનો ઉપયોગ કરીને વિશ્વસનીય પ્રશ્નપત્રો જનરેટ કરવા માટે ઇન્ટરફેસ પ્રદાન કરે છે. પરિમાણોની શ્રેણીના આધારે પ્રશ્નો પસંદ કરી શકાય છે અને મિનિટોમાં તમારા ઇચ્છિત ફોર્મેટમાં નિકાસ કરી શકાય છે. યોગદાન આપેલ દરેક પ્રશ્ન સંખ્યાબંધ તપાસમાંથી પસાર થાય છે અને નિષ્ણાતો દ્વારા તેની ચકાસણી પણ કરવામાં આવે છે.',
         'qbagDescp2': 'આ એપ્લિકેશન ટીમ એક્ઝિક્યુટેબલ્સ દ્વારા બનાવવામાં આવી છે',
@@ -325,7 +328,8 @@ export const multilingualSupport = {
         'forgotPasswordAlertTitle': 'પાસવર્ડ લિંક રીસેટ કરો',
         'forgotPasswordAlertDescription': 'આપેલ ઈમેલ એડ્રેસ પર રીસેટ પાસવર્ડ લિંક મોકલવામાં આવી છે.\nતમારો નવો પાસવર્ડ સેટ કરવા માટે કૃપા કરીને લિંક પર ક્લિક કરો.\nરીસેટ લિંક 24 કલાક માટે માન્ય છે'
     },
-    "Marathi": {
+    "मराठी": {
+        'language': 'भाषा बदला',
         'qbag': 'प्रश्न बँक जनरेटर',
         'qbagDescp1': 'प्रश्न बँक जनरेटर वस्तुनिष्ठ प्रश्नांच्या मोठ्या समूहातून प्रश्न बँक तयार करण्यासाठी क्राउड सोर्सिंग मॉडेल वापरतो. QBaG आमच्या स्वयंचलित आणि मजबूत प्रणालीचा वापर करून विश्वासार्ह प्रश्नपत्रिका तयार करण्यासाठी पेपर सेटर आणि शिक्षणतज्ज्ञांसाठी इंटरफेस प्रदान करते. प्रश्न विविध पॅरामीटर्सच्या आधारे निवडले जाऊ शकतात आणि काही मिनिटांत आपल्या इच्छित स्वरूपात निर्यात केले जाऊ शकतात. योगदान दिलेला प्रत्येक प्रश्न अनेक तपासण्यांमधून जातो आणि तज्ञांद्वारे तपासला जातो.',
         'qbagDescp2': 'हे अॅप टीम एक्झिक्युटेबल्सने तयार केले आहे',
