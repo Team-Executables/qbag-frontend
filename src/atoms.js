@@ -1,4 +1,8 @@
 import { atom } from "recoil";
+import { multilingualSupport} from "./utils";
+
+
+
 
 const localStorageEffect =
   (key) =>
@@ -17,17 +21,24 @@ const localStorageEffect =
     });
   };
 
+
+
+
 export const userData = atom({
   key: "userData",
   default: {},
   effects_UNSTABLE: [localStorageEffect("userData")],
 });
 
+
+
 export const isLoggedIn = atom({
   key: "isLoggedIn",
   default: false,
   effects_UNSTABLE: [localStorageEffect("isLoggedIn")],
 });
+
+
 
 export const question = atom({
   key: "question",
@@ -42,6 +53,8 @@ export const question = atom({
   },
 });
 
+
+
 export const MCQoptions = atom({
   key: "MCQoptions",
   default: [
@@ -52,11 +65,15 @@ export const MCQoptions = atom({
   ],
 });
 
+
+
 export const resQues = atom({
   key: "resQues",
   default: [],
   effects_UNSTABLE: [localStorageEffect("resQues")],
 });
+
+
 
 export const matchPairs = atom({
   key: "matchPairs",
@@ -67,4 +84,12 @@ export const matchPairs = atom({
     }
   ],
   effects_UNSTABLE: [localStorageEffect("matchPairs")],
+});
+
+
+
+export const multilingual = atom({
+  key: "multilingual",
+  default: multilingualSupport["English"],
+  effects_UNSTABLE: [localStorageEffect("multilingual")],
 });
