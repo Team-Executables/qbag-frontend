@@ -1,4 +1,6 @@
 import React from 'react';
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../atoms";
 
 //MUI
 import Button from '@mui/material/Button';
@@ -14,6 +16,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AlertDialog(props) {
+
+  const multi = useRecoilValue(multilingual);
 
   return (
     <div>
@@ -35,7 +39,7 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogActions>
           <Button onClick={props.closeDialog} variant="contained" color="primary">
-            OK
+            {multi.ok}
           </Button>
         </DialogActions>
       </Dialog>

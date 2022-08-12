@@ -75,14 +75,29 @@ export const multilingualSupport = {
 
         "dashboard": "Dashboard",
         "viewIDProof": "View ID Proof",
+
         "changePassword": "Change Password",
         "changePasswordError": "Old password is incorrect. Please Try Again",
         "oldPassword": "Old Password",
         "newPassword": "New Password",
         "confirmNewPassword": "Confirm New Password",
+
         "logout": "Logout",
         "ok": "OK",
-        "change": "CHANGE"
+        "submit": "Submit",
+        "change": "CHANGE",
+        "backToHome": "Back to Home",
+        "pageNotFound": "Page Not Found",
+        
+        "getResetLink": "Enter Email to Get your Password Reset Link",
+        "enterNewPassword": "Enter your New Password",
+        "resetPasswordAlertTitle": "Password Changed Successfully",
+        "resetPasswordAlertDescription": "Your password has been reset successfully.\nPlease proceed to login",
+        "resetPasswordError": "Reset Link has Expired! Please Try Again",
+
+        "forgotPasswordError": "Invalid email ID! Please Try Again",
+        "forgotPasswordAlertTitle": "Reset Password Link",
+        "forgotPasswordAlertDescription": "A reset password link has been sent on the given email address.\nPlease click on the link to set your new password.\nReset link is valid for 24 hrs"
     },
     "Hindi": {
 

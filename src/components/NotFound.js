@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Copyright from './copyright'
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../atoms";
 
 //IMAGE
 import four0four from '../images/404.svg';
@@ -15,6 +17,9 @@ import green from '@mui/material/colors/green';
 
 
 const NotFound = () => {
+
+    const multi = useRecoilValue(multilingual);
+
 
     return (
         <div>
@@ -34,11 +39,11 @@ const NotFound = () => {
                         <Grid item xs={12} style={{ textAlign: 'center' }}>
                             <br />
                             <Typography variant="h3" gutterBottom>
-                                Page Not Found
+                                {multi.pageNotFound}
                             </Typography>
                             <br />
                             <Link to="/" style={{ textDecoration: 'none' }} color="inherit">
-                                <Button variant="contained" color="primary"> Back to Home </Button>
+                                <Button variant="contained" color="primary"> {multi.backToHome} </Button>
                             </Link>
                         </Grid>
                     </Grid>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import axiosInstance from "../axios";
 import AlertDialog from "./AlertDialog";
 import { Link as RouterLink } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../atoms";
 
 //IMAGE
 import study4 from "../images/study4.svg";
@@ -59,6 +61,8 @@ function TransitionLeft(props) {
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [emailerror, setEmailerror] = useState(false);
+  const multi = useRecoilValue(multilingual);
+
 
   //Snackbar
   const [open, setOpen] = useState(false);
@@ -124,7 +128,7 @@ const ForgotPassword = () => {
           <CssBaseline />
           <div sx={classes.paper}>
             <Box fontSize={25} fontWeight="fontWeightBold" pb={1}>
-              Enter Email to Get your Password Reset Link
+              {multi.getResetLink}
             </Box>
             <form sx={classes.form}>
               <TextField
@@ -132,7 +136,7 @@ const ForgotPassword = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label={multi.email}
                 name="email"
                 autoComplete="email"
                 onChange={handleChange}
@@ -146,12 +150,12 @@ const ForgotPassword = () => {
                 sx={classes.submit}
                 onClick={handleSubmit}
               >
-                Submit
+                {multi.submit}
               </Button>
               <Grid container>
                 <Grid item>
                   <Link component={RouterLink} to="/" variant="body2">
-                    Back to Home
+                    {multi.backToHome}
                   </Link>
                 </Grid>
               </Grid>
@@ -162,14 +166,14 @@ const ForgotPassword = () => {
             open={open}
             onClose={handleClose}
             TransitionComponent={transition}
-            message="Invalid email ID! Please Try Again"
+            message={multi.forgotPasswordError}
             key={"bottom center"}
           />
           <AlertDialog
             open={openState}
             closeDialog={closeDialog}
-            title="Reset Password Link"
-            description="A reset password link has been sent on the given email address.\nPlease click on the link to set your new password.\nReset link is valid for 24 hrs"
+            title={multi.forgotPasswordAlertTitle}
+            description={multi.forgotPasswordAlertDescription}
           />
         </Grid>
       </Grid>

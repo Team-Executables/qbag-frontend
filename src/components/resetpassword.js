@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axiosInstance from '../axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import AlertDialog from "./AlertDialog";
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../atoms";
 
 //IMAGE
 import lock from '../images/lock.svg';
@@ -59,6 +61,8 @@ const ResetPassword = () => {
 
     const [password, setPassword] = useState('');
     const [passworderror, setPassworderror] = useState(false);
+    const multi = useRecoilValue(multilingual);
+
 
     //Snackbar
     const [open, setOpen] = useState(false);
@@ -129,7 +133,7 @@ const ResetPassword = () => {
                     <CssBaseline />
                     <Box mt={15}>
                         <Box fontSize={25} fontWeight="fontWeightBold" pb={1}>
-                            Enter your New Password
+                            {multi.enterNewPassword}
                         </Box>
                         <form sx={classes.form}>
                             <TextField
@@ -138,7 +142,7 @@ const ResetPassword = () => {
                                 fullWidth
                                 name="password"
                                 id="password"
-                                label="Password"
+                                label={multi.password}
                                 type="password"
                                 onChange={handleChange}
                                 error={passworderror}
@@ -151,12 +155,12 @@ const ResetPassword = () => {
                                 sx={classes.submit}
                                 onClick={handleSubmit}
                             >
-                                Submit
+                                {multi.submit}
                             </Button>
                             <Grid container>
                                 <Grid item>
                                     <Link href="/" variant="body2">
-                                        Back to Home
+                                        {multi.backToHome}
                                     </Link>
                                 </Grid>
                             </Grid>
@@ -167,14 +171,14 @@ const ResetPassword = () => {
                         open={open}
                         onClose={handleClose}
                         TransitionComponent={transition}
-                        message="Reset Link has Expired! Please Try Again"
+                        message={multi.resetPasswordError}
                         key={'bottom center'}
                     />
                     <AlertDialog
                         open={openState}
                         closeDialog={closeDialog}
-                        title="Password Changed Successfully"
-                        description='Your password has been reset successfully.\nPlease proceed to login' />
+                        title={multi.resetPasswordAlertTitle}
+                        description={multi.resetPasswordAlertDescription} />
                 </Grid>
             </Grid>
         </Container>
