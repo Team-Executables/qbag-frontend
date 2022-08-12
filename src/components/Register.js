@@ -5,7 +5,7 @@ import Copyright from "./copyright";
 import AlertDialog from "./AlertDialog";
 import FileUpload from "react-material-file-upload";
 import { useRecoilValue } from "recoil";
-import { isLoggedIn } from "../atoms";
+import { isLoggedIn, multilingual } from "../atoms";
 
 //IMAGE
 import study2 from "../images/study2.svg";
@@ -34,6 +34,8 @@ function TransitionLeft(props) {
 
 export default function Register() {
   const log = useRecoilValue(isLoggedIn);
+  const multi = useRecoilValue(multilingual);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -320,7 +322,7 @@ export default function Register() {
             <PersonOutlineOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            {multi.login}
           </Typography>
           <form>
             <Grid container spacing={2}>
@@ -330,7 +332,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="Name"
-                  label="Name"
+                  label={multi.name}
                   name="name"
                   autoComplete="name"
                   onChange={handleChange}
@@ -343,7 +345,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label={multi.email}
                   type="email"
                   name="email"
                   autoComplete="email"
@@ -357,7 +359,7 @@ export default function Register() {
                   required
                   fullWidth
                   id="Employment"
-                  label="Employment"
+                  label={multi.employment}
                   name="employment"
                   autoComplete="Employment"
                   onChange={handleChange}
@@ -370,7 +372,7 @@ export default function Register() {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label={multi.password}
                   type="password"
                   id="password"
                   autoComplete="current-password"
@@ -383,26 +385,26 @@ export default function Register() {
                   required
                   value={file}
                   onChange={setFile}
-                  buttonText="Upload Photo ID"
-                  title="Drad 'n' Drop or select a valid identity proof."
+                  buttonText={multi.uploadPhotoID}
+                  title={multi.dragNDropProof}
                   sx={fileerror ? { borderColor: "red" } : ""}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="select-label">User Type</InputLabel>
+                  <InputLabel id="select-label">{multi.userType}</InputLabel>
                   <Select
                     name="user_type"
                     labelId="select-label"
                     id="select"
                     value={formData.user_type}
-                    label="User Type"
+                    label={multi.userType}
                     required
                     onChange={handleChange}
                     error={typeerror}
                   >
-                    <MenuItem value={"teacher"}>Teacher</MenuItem>
-                    <MenuItem value={"other"}>Others</MenuItem>
+                    <MenuItem value={"teacher"}>{multi.teacherType}</MenuItem>
+                    <MenuItem value={"other"}>{multi.othersType}</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -413,7 +415,7 @@ export default function Register() {
                     required
                     fullWidth
                     id="education"
-                    label="Education"
+                    label={multi.education}
                     name="education"
                     autoComplete="education"
                     onChange={handleOthersChange}
@@ -428,7 +430,7 @@ export default function Register() {
                       required
                       fullWidth
                       id="college"
-                      label="College"
+                      label={multi.schoolCollege}
                       name="college"
                       autoComplete="college"
                       onChange={handleTeacherChange}
@@ -441,7 +443,7 @@ export default function Register() {
                       required
                       fullWidth
                       id="position"
-                      label="Position"
+                      label={multi.position}
                       name="position"
                       onChange={handleTeacherChange}
                       error={positionerror}
@@ -462,12 +464,12 @@ export default function Register() {
               })}
               onClick={handleSubmit}
             >
-              Register
+              {multi.register}
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
                 <Link component={RouterLink} to="/login" variant="body2">
-                  Already have an account? Sign in
+                  {multi.alreadyHaveAnAccountSignIn}
                 </Link>
               </Grid>
             </Grid>
@@ -496,14 +498,14 @@ export default function Register() {
         open={open}
         onClose={handleClose}
         TransitionComponent={transition}
-        message="Invalid Registration Data! Please Try Again"
+        message={multi.invalidRegistration}
         key={"bottom center"}
       />
       <AlertDialog
         open={openState}
         closeDialog={closeDialog}
         title="Verify Email"
-        description="An email verification link has been sent on the given email address.\nPlease verify your email to complete the account setup.\nVerification link is valid for 24 hrs"
+        description={multi.verifyEmail}
       />
     </Grid>
   );

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import axiosInstance from "../axios";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import Copyright from "./copyright";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { userData, isLoggedIn } from "../atoms";
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
+import { userData, isLoggedIn, multilingual } from "../atoms";
 
 //IMAGE
 import bg from "../images/bg.svg";
@@ -64,6 +64,7 @@ function TransitionLeft(props) {
 }
 
 export default function SignIn() {
+  const multi = useRecoilValue(multilingual);
   const setUser = useSetRecoilState(userData);
   const [login, setLogin] = useRecoilState(isLoggedIn);
   const navigate = useNavigate();
@@ -79,9 +80,7 @@ export default function SignIn() {
   const [open, setOpen] = useState(false);
   const [transition, setTransition] = useState(undefined);
 
-  const [message, setMessage] = useState(
-    "Invalid Login Credentials! Please Try Again"
-  );
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setEmailerror(false);
@@ -161,13 +160,14 @@ export default function SignIn() {
             err.response.status === 401 &&
             err.response.data.detail === "Invalid credentials, try again"
           ) {
+            setMessage(multi.loginError1);
             setTransition(() => TransitionLeft);
             setOpen(true);
           } else if (
             err.response.status === 401 &&
             err.response.data.detail === "Email is not verified"
           ) {
-            setMessage("Please validate your email! Check your inbox");
+            setMessage(multi.loginError2);
             setTransition(() => TransitionLeft);
             setOpen(true);
           }
@@ -203,7 +203,7 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          {multi.login}
         </Typography>
         <form sx={classes.form}>
           <TextField
@@ -212,7 +212,7 @@ export default function SignIn() {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label={multi.email}
             name="email"
             autoComplete="email"
             autoFocus
@@ -225,7 +225,7 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label={multi.password}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -240,7 +240,7 @@ export default function SignIn() {
             sx={classes.submit}
             onClick={handleSubmit}
           >
-            Sign In
+            {multi.login}
           </Button>
           <Grid container>
             <Grid item xs>
@@ -249,12 +249,12 @@ export default function SignIn() {
                 to="/forgot-password"
                 variant="body2"
               >
-                Forgot password?
+                {multi.forgotPassword}
               </Link>
             </Grid>
             <Grid item>
               <Link component={RouterLink} to="/register" variant="body2">
-                Don't have an account? Sign Up"
+                {multi.dontHaveAnAccountSignUp}
               </Link>
             </Grid>
           </Grid>
