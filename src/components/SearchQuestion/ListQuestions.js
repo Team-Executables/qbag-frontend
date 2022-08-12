@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { resQues } from "../../atoms";
+import { userData, resQues, multilingual } from "../../atoms";
 import { useNavigate } from "react-router-dom";
-import { userData } from "../../atoms";
 import Match from "./Match";
 import { difficulty } from "../../utils";
 
@@ -28,6 +27,7 @@ const ListQuestions = () => {
     const navigate = useNavigate();
     const uData = useRecoilValue(userData);
     // const questions = useRecoilValue(resQues);
+    const multi = useRecoilValue(multilingual);
     const [questions, setQuestions] = useRecoilState(resQues);
 
 
@@ -88,22 +88,22 @@ const ListQuestions = () => {
                 {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
                 <Box sx={{ mt: 3, mb: 3 }}>
                     {questions && questions.length > 0 && (
-                        <Typography variant="h5">{`Board: ${questions[0].question_data.board}`}</Typography>
+                        <Typography variant="h5">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
                     )}
                     {questions && questions.length > 0 && (
-                        <Typography variant="h5">{`Grade: ${questions[0].question_data.grade}`}</Typography>
+                        <Typography variant="h5">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
                     )}
                     {questions && questions.length > 0 && (
                         <Typography variant="h5">
-                            {`Subject: ${questions[0].question_data.subject}`}
+                            {`${multi.subject}: ${questions[0].question_data.subject}`}
                         </Typography>
                     )}
                     {questions && questions.length > 0 && (
-                        <Typography variant="h5">{`No. of questions: ${questions.length}`}</Typography>
+                        <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
                     )}
                 </Box>
                 <Box displayPrint= "none">
-                    <Button variant="contained" onClick={() => window.print()} >Export PDF</Button>
+                    <Button variant="contained" onClick={() => window.print()} >{multi.exportPDF}</Button>
                 </Box>
             </Box>
             <Divider />
@@ -114,7 +114,7 @@ const ListQuestions = () => {
                             <Box>
                                 <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                                     <Typography variant="h5" sx={{ m: 0, p: 0 }}>
-                                        {"Question " + (key + 1)}
+                                        {multi.question + (key + 1)}
                                     </Typography>
                                     <Box sx={{ display: "flex" }}>
                                         <Box sx={{ mr: 1, mt: 1 }}>
@@ -137,7 +137,7 @@ const ListQuestions = () => {
                                 <Box sx={{ display: "flex" }}>
                                     <Typography variant="h6" sx={{ mr: 2, mt: 0, mb: 1 }}>
                                         {q.question_data.marks}{" "}
-                                        {q.question_data.marks > 1 ? <>marks</> : <>mark</>} {" "} &nbsp;
+                                        {q.question_data.marks > 1 ? <>{multi.marks}</> : <>{multi.mark}</>} {" "} &nbsp;
                                         {getKeyByValue(difficulty, q.question_data.difficulty)}
                                     </Typography>
                                 </Box>
@@ -145,7 +145,7 @@ const ListQuestions = () => {
                             <Typography variant="h6">{q.question_data.title}</Typography>
                             {q.question_data.type === 'd' && <Match data={q.match_data} />}
                             {(q.question_data.type === 'b' || q.question_data.type === 'c') &&
-                                <Typography variant="h6"><b>Ans</b>: {q.option_data[0].option}</Typography>
+                                <Typography variant="h6"><b>{multi.answer}</b>: {q.option_data[0].option}</Typography>
                             }
                             {
                                 q.question_data.type === 'a' && <FormControl component="fieldset">

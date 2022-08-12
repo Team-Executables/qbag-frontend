@@ -6,8 +6,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../../atoms";
 
 const Match = (props) => {
+
+  const multi = useRecoilValue(multilingual);
+
 
     const data = props.data;
     let keys = []
@@ -48,9 +53,9 @@ const Match = (props) => {
             <Table sx={{ my: 1 }}>
                 <TableHead>
                     <TableRow >
-                        <StyledTableCell>Column A</StyledTableCell>
-                        <StyledTableCell>Answers</StyledTableCell>
-                        <StyledTableCell>Column B</StyledTableCell>
+                        <StyledTableCell>{multi.columnA}</StyledTableCell>
+                        <StyledTableCell>{multi.answers}</StyledTableCell>
+                        <StyledTableCell>{multi.columnB}</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

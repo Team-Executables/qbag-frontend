@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { userData } from "../../atoms";
 import axiosInstance from "../../axios";
-import { useRecoilState } from "recoil";
-import { resQues } from "../../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userData, resQues, multilingual } from "../../atoms";
 
 //MUI
 import Avatar from "@mui/material/Avatar";
@@ -39,6 +37,7 @@ const SearchQuestions = () => {
     const [formData, updateFormData] = useState(initialFormData);
 
     const [resQ, setResQ] = useRecoilState(resQues);
+    const multi = useRecoilValue(multilingual);
 
     const handleChange = (e) => {
 
@@ -87,7 +86,7 @@ const SearchQuestions = () => {
                     <SearchIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5" sx={{ mb: 2 }}>
-                    Seach Questions
+                    {multi.searchQuestion}
                 </Typography>
                 <form>
                     <Grid container spacing={2}>
@@ -97,7 +96,7 @@ const SearchQuestions = () => {
                                 required
                                 fullWidth
                                 id="Easy"
-                                label="Easy"
+                                label={multi.easy}
                                 name="easy"
                                 autoComplete="easy"
                                 onChange={handleChange}
@@ -109,7 +108,7 @@ const SearchQuestions = () => {
                                 required
                                 fullWidth
                                 id="Medium"
-                                label="Medium"
+                                label={multi.medium}
                                 name="medium"
                                 autoComplete="medium"
                                 onChange={handleChange}
@@ -121,7 +120,7 @@ const SearchQuestions = () => {
                                 required
                                 fullWidth
                                 id="Hard"
-                                label="Hard"
+                                label={multi.hard}
                                 name="hard"
                                 autoComplete="hard"
                                 onChange={handleChange}
@@ -133,7 +132,7 @@ const SearchQuestions = () => {
                                 required
                                 fullWidth
                                 name="subject"
-                                label="Subject"
+                                label={multi.subject}
                                 id="Subject"
                                 autoComplete="subject"
                                 onChange={handleChange}
@@ -145,7 +144,7 @@ const SearchQuestions = () => {
                                 required
                                 fullWidth
                                 name="grade"
-                                label="Grade"
+                                label={multi.grade}
                                 id="Grade"
                                 autoComplete="grade"
                                 onChange={handleChange}
@@ -157,7 +156,7 @@ const SearchQuestions = () => {
                                 required
                                 fullWidth
                                 id="Board"
-                                label="Board"
+                                label={multi.board}
                                 name="board"
                                 autoComplete="board"
                                 onChange={handleChange}
@@ -176,7 +175,7 @@ const SearchQuestions = () => {
                                 mx: "auto"
                             })}
                         >
-                            Search
+                            {multi.search}
                         </Button>
                     </Grid>
                 </form>
