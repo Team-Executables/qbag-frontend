@@ -3,7 +3,7 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { userData, resQues, multilingual } from "../../atoms";
 import { useNavigate } from "react-router-dom";
 import Match from "./Match";
-import { difficulty } from "../../utils";
+
 
 // MUI
 import {
@@ -23,11 +23,21 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import axiosInstance from "../../axios";
 
+
+
 const ListQuestions = () => {
     const navigate = useNavigate();
     const uData = useRecoilValue(userData);
     // const questions = useRecoilValue(resQues);
     const multi = useRecoilValue(multilingual);
+
+    const difficulty = {
+        [multi.easy]: "a",
+        [multi.medium]: "b",
+        [multi.hard]: "c",
+    };
+
+
     const [questions, setQuestions] = useRecoilState(resQues);
 
 

@@ -1,4 +1,3 @@
-// import { difficulty, questionTypes } from "../../utils";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 

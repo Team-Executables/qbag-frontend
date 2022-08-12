@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import CssBaseline from "@mui/material/CssBaseline";
 
-const steps = ["Question Details", "Enter Question", "Review question"];
+
 
 export default function AddQuestion() {
   const initialQuestionDetails = {
@@ -47,8 +47,10 @@ export default function AddQuestion() {
   const mcqs = useRecoilValue(MCQoptions);
   const multi = useRecoilValue(multilingual);
 
+  const steps = [multi.questionDetails, multi.enterQuestion, multi.reviewQuestion];
 
-  const handleNext = () => {
+
+    const handleNext = () => {
     if (questionDetails.type === "a") {
       if (activeStep + 1 === steps.length) {
         let objToSend = {
