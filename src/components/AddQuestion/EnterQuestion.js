@@ -1,19 +1,19 @@
-import { difficulty, questionTypes } from "../../utils";
+// import { difficulty, questionTypes } from "../../utils";
 import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
+// import FormControl from "@mui/material/FormControl";
+// import InputLabel from "@mui/material/InputLabel";
+// import Select from "@mui/material/Select";
+// import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { question, MCQoptions, matchPairs } from "../../atoms";
+import { question, MCQoptions, matchPairs, multilingual } from "../../atoms";
 
 const EnterQuestion = ({ qType }) => {
     const [ques, setQues] = useRecoilState(question);
@@ -21,6 +21,8 @@ const EnterQuestion = ({ qType }) => {
     const tagz = mcqs.map((m) => m.option);
     const [tags, setTags] = useState([...tagz.splice(1)]);
     const [matchFields, setMatchFields] = useRecoilState(matchPairs);
+    const multi = useRecoilValue(multilingual);
+
 
     const addMatchField = () => {
         setMatchFields([
@@ -96,7 +98,7 @@ const EnterQuestion = ({ qType }) => {
     return (
         <>
             <Typography variant="h6" gutterBottom>
-                Enter Question
+                {multi.enterQuestion}
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -104,7 +106,7 @@ const EnterQuestion = ({ qType }) => {
                         required
                         id="title"
                         name="title"
-                        label="Question"
+                        label={multi.question}
                         fullWidth
                         variant="standard"
                         value={ques.title}
@@ -118,7 +120,7 @@ const EnterQuestion = ({ qType }) => {
                                 required
                                 id="corr-option"
                                 name="corr-option"
-                                label="Correct Option"
+                                label={multi.correctOption}
                                 value={mcqs[0].option}
                                 fullWidth
                                 variant="standard"
@@ -128,7 +130,7 @@ const EnterQuestion = ({ qType }) => {
                                 <ReactTagInput
                                     tags={tags}
                                     onChange={(newTags) => handleWrongMCQChange(newTags)}
-                                    placeholder="Type wrong options and press enter"
+                                    placeholder={multi.wrongOption}
                                 />
                             </Box>
                         </>
@@ -137,7 +139,7 @@ const EnterQuestion = ({ qType }) => {
                             required
                             id="Answer"
                             name="Answer"
-                            label="Answer"
+                            label={multi.answer}
                             fullWidth
                             variant="standard"
                             value={ques.options[0].option}
@@ -154,14 +156,14 @@ const EnterQuestion = ({ qType }) => {
                                                 <div className="form-group">
                                                     {/* <input type="text"  /> */}
                                                     <TextField
-                                                        label="Key"
+                                                        label={multi.key}
                                                         id="outlined-size-small"
                                                         defaultValue="Small"
                                                         size="small"
                                                         onChange={(evnt) => handleMatchChange(index, evnt)}
                                                         value={key} name="key"
                                                         className="form-control"
-                                                        placeholder="Key"
+                                                        placeholder={multi.key}
                                                         sx={{ mt: 1 }}
                                                     />
                                                 </div>
@@ -170,7 +172,7 @@ const EnterQuestion = ({ qType }) => {
                                                 <div className="form-group">
                                                     {/* <input type="text" onChange={(evnt) => handleMatchChange(index, evnt)} value={value} name="value" className="form-control" placeholder="value" /> */}
                                                     <TextField
-                                                        label="Value"
+                                                        label={multi.value}
                                                         id="outlined-size-small"
                                                         defaultValue="Small"
                                                         size="small"
@@ -178,7 +180,7 @@ const EnterQuestion = ({ qType }) => {
                                                         onChange={(evnt) => handleMatchChange(index, evnt)}
                                                         value={value}
                                                         name="value"
-                                                        placeholder="Value"
+                                                        placeholder={multi.value}
                                                         sx={{ mt: 1 }}
                                                     />
                                                 </div>
@@ -186,7 +188,7 @@ const EnterQuestion = ({ qType }) => {
                                             <div className="col">
                                                 {
                                                     (matchFields.length !== 1) ?
-                                                        <Button variant="outlined" size="small" color="error" sx={{ mt: 1 }} onClick={removeMatchFields}>Remove</Button> :
+                                                        <Button variant="outlined" size="small" color="error" sx={{ mt: 1 }} onClick={removeMatchFields}>{multi.remove}</Button> :
                                                         // <button className="btn btn-outline-danger" onClick={removeMatchFields}>Remove</button> :
                                                         ''
                                                 }
@@ -197,7 +199,7 @@ const EnterQuestion = ({ qType }) => {
                             }
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <Button variant="contained" size="small" color="success" sx={{ mt: 3 }} onClick={addMatchField}>Add New</Button>
+                                    <Button variant="contained" size="small" color="success" sx={{ mt: 3 }} onClick={addMatchField}>{multi.addNew}</Button>
                                     {/* <button className="btn btn-outline-success" onClick={addMatchField}>Add New</button> */}
                                 </div>
                             </div>

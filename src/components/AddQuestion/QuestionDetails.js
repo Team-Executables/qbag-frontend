@@ -1,5 +1,7 @@
 import { difficulty, questionTypes } from "../../utils";
 import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../../atoms";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -11,12 +13,18 @@ import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import ReactTagInput from "@pathofdev/react-tag-input";
 
+
+
 const QuestionDetails = ({
   questionDetails,
   setQuestionDetails,
   kwords,
   setKwords,
 }) => {
+
+
+  const multi = useRecoilValue(multilingual);
+
   const handleChange = (e) => {
     setQuestionDetails((ques) => ({
       ...ques,
@@ -39,7 +47,7 @@ const QuestionDetails = ({
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Question Details{console.log(kwords)}
+        {multi.questionDetails}
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
@@ -47,7 +55,7 @@ const QuestionDetails = ({
             required
             id="board"
             name="board"
-            label="Board"
+            label={multi.board}
             fullWidth
             variant="standard"
             onChange={handleChange}
@@ -59,7 +67,7 @@ const QuestionDetails = ({
             required
             id="grade"
             name="grade"
-            label="Grade"
+            label={multi.grade}
             fullWidth
             type="number"
             variant="standard"
@@ -75,7 +83,7 @@ const QuestionDetails = ({
               labelId="select-label"
               id="select"
               value={questionDetails.type}
-              label="Question Type"
+              label={multi.questionType}
               required
               onChange={handleChange}
             >
@@ -89,13 +97,13 @@ const QuestionDetails = ({
         </Grid>
         <Grid item xs={12}>
           <FormControl variant="outlined" fullWidth>
-            <InputLabel id="select-labell">Difficulty</InputLabel>
+            <InputLabel id="select-labell">{multi.difficulty}</InputLabel>
             <Select
               name="difficulty"
               labelId="select-labell"
               id="selectt"
               value={questionDetails.difficulty}
-              label="Difficulty"
+              label={multi.difficulty}
               required
               onChange={handleChange}
             >
@@ -112,7 +120,7 @@ const QuestionDetails = ({
             required
             id="marks"
             name="marks"
-            label="Marks"
+            label={multi.marks}
             fullWidth
             type="number"
             variant="standard"
@@ -125,7 +133,7 @@ const QuestionDetails = ({
             required
             id="subject"
             name="subject"
-            label="Subject"
+            label={multi.subject}
             fullWidth
             variant="standard"
             onChange={handleChange}
@@ -138,7 +146,7 @@ const QuestionDetails = ({
               tags={questionDetails.keywords}
               onChange={(newWords) => setKwords(newWords)}
               removeOnBackspace
-              placeholder="Type keywords and press enter"
+              placeholder={multi.typeKeywordsAndPressEnter}
               id="Topic/Keywords"
               name="keywords"
             />

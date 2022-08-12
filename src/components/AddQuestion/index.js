@@ -4,7 +4,7 @@ import EnterQuestion from "./EnterQuestion";
 import ReviewQuestion from "./ReviewQuestion";
 import axiosInstance from "../../axios";
 import { useRecoilValue } from "recoil";
-import { question, matchPairs, MCQoptions } from "../../atoms";
+import { question, matchPairs, MCQoptions, multilingual } from "../../atoms";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -45,6 +45,8 @@ export default function AddQuestion() {
   const q = useRecoilValue(question);
   const mp = useRecoilValue(matchPairs);
   const mcqs = useRecoilValue(MCQoptions);
+  const multi = useRecoilValue(multilingual);
+
 
   const handleNext = () => {
     if (questionDetails.type === "a") {
@@ -187,7 +189,7 @@ export default function AddQuestion() {
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 1, md: 3 } }}
         >
           <Typography component="h1" variant="h4" align="center">
-            Add Question
+            {multi.addQuestion}
           </Typography>
           <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
             {steps.map((label) => (
@@ -202,7 +204,7 @@ export default function AddQuestion() {
                 {respons.status === 201 ? (
                   <>
                     <Typography variant="h5" gutterBottom>
-                      Thank you for your Question.
+                      {multi.enterQuestionSuccess}
                     </Typography>
                     <Typography variant="subtitle1">
                       {respons.data.question_data.title}
@@ -211,7 +213,7 @@ export default function AddQuestion() {
                 ) : respons.status === 409 ? (
                   <>
                     <Typography variant="h5" gutterBottom>
-                      OOPS! a similar question already exists!
+                      {multi.enterQuestionError}
                     </Typography>
                     <Typography variant="subtitle1">
                       {respons.data.similar_question_data.title}
@@ -227,7 +229,7 @@ export default function AddQuestion() {
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                      Back
+                      {multi.back}
                     </Button>
                   )}
                   <Button
@@ -237,8 +239,8 @@ export default function AddQuestion() {
                     sx={{ mt: 3, ml: 1 }}
                   >
                     {activeStep === steps.length - 1
-                      ? "Submit Question"
-                      : "Next"}
+                      ? multi.submitQuestion
+                      : multi.next}
                   </Button>
                 </Box>
               </>

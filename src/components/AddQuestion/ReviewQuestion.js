@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { question, MCQoptions, matchPairs } from "../../atoms";
+import { question, MCQoptions, matchPairs, multilingual } from "../../atoms";
 import ReactTagInput from "@pathofdev/react-tag-input";
 
 import Grid from "@mui/material/Grid";
@@ -11,6 +11,7 @@ const ReviewQuestion = ({ qType }) => {
     const ques = useRecoilValue(question);
     const mcqs = useRecoilValue(MCQoptions);
     const matchFields = useRecoilValue(matchPairs);
+    const multi = useRecoilValue(multilingual);
     const tagz = mcqs.map((m) => m.option);
 
     return (
@@ -20,7 +21,7 @@ const ReviewQuestion = ({ qType }) => {
                     required
                     id="title"
                     name="title"
-                    label="Question"
+                    label={multi.question}
                     fullWidth
                     variant="outlined"
                     value={ques.title}
@@ -33,17 +34,17 @@ const ReviewQuestion = ({ qType }) => {
                         required
                         id="corr-option"
                         name="corr-option"
-                        label="Correct Option"
+                        label={multi.correctOption}
                         value={tagz[0]}
                         fullWidth
                         variant="standard"
                         disabled
                     />
                     <Box sx={{ mt: 4 }}>
-                        <div>Wrong Options</div>
+                        <div>{multi.wrongOpts}</div>
                         <ReactTagInput
                             tags={tagz.splice(1)}
-                            placeholder="Type wrong options and press enter"
+                            placeholder={multi.wrongOption}
                             readOnly
                         />
                     </Box>
@@ -54,7 +55,7 @@ const ReviewQuestion = ({ qType }) => {
                         required
                         id="title"
                         name="title"
-                        label="Answer"
+                        label={multi.answer}
                         fullWidth
                         variant="outlined"
                         value={ques.options[0].option}
@@ -70,7 +71,7 @@ const ReviewQuestion = ({ qType }) => {
                                 <div className="row my-3" key={index}>
                                     <Box className="form-group" sx={{mt: 2, ml: 3}}>
                                         <TextField
-                                            label="Key"
+                                            label={multi.key}
                                             id="outlined-size-small"
                                             defaultValue="Small"
                                             size="small"
@@ -81,14 +82,14 @@ const ReviewQuestion = ({ qType }) => {
                                         />
                                         &nbsp; &nbsp; &nbsp;
                                         <TextField
-                                            label="Value"
+                                            label={multi.value}
                                             id="outlined-size-small"
                                             defaultValue="Small"
                                             size="small"
                                             className="form-control"
                                             value={value}
                                             name="value"
-                                            placeholder="Value"
+                                            placeholder={multi.value}
                                             sx={{ mt: 1 }}
                                         />
                                     </Box>
