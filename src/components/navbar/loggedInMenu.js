@@ -4,6 +4,7 @@ import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
 import { userData, isLoggedIn, multilingual } from "../../atoms";
 import axiosInstance from "../../axios";
 import ChangePassword from "./changePassword";
+import LanguageDialog from "../languageDialog";
 
 //MUI
 import Box from "@mui/material/Box";
@@ -22,13 +23,31 @@ import TranslateIcon from '@mui/icons-material/Translate';
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { amber } from "@mui/material/colors";
 
+
+
 // Will be displayed after log in
 export default function LMenu() {
+
     const navigate = useNavigate();
 
     const [user, setUser] = useRecoilState(userData);
     const setLogin = useSetRecoilState(isLoggedIn);
     const multi = useRecoilValue(multilingual);
+
+
+    //Language Dialog
+    const [openLang, setOpenLang] = useState(false);
+    const [selectedLangValue, setSelectedLangValue] = useState("English");
+
+    const handleLangClickOpen = () => {
+        setOpenLang(true);
+    };
+
+    const handleLangClose = (value) => {
+        setOpenLang(false);
+        setSelectedLangValue(value);
+    };
+
 
 
     //Change Password Dialog
@@ -145,7 +164,7 @@ export default function LMenu() {
                     </ListItemIcon>
                     {multi.changePassword}
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={handleLangClickOpen}>
                     <ListItemIcon>
                         <TranslateIcon />
                     </ListItemIcon>
@@ -165,6 +184,12 @@ export default function LMenu() {
                 open={openState}
                 closeDialog={closeDialog}
                 title={multi.changePassword}
+            />
+
+            <LanguageDialog
+                selectedValue={selectedLangValue}
+                open={openLang}
+                onClose={handleLangClose}
             />
         </>
     );

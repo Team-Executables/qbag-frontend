@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useRecoilValue } from "recoil";
 import { multilingual } from "../atoms";
-import LanguageDialog from './languageDialog';
 
 //Images
 import study from '../images/home/study.jpg'
@@ -52,25 +51,6 @@ const Home = () => {
     const height = useMediaQuery('(min-width:960px)') ? 400 : 200
 
     const multi = useRecoilValue(multilingual);
-
-
-    //Language Modal
-    const [open, setOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState("English");
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (value) => {
-        setOpen(false);
-        setSelectedValue(value);
-    };
-
-    useEffect(() => {
-        handleClickOpen()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
 
     const infoarray = [
@@ -243,11 +223,6 @@ const Home = () => {
                 </Grid>
                 <Divider />
             </Box>
-            <LanguageDialog
-                selectedValue={selectedValue}
-                open={open}
-                onClose={handleClose}
-            />
         </Container >
     );
 }
