@@ -112,7 +112,7 @@ const ListQuestions = () => {
                         <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
                     )}
                 </Box>
-                <Box displayPrint= "none">
+                <Box displayPrint="none">
                     <Button variant="contained" onClick={() => window.print()} >{multi.exportPDF}</Button>
                 </Box>
             </Box>

@@ -24,161 +24,161 @@ import { createTheme } from "@mui/material/styles";
 const theme = createTheme();
 
 const classes = {
-  background: {
-    backgroundImage: `url(${study4})`,
-    backgroundRepeat: "no-repeat",
-    backgroundColor: green[50],
-    backgroundSize: "auto",
-    backgroundPosition: "center",
-    height: "92vh",
-  },
-  paper: {
-    marginTop: theme.spacing(24),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(2),
-    paddingRight: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-  spacing: {
-    margin: theme.spacing(3),
-  },
-  gridspacing: {
-    marginLeft: theme.spacing(2),
-  },
+    background: {
+        backgroundImage: `url(${study4})`,
+        backgroundRepeat: "no-repeat",
+        backgroundColor: green[50],
+        backgroundSize: "auto",
+        backgroundPosition: "center",
+        height: "92vh",
+    },
+    paper: {
+        marginTop: theme.spacing(24),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+    },
+    form: {
+        width: "100%", // Fix IE 11 issue.
+        marginTop: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+    spacing: {
+        margin: theme.spacing(3),
+    },
+    gridspacing: {
+        marginLeft: theme.spacing(2),
+    },
 };
 
 function TransitionLeft(props) {
-  return <Slide {...props} direction="left" />;
+    return <Slide {...props} direction="left" />;
 }
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState("");
-  const [emailerror, setEmailerror] = useState(false);
-  const multi = useRecoilValue(multilingual);
+    const [email, setEmail] = useState("");
+    const [emailerror, setEmailerror] = useState(false);
+    const multi = useRecoilValue(multilingual);
 
 
-  //Snackbar
-  const [open, setOpen] = useState(false);
-  const [transition, setTransition] = useState(undefined);
+    //Snackbar
+    const [open, setOpen] = useState(false);
+    const [transition, setTransition] = useState(undefined);
 
-  //AlertDialog
-  const [openState, setOpenState] = useState(false);
-  const openDialog = () => setOpenState(true);
-  const closeDialog = () => setOpenState(false);
+    //AlertDialog
+    const [openState, setOpenState] = useState(false);
+    const openDialog = () => setOpenState(true);
+    const closeDialog = () => setOpenState(false);
 
-  const handleChange = (e) => {
-    setEmailerror(false);
-    setEmail(e.target.value.trim());
-  };
+    const handleChange = (e) => {
+        setEmailerror(false);
+        setEmail(e.target.value.trim());
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    console.log(email);
+        console.log(email);
 
-    // Validation
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    let submit = true;
+        // Validation
+        const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let submit = true;
 
-    setEmailerror(false);
+        setEmailerror(false);
 
-    if (email === "" || !re.test(email)) {
-      setEmailerror(true);
-      submit = false;
-      console.log(submit);
-      console.log(email);
-    }
+        if (email === "" || !re.test(email)) {
+            setEmailerror(true);
+            submit = false;
+            console.log(submit);
+            console.log(email);
+        }
 
-    if (submit) {
-      axiosInstance
-        .post(`auth/request-reset-email`, {
-          email: email,
-        })
-        .then((res) => {
-          console.log(res);
-          console.log(res.data);
-          openDialog();
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response.status === 400) {
-            setTransition(() => TransitionLeft);
-            setOpen(true);
-          }
-        });
-    }
-  };
+        if (submit) {
+            axiosInstance
+                .post(`auth/request-reset-email`, {
+                    email: email,
+                })
+                .then((res) => {
+                    console.log(res);
+                    console.log(res.data);
+                    openDialog();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    if (err.response.status === 400) {
+                        setTransition(() => TransitionLeft);
+                        setOpen(true);
+                    }
+                });
+        }
+    };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
-  return (
-    <Container disableGutters={false} maxWidth="xl" sx={classes.background}>
-      <Grid container direction="row" sx={classes.gridspacing}>
-        <Grid item mt={15}>
-          <CssBaseline />
-          <div sx={classes.paper}>
-            <Box fontSize={25} fontWeight="fontWeightBold" pb={1}>
-              {multi.getResetLink}
-            </Box>
-            <form sx={classes.form}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label={multi.email}
-                name="email"
-                autoComplete="email"
-                onChange={handleChange}
-                error={emailerror}
-              />
-              <Button
-                type="submit"
-                fullWidth={false}
-                variant="contained"
-                color="primary"
-                sx={classes.submit}
-                onClick={handleSubmit}
-              >
-                {multi.submit}
-              </Button>
-              <Grid container>
-                <Grid item>
-                  <Link component={RouterLink} to="/" variant="body2">
-                    {multi.backToHome}
-                  </Link>
+    return (
+        <Container disableGutters={false} maxWidth="xl" sx={classes.background}>
+            <Grid container direction="row" sx={classes.gridspacing}>
+                <Grid item mt={15}>
+                    <CssBaseline />
+                    <div sx={classes.paper}>
+                        <Box fontSize={25} fontWeight="fontWeightBold" pb={1}>
+                            {multi.getResetLink}
+                        </Box>
+                        <form sx={classes.form}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                id="email"
+                                label={multi.email}
+                                name="email"
+                                autoComplete="email"
+                                onChange={handleChange}
+                                error={emailerror}
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth={false}
+                                variant="contained"
+                                color="primary"
+                                sx={classes.submit}
+                                onClick={handleSubmit}
+                            >
+                                {multi.submit}
+                            </Button>
+                            <Grid container>
+                                <Grid item>
+                                    <Link component={RouterLink} to="/" variant="body2">
+                                        {multi.backToHome}
+                                    </Link>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </div>
+                    <Snackbar
+                        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                        open={open}
+                        onClose={handleClose}
+                        TransitionComponent={transition}
+                        message={multi.forgotPasswordError}
+                        key={"bottom center"}
+                    />
+                    <AlertDialog
+                        open={openState}
+                        closeDialog={closeDialog}
+                        title={multi.forgotPasswordAlertTitle}
+                        description={multi.forgotPasswordAlertDescription}
+                    />
                 </Grid>
-              </Grid>
-            </form>
-          </div>
-          <Snackbar
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={transition}
-            message={multi.forgotPasswordError}
-            key={"bottom center"}
-          />
-          <AlertDialog
-            open={openState}
-            closeDialog={closeDialog}
-            title={multi.forgotPasswordAlertTitle}
-            description={multi.forgotPasswordAlertDescription}
-          />
-        </Grid>
-      </Grid>
-    </Container>
-  );
+            </Grid>
+        </Container>
+    );
 };
 
 export default ForgotPassword;

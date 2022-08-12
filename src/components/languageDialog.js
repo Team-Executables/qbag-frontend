@@ -44,7 +44,7 @@ export default function LanguageDialog(props) {
                 {languages.map((language) => (
                     <>
                         <Divider />
-                        <ListItem button onClick={() => handleListItemClick(language)} key={language} sx={{textAlign: "center"}}>
+                        <ListItem button onClick={() => handleListItemClick(language)} key={language} sx={{ textAlign: "center" }}>
                             <ListItemText primary={language} />
                         </ListItem>
                     </>

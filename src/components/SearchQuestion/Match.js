@@ -11,7 +11,7 @@ import { multilingual } from "../../atoms";
 
 const Match = (props) => {
 
-  const multi = useRecoilValue(multilingual);
+    const multi = useRecoilValue(multilingual);
 
 
     const data = props.data;
@@ -40,13 +40,13 @@ const Match = (props) => {
 
     const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
+            backgroundColor: theme.palette.action.hover,
         },
         // hide last border
         '&:last-child td, &:last-child th': {
-          border: 0,
+            border: 0,
         },
-      }));
+    }));
 
     return (
         <TableContainer component={Paper} sx={{ mt: 2 }}>

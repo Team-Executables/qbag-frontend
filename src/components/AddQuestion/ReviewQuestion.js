@@ -69,7 +69,7 @@ const ReviewQuestion = ({ qType }) => {
                             const { key, value } = data;
                             return (
                                 <div className="row my-3" key={index}>
-                                    <Box className="form-group" sx={{mt: 2, ml: 3}}>
+                                    <Box className="form-group" sx={{ mt: 2, ml: 3 }}>
                                         <TextField
                                             label={multi.key}
                                             id="outlined-size-small"

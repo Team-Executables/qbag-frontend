@@ -39,7 +39,7 @@ export default function ChangePassword(props) {
     //Snackbar
     const [open, setOpen] = useState(false);
     const [transition, setTransition] = useState(undefined);
-    
+
 
     const handleChange = (e) => {
 
@@ -77,12 +77,12 @@ export default function ChangePassword(props) {
                     "confirm_password": formData.confirm_password,
                 })
                 .then((res) => {
-                    console.log({res});
+                    console.log({ res });
                     props.closeDialog();
                 })
                 .catch(err => {
                     console.log(err)
-                    console.log({err})
+                    console.log({ err })
                     if (err.response.status === 400) {
                         setTransition(() => TransitionLeft);
                         setOpen(true);
@@ -91,7 +91,7 @@ export default function ChangePassword(props) {
         }
     };
 
-    
+
     const handleClose = () => {
         setOpen(false);
     };

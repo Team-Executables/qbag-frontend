@@ -150,7 +150,7 @@ const EnterQuestion = ({ qType }) => {
                                 matchFields.map((data, index) => {
                                     const { key, value } = data;
                                     return (
-                                        <Box key={index} sx={{mt:2}}>
+                                        <Box key={index} sx={{ mt: 2 }}>
                                             <div className="col">
                                                 <div className="form-group">
                                                     {/* <input type="text"  /> */}
