@@ -4,6 +4,8 @@ import checks from '../images/home/checks.svg'
 import folder from '../images/home/folder.svg'
 import xport from '../images/home/xport.svg'
 import exam from '../images/home/exam.svg'
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../atoms";
 
 //MUI
 import Container from '@mui/material/Container';
@@ -36,36 +38,7 @@ const useStyles = makeStyles({
     },
 });
 
-const infoarray = [
-    {
-        'id': 1,
-        'head': 'CROWDSOURCES QUESTIONS',
-        'title': 'Get questions from various sources',
-        'logo': crowdSource,
-        'body': 'Crowdsourcing enables all the users to contribute, this helps in gathering multiple viewpoints and diversifies the archive of questions. Crowdsourcing reduces the management burden as the major work is handled by the system which frees the user from manual work'
-    },
-    {
-        'id': 2,
-        'head': 'RELIABLE QUESTIONS',
-        'title': 'Verified and validated questions',
-        'logo': checks,
-        'body': 'Each question contributed passes through a series of automated test, which is then scrutinised by experts'
-    },
-    {
-        'id': 3,
-        'head': 'EXPORT',
-        'title': 'Export the questions in the desired format',
-        'logo': xport,
-        'body': 'The selected questions can be converted into a question paper and can be exported into PDF, CSV or excel format'
-    },
-    {
-        'id': 4,
-        'head': 'FILTERING OPTIONS',
-        'title': 'Choose from a variety of questions',
-        'logo': folder,
-        'body': 'Filter and choose questions based on board, class, difficulty, marks, number of questions and other parameters to get the perfect list of curated questions'
-    }
-]
+
 
 const Home = () => {
 
@@ -74,32 +47,65 @@ const Home = () => {
     const dir = useMediaQuery('(min-width:960px)') ? 'row' : 'column-reverse'
     const height = useMediaQuery('(min-width:960px)') ? 400 : 200
 
+    const multi = useRecoilValue(multilingual);
+
+
+    const infoarray = [
+        {
+            'id': 1,
+            'head': multi.homeBanner1,
+            'title': multi['homeBanner1.2'],
+            'logo': crowdSource,
+            'body': multi['homeBanner1.3']
+        },
+        {
+            'id': 2,
+            'head': multi.homeBanner2,
+            'title': multi['homeBanner2.2'],
+            'logo': checks,
+            'body': multi['homeBanner2.3'],
+        },
+        {
+            'id': 3,
+            'head': multi.homeBanner3,
+            'title': multi['homeBanner3.2'],
+            'logo': xport,
+            'body': multi['homeBanner3.3'],
+        },
+        {
+            'id': 4,
+            'head': multi.homeBanner4,
+            'title': multi['homeBanner4.2'],
+            'logo': folder,
+            'body': multi['homeBanner4.3'],
+        }
+    ]
+
     return (
         <Container>
             <Box sx={{ textAlign: "center" }}>
                 <Box mt={6} mb={4} pt={3} pb={3} style={{ backgroundColor: "#e8f5e9", borderRadius: "20px" }}>
                     <Box justifyContent="center" mb={2}>
                         <Box sx={{ fontSize: 'h4.fontSize', fontWeight: 'regular' }}>
-                            Question Bank Generator
+                            {multi.qbag}
                         </Box>
                     </Box>
                     <img src={exam} alt="banner" style={{ height: 230, width: 300 }} />
                     <Box mt={2}>
                         <Typography variant='body1' sx={{ mx: 4 }}>
-                        Question Bank Generator uses a crowd sourcing model to prepare question banks from a large pool of objective questions. QBaG provides an interface for paper setters and academicians to generate reliable question papers using our automated and robust system. The questions can be selected based on a range of parameters and can be exported to your desired format within minutes. Each question contributed is passed through a number of checks and is also vetted by experts.
+                            {multi.qbagDescp1}
                         </Typography>
                     </Box>
                     <Box mt={5} fontSize="h6.fontSize" fontWeight={400} fontFamily="Monospace">
-                        This app is built by: <br /> 
-                        <Link href="https://github.com/heyanurag" color="inherit" target="_blank" rel="noopener" underline="hover">Anurag Singh</Link>, {" "} 
+                        <Link href="https://github.com/Team-Executables" color="inherit" target="_blank" rel="noopener" underline="hover">{multi.qbagDescp2}</Link>
+                        {/* <Link href="https://github.com/heyanurag" color="inherit" target="_blank" rel="noopener" underline="hover">Anurag Singh</Link>, {" "} 
                         <Link href="https://github.com/VirajPatidar" color="inherit" target="_blank" rel="noopener" underline="hover">Viraj Patidar</Link>, {" "}
                         <Link href="https://github.com/namanshah01" color="inherit" target="_blank" rel="noopener" underline="hover">Naman Shah</Link>, {" "}
-                        <Link href="https://github.com/ishika2736" color="inherit" target="_blank" rel="noopener" underline="hover">Ishika Bhatt</Link>, {" "}
                         <Link href="https://github.com/atharvadpatil" color="inherit" target="_blank" rel="noopener" underline="hover">Atharva Patil</Link> {" and "}
-                        <Link href="https://github.com/thadaniumang" color="inherit" target="_blank" rel="noopener" underline="hover">Umang Thadani</Link>
+                        <Link href="https://github.com/thadaniumang" color="inherit" target="_blank" rel="noopener" underline="hover">Umang Thadani</Link> */}
                     </Box>
                     <Box mt={3}>
-                        <Link href="https://github.com/Team-Executables" color="inherit" target="_blank" rel="noopener" underline="hover">
+                        <Link href="https://github.com/Team-Executables/qbag-frontend" color="inherit" target="_blank" rel="noopener" underline="hover">
                             <Button
                                 variant="outlined"
                                 display="inline"
@@ -175,16 +181,16 @@ const Home = () => {
                     <Grid item sm={12} md={6}>
                         <Typography variant='h4' className={classes.changefontSize} component="div">
                             <Box pl={3} pt={4} fontWeight={350}>
-                                Create your account now, and use QBaG as your paper setter assistant.
+                                {multi.qbagDescp3}
                             </Box>
                         </Typography>
                         <Typography variant='body1' component="div">
                             <Box pl={3} pt={3} fontWeight={350}>
-                                To explore more features of QBaG, create an account to get started.
+                                {multi.qbagDescp4}
                             </Box>
                         </Typography>
                         <Box pl={3} pt={3}>
-                            <Button pl={3} pt={3} variant="outlined" color="primary" href="/register">Sign Up</Button>
+                            <Button pl={3} pt={3} variant="outlined" color="primary" href="/register">{multi.register}</Button>
                         </Box>
 
                     </Grid>
@@ -195,7 +201,7 @@ const Home = () => {
                     <Grid item style={{ display: "flex", paddingBottom: "10px" }}>
                         <Box pr={3} pt={4}>
                             <Typography>
-                                Follow us on:
+                                {multi.footer}
                             </Typography>
                         </Box>
                         <Box pt={4} pr={2}>
