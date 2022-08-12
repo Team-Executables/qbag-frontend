@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { isLoggedIn } from "../../atoms";
+import { isLoggedIn, multilingual } from "../../atoms";
 import LMenu from "./loggedInMenu";
 
 //MUI
@@ -31,6 +31,7 @@ const classes = {
 };
 
 export default function Navbar({ handleDrawerToggle }) {
+  const multi = useRecoilValue(multilingual);
   const login = useRecoilValue(isLoggedIn);
   const navigate = useNavigate();
 
@@ -80,11 +81,11 @@ export default function Navbar({ handleDrawerToggle }) {
             <>
               <Box mr={1}>
                 <Button variant="outlined" color="inherit" href="/register">
-                  Register
+                  {multi.register}
                 </Button>
               </Box>
               <Button variant="outlined" color="inherit" href="/login">
-                Login
+                {multi.login}
               </Button>
             </>
           )}

@@ -71,7 +71,18 @@ export const multilingualSupport = {
         "verifyEmail": "An email verification link has been sent on the given email address.\nPlease verify your email to complete the account setup.\nVerification link is valid for 24 hrs",
 
         "loginError1": "Invalid Login Credentials! Please Try Again",
-        "loginError2": "Please validate your email! Check your inbox"
+        "loginError2": "Please validate your email! Check your inbox",
+
+        "dashboard": "Dashboard",
+        "viewIDProof": "View ID Proof",
+        "changePassword": "Change Password",
+        "changePasswordError": "Old password is incorrect. Please Try Again",
+        "oldPassword": "Old Password",
+        "newPassword": "New Password",
+        "confirmNewPassword": "Confirm New Password",
+        "logout": "Logout",
+        "ok": "OK",
+        "change": "CHANGE"
     },
     "Hindi": {
 

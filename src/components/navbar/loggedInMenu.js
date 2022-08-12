@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { userData, isLoggedIn } from "../../atoms";
+import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
+import { userData, isLoggedIn, multilingual } from "../../atoms";
 import axiosInstance from "../../axios";
 import ChangePassword from "./changePassword";
 
@@ -27,6 +27,8 @@ export default function LMenu() {
 
   const [user, setUser] = useRecoilState(userData);
   const setLogin = useSetRecoilState(isLoggedIn);
+  const multi = useRecoilValue(multilingual);
+
 
   //Change Password Dialog
   const [openState, setOpenState] = useState(false);
@@ -120,7 +122,7 @@ export default function LMenu() {
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
-          Dashboard
+          {multi.dashboard}
         </MenuItem>
         <Link
           href={user.idproof}
@@ -133,21 +135,21 @@ export default function LMenu() {
             <ListItemIcon>
               <PermIdentityIcon />
             </ListItemIcon>
-            View ID Proof
+            {multi.viewIDProof}
           </MenuItem>
         </Link>
         <MenuItem onClick={openDialog}>
           <ListItemIcon>
             <LockIcon />
           </ListItemIcon>
-          Change Password
+          {multi.changePassword}
         </MenuItem>
         <Divider />
         <MenuItem onClick={logout}>
           <ListItemIcon>
             <Logout />
           </ListItemIcon>
-          Logout
+          {multi.logout}
         </MenuItem>
       </Menu>
 
@@ -155,7 +157,7 @@ export default function LMenu() {
       <ChangePassword
         open={openState}
         closeDialog={closeDialog}
-        title="Change Password"
+        title={multi.changePassword}
       />
     </>
   );

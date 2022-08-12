@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useRecoilValue } from "recoil";
+import { multilingual } from "../../atoms";
 
 //MUI
 import Button from '@mui/material/Button';
@@ -30,6 +32,9 @@ export default function ChangePassword(props) {
 
     const [formData, updateFormData] = useState(initialFormData);
     const [passerror, setPasserror] = useState(false);
+
+    const multi = useRecoilValue(multilingual);
+
 
     //Snackbar
     const [open, setOpen] = useState(false);
@@ -110,7 +115,7 @@ export default function ChangePassword(props) {
                             required
                             fullWidth
                             name="old_password"
-                            label="Old Password"
+                            label={multi.oldPassword}
                             type="password"
                             id="old_password"
                             onChange={handleChange}
@@ -121,7 +126,7 @@ export default function ChangePassword(props) {
                             required
                             fullWidth
                             name="new_password"
-                            label="New Password"
+                            label={multi.newPassword}
                             type="password"
                             id="new_password"
                             onChange={handleChange}
@@ -133,7 +138,7 @@ export default function ChangePassword(props) {
                             required
                             fullWidth
                             name="confirm_password"
-                            label="Confirm New Password"
+                            label={multi.confirmNewPassword}
                             type="password"
                             id="confirm_password"
                             onChange={handleChange}
@@ -143,7 +148,7 @@ export default function ChangePassword(props) {
                 </DialogContent>
                 <DialogActions>
                     <Button type="submit" onClick={handleSubmit} variant="contained" color="primary">
-                        CHANGE
+                        {multi.change}
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -152,7 +157,7 @@ export default function ChangePassword(props) {
                 open={open}
                 onClose={handleClose}
                 TransitionComponent={transition}
-                message="Old password is incorrect. Please Try Again"
+                message={multi.changePasswordError}
                 key={'bottom center'}
             />
         </div>
