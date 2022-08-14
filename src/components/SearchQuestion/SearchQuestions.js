@@ -157,7 +157,7 @@ const SearchQuestions = () => {
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
                                 required
@@ -169,7 +169,7 @@ const SearchQuestions = () => {
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={12} sm={6}>
                             <FormControl variant="outlined" fullWidth>
                                 <InputLabel id="select-labelll">{multi.langMedium}</InputLabel>
                                 <Select

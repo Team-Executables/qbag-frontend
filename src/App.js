@@ -11,7 +11,7 @@ import Navbar from "./components/navbar/navbar";
 import AddQuestion from "./components/AddQuestion";
 import SearchQuestions from "./components/SearchQuestion/SearchQuestions";
 import ListQuestions from "./components/SearchQuestion/ListQuestions";
-import GeneratePaper from "./components/GeneratePaper";
+import PastPapers from "./components/PastPapers";
 
 // MUI
 import { teal, amber } from "@mui/material/colors";
@@ -54,7 +54,7 @@ function App() {
                     <Route path="" element={<AddQuestion />} />
                     <Route path="search" element={<SearchQuestions />} />
                     <Route path="list" element={<ListQuestions />} />
-                    <Route path="paper" element={<GeneratePaper />} />
+                    <Route path="paper" element={<PastPapers />} />
                 </Route>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />

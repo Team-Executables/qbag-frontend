@@ -49,6 +49,10 @@ export const multilingualSupport = {
         "addQuestion": "Add Question",
         "searchQuestion": "Search Question",
         "generateQuestionPaper": "Generate Question Paper",
+        "viewPastPapers": "View Past Papers",
+        "noQuestionsFound": "Sorry, No Questions Found",
+        "contributeQuestions": "Contribute Questions",
+        
 
         "questionDetails": "Question Details",
         "board": "Board",

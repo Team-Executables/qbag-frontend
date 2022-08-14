@@ -52,19 +52,19 @@ const Match = (props) => {
         <TableContainer component={Paper} sx={{ mt: 2 }}>
             <Table sx={{ my: 1 }}>
                 <TableHead>
-                    <TableRow >
+                    <StyledTableRow >
                         <StyledTableCell>{multi.columnA}</StyledTableCell>
                         <StyledTableCell>{multi.answers}</StyledTableCell>
                         <StyledTableCell>{multi.columnB}</StyledTableCell>
-                    </TableRow>
+                    </StyledTableRow>
                 </TableHead>
                 <TableBody>
                     {keys.map((key, i) => (
-                        <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
+                        <StyledTableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
                             <TableCell component="th" scope="row">{key}</TableCell>
                             <TableCell component="th" scope="row">{values[i]}</TableCell>
                             <TableCell component="th" scope="row">{shuffledValues[i]}</TableCell>
-                        </TableRow>
+                        </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>

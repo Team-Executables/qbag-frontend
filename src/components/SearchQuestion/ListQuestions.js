@@ -16,6 +16,7 @@ import {
     RadioGroup,
     IconButton,
     Button,
+    Container,
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
@@ -230,32 +231,38 @@ const ListQuestions = () => {
 
     return (
         <Box>
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
-                {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
-                <Box sx={{ mt: 3, mb: 3 }}>
-                    {questions && questions.length > 0 && (
-                        <Typography variant="h5">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
-                    )}
-                    {questions && questions.length > 0 && (
-                        <Typography variant="h5">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
-                    )}
-                    {questions && questions.length > 0 && (
-                        <Typography variant="h5">
-                            {`${multi.subject}: ${questions[0].question_data.subject}`}
-                        </Typography>
-                    )}
-                    {questions && questions.length > 0 && (
-                        <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
-                    )}
-                </Box>
-                <Box displayPrint="none">
-                    <Button variant="contained" onClick={() => window.print()} >{multi.exportPDF}</Button>
-                </Box>
-                <Box displayPrint="none">
-                    <Button variant="contained" onClick={generatePDF} >Generate Question Paper</Button>
-                </Box>
-            </Box>
-            <Divider />
+            {questions && questions.length > 0
+                ?
+                <>
+                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-evenly" }}>
+                        {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
+                        <Box sx={{ mt: 3, mb: 3 }}>
+                            {questions && questions.length > 0 && (
+                                <Typography variant="h5">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
+                            )}
+                            {questions && questions.length > 0 && (
+                                <Typography variant="h5">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
+                            )}
+                            {questions && questions.length > 0 && (
+                                <Typography variant="h5">
+                                    {`${multi.subject}: ${questions[0].question_data.subject}`}
+                                </Typography>
+                            )}
+                            {questions && questions.length > 0 && (
+                                <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
+                            )}
+                        </Box>
+                        <Box displayPrint="none">
+                            <Button variant="contained" onClick={() => window.print()} >{multi.exportPDF}</Button>
+                        </Box>
+                        <Box displayPrint="none">
+                            <Button variant="contained" onClick={generatePDF} >{multi.generateQuestionPaper}</Button>
+                        </Box>
+                    </Box>
+                    <Divider />
+                </>
+                : null}
+
             {questions && questions.length > 0
                 ? questions.map((q, key) => (
                     <Paper elevation={3} style={{ backgroundColor: "#e8f5e9" }}>
@@ -312,7 +319,23 @@ const ListQuestions = () => {
                         </Box>
                     </Paper>
                 ))
-                : null}
+                :
+                <Container
+                    component="main"
+                    maxWidth="sm"
+                    sx={{ mb: 4, p: { xs: 0, md: 1 }, textAlign: "center" }}
+                >
+                    <Paper
+                        variant="outlined"
+                        sx={{ my: { xs: 3, md: 15 }, p: { xs: 1, md: 3 }}}
+                    >
+                        <Typography variant="h5">{multi.noQuestionsFound}</Typography>
+                        <Button onClick={() => {navigate("/dashboard/question")}} size="small" variant="contained" color="primary" sx={{ mt: 3 }}>
+                            {multi.contributeQuestions}
+                        </Button>
+                    </Paper>
+                </Container>
+            }
         </Box>
     );
 };

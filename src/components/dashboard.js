@@ -24,7 +24,7 @@ const Dashboard = ({ mobileOpen, handleDrawerToggle }) => {
     const buttons = [
         { text: multi.addQuestion, route: "question" },
         { text: multi.searchQuestion, route: "question/search" },
-        { text: multi.generateQuestionPaper, route: "question/paper" },
+        { text: multi.viewPastPapers, route: "question/paper" },
     ];
 
     const log = useRecoilValue(isLoggedIn);
