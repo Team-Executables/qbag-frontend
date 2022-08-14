@@ -1,7 +1,11 @@
 import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { multilingual } from "../../atoms";
+import { multilingualSupport } from "../../utils";
+import ReactTagInput from "@pathofdev/react-tag-input";
 
+
+//MUI
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -10,7 +14,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-import ReactTagInput from "@pathofdev/react-tag-input";
 
 
 
@@ -108,7 +111,27 @@ const QuestionDetails = ({
                         </Select>
                     </FormControl>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
+                    <FormControl variant="outlined" fullWidth>
+                        <InputLabel id="select-labelll">{multi.langMedium}</InputLabel>
+                        <Select
+                            name="medium"
+                            labelId="select-labelll"
+                            id="selecttt"
+                            value={questionDetails.medium}
+                            label={multi.langMedium}
+                            required
+                            onChange={handleChange}
+                        >
+                            {Object.keys(multilingualSupport).map((lang) => (
+                                <MenuItem key={lang} value={lang}>
+                                    {lang}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={6}>
                     <FormControl variant="outlined" fullWidth>
                         <InputLabel id="select-labell">{multi.difficulty}</InputLabel>
                         <Select

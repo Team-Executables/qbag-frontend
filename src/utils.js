@@ -52,6 +52,7 @@ export const multilingualSupport = {
 
         "questionDetails": "Question Details",
         "board": "Board",
+        "langMedium": "Medium of Board",
         "grade": "Grade",
         "questionType": "Question Type",
         "mcq": "Multiple Choice Question",

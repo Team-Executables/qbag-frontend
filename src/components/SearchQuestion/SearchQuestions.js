@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../axios";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userData, resQues, multilingual } from "../../atoms";
+import { multilingualSupport } from "../../utils";
+
 
 //MUI
 import Avatar from "@mui/material/Avatar";
@@ -12,6 +14,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import SearchIcon from '@mui/icons-material/Search';
 import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 
 const SearchQuestions = () => {
@@ -32,6 +38,7 @@ const SearchQuestions = () => {
         board: "",
         grade: "",
         subject: "",
+        langMedium: "",
     });
 
     const [formData, updateFormData] = useState(initialFormData);
@@ -150,7 +157,7 @@ const SearchQuestions = () => {
                                 onChange={handleChange}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={6}>
                             <TextField
                                 variant="outlined"
                                 required
@@ -161,6 +168,26 @@ const SearchQuestions = () => {
                                 autoComplete="board"
                                 onChange={handleChange}
                             />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <FormControl variant="outlined" fullWidth>
+                                <InputLabel id="select-labelll">{multi.langMedium}</InputLabel>
+                                <Select
+                                    name="langMedium"
+                                    labelId="select-labelll"
+                                    id="selecttt"
+                                    value={formData.langMedium}
+                                    label={multi.langMedium}
+                                    required
+                                    onChange={handleChange}
+                                >
+                                    {Object.keys(multilingualSupport).map((lang) => (
+                                        <MenuItem key={lang} value={lang}>
+                                            {lang}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
                     </Grid>
                     <Grid container justify="center">

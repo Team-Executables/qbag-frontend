@@ -25,6 +25,7 @@ export default function AddQuestion() {
         grade: "",
         board: "",
         marks: "",
+        medium: "",
         difficulty: "",
         subject: "",
         keywords: [],
