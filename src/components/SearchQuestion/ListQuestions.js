@@ -251,7 +251,7 @@ const ListQuestions = () => {
                 <Box displayPrint="none">
                     <Button variant="contained" onClick={() => window.print()} >{multi.exportPDF}</Button>
                 </Box>
-                <Box>
+                <Box displayPrint="none">
                     <Button variant="contained" onClick={generatePDF} >Generate Question Paper</Button>
                 </Box>
             </Box>
@@ -265,7 +265,7 @@ const ListQuestions = () => {
                                     <Typography variant="h5" sx={{ m: 0, p: 0 }}>
                                         {multi.question + (key + 1)}
                                     </Typography>
-                                    <Box sx={{ display: "flex" }}>
+                                    <Box sx={{ display: "flex" }} displayPrint="none">
                                         <Box sx={{ mr: 1, mt: 1 }}>
                                             <IconButton color="primary">
                                                 {q.question_data.setbyTeacher ? <VerifiedIcon /> : ""}

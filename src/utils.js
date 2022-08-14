@@ -86,7 +86,7 @@ export const multilingualSupport = {
         "enterQuestionSuccess": "Thank you for your Question.",
         "enterQuestionError": "OOPS! a similar question already exists!",
         "search": "Search",
-        "exportPDF": "Export PDF",
+        "exportPDF": "Print to PDF",
         "reviewQuestion": "Review Question",
         "submitQuestion": "Submit Question",
 
