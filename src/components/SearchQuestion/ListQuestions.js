@@ -170,7 +170,57 @@ const ListQuestions = () => {
             }
         }
 
-        
+        // Answers
+        pdf.addPage()
+        x = 20
+
+
+        pdf.setFontSize(16)
+        pdf.setFont("times", "bold");
+        pdf.text(20, x, `Answers`)
+
+        pdf.setFont("times", "normal");
+        pdf.setFontSize(12)
+
+        q_num = 0
+        for (let question of questions) {
+            if (x > pageHeight1 - 50) {
+                x = 0;
+                pdf.addPage();
+            }
+            x = x + 15
+            q_num++
+            pdf.setFont("times", "bold");
+            pdf.text(20, x, `Answer ${q_num}: `)
+            pdf.setFont("times", "normal");
+            if (question.question_data.type === 'd') {
+                x = x + 8
+                let flag = false
+                pdf.text(20, x, "ColumnA")
+                pdf.text(120, x, "ColumnB")
+                for (let match of question.match_data) {
+                    let match_key = pdf.splitTextToSize(match.key, 80)
+                    let match_value = pdf.splitTextToSize(match.value, 80)
+                    if (Math.max(match_key.length, match_value.length) > 1) {
+                        flag = true
+                    }
+                    x = x + (Math.max(match_key.length, match_value.length) * 4) + 4
+                    pdf.text(20, x, match_key)
+                    pdf.text(120, x, match_value)
+                }
+                if (flag) {
+                    x = x + 20
+                }
+            }
+            else {
+                x = x + 8
+                for (let option of question.option_data) {
+                    if (option.correct === true) {
+                        pdf.text(20, x, option.option)
+                    }
+                }
+            }
+        }
 
 
         pdf.save(`${questions[0].question_data.board} Class ${questions[0].question_data.grade} ${questions[0].question_data.subject} Question Paper.pdf`);
