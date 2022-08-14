@@ -66,6 +66,7 @@ export default function AddQuestion() {
                         console.log(res);
                         // console.log(res.data);
                         setRespons(res);
+                        
                     })
                     .catch((err) => {
                         // console.log(err);

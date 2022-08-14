@@ -181,7 +181,7 @@ export default function SignIn() {
 
     useEffect(() => {
         if (login) {
-            navigate("/dashboard/add-question");
+            navigate("/dashboard/question");
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

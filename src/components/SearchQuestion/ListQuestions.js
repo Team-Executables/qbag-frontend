@@ -6,19 +6,9 @@ import { jsPDF } from "jspdf";
 import Question from "./Question";
 
 // MUI
-import {
-  Box,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  Paper,
-  RadioGroup,
-  IconButton,
-  Button,
-} from "@mui/material";
+import { Box, Paper, Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import axiosInstance from "../../axios";
 
 const ListQuestions = () => {
   const navigate = useNavigate();
@@ -214,7 +204,29 @@ const ListQuestions = () => {
       {questions && questions.length > 0 ? (
         questions.map((q, key) => <Question q={q} qkey={key} />)
       ) : (
-        <p>No questions for this category :(</p>
+        <Container
+          component="main"
+          maxWidth="sm"
+          sx={{ mb: 4, p: { xs: 0, md: 1 }, textAlign: "center" }}
+        >
+          <Paper
+            variant="outlined"
+            sx={{ my: { xs: 3, md: 15 }, p: { xs: 1, md: 3 } }}
+          >
+            <Typography variant="h5">{multi.noQuestionsFound}</Typography>
+            <Button
+              onClick={() => {
+                navigate("/dashboard/question");
+              }}
+              size="small"
+              variant="contained"
+              color="primary"
+              sx={{ mt: 3 }}
+            >
+              {multi.contributeQuestions}
+            </Button>
+          </Paper>
+        </Container>
       )}
     </Box>
   );

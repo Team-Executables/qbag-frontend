@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../atoms";
 
-const GeneratePaper = () => {
+const PastPapers = () => {
     const navigate = useNavigate();
     const uData = useRecoilValue(userData);
 
@@ -13,7 +13,7 @@ const GeneratePaper = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    return <div>GeneratePaper</div>;
+    return <div>Past Papers</div>;
 };
 
-export default GeneratePaper;
+export default PastPapers;
