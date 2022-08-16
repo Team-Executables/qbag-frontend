@@ -41,6 +41,7 @@ export const multilingualSupport = {
         "othersType": "Others",
         "schoolCollege": "School/College",
         "position": "Position",
+        "education": "Education",
         "password": "Password",
         "forgotPassword": "Forgot password?",
         "dontHaveAnAccountSignUp": "Don't have an account? Sign Up",
@@ -49,7 +50,7 @@ export const multilingualSupport = {
         "addQuestion": "Add Question",
         "searchQuestion": "Search Question",
         "generateQuestionPaper": "Generate Question Paper",
-        "viewPastPapers": "View Past Papers",
+        "viewPastPapers": "Generated Paper",
         "noQuestionsFound": "Sorry, No Questions Found",
         "contributeQuestions": "Contribute Questions",
         

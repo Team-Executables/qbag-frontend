@@ -65,13 +65,17 @@ const SearchQuestions = () => {
         e.preventDefault();
         console.log(formData);
 
+
         axiosInstance
             .post(`questions/retrieve`, formData)
             .then((res) => {
                 console.log(res);
                 setResQ(res.data);
                 console.log(res.data);
-                navigate("/dashboard/question/list");
+                navigate({
+                    pathname: "/dashboard/question/list",
+                    search: `?easy=${formData.easy}&medium=${formData.medium}&hard=${formData.hard}&grade=${formData.grade}&subject=${formData.subject}&board=${formData.board}&langMedium=${formData.langMedium}`
+                })
             })
             .catch((err) => {
                 console.log(err);

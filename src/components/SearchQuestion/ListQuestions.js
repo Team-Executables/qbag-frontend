@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userData, resQues, multilingual } from "../../atoms";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import Question from "./Question";
+import axiosInstance from "../../axios";
 
 // MUI
 import { Box, Paper, Button, Container } from "@mui/material";
@@ -12,6 +13,7 @@ import Divider from "@mui/material/Divider";
 
 const ListQuestions = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const uData = useRecoilValue(userData);
   // const questions = useRecoilValue(resQues);
   const multi = useRecoilValue(multilingual);
@@ -33,6 +35,26 @@ const ListQuestions = () => {
       navigate("/dashboard/question/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+	const formData = {
+		easy: searchParams.get("easy"),
+		medium: searchParams.get("medium"),
+		hard: searchParams.get("hard"),
+		grade: searchParams.get("grade"),
+		subject: searchParams.get("subject"),
+		board: searchParams.get("board"),
+		langMedium: searchParams.get("langMedium"),
+	}
+
+    axiosInstance
+		.post(`questions/retrieve`, formData)
+		.then((res) => {
+			console.log(res);
+			setQuestions(res.data);
+			console.log(res.data);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
   }, []);
 
   const generatePDF = () => {
@@ -165,42 +187,47 @@ const ListQuestions = () => {
 
   return (
     <Box>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-        }}
-      >
-        {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
-        <Box sx={{ mt: 3, mb: 3 }}>
-          {questions && questions.length > 0 && (
-            <Typography variant="h5">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
-          )}
-          {questions && questions.length > 0 && (
-            <Typography variant="h5">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
-          )}
-          {questions && questions.length > 0 && (
-            <Typography variant="h5">
-              {`${multi.subject}: ${questions[0].question_data.subject}`}
-            </Typography>
-          )}
-          {questions && questions.length > 0 && (
-            <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
-          )}
-        </Box>
-        <Box displayPrint="none">
-          <Button variant="contained" onClick={() => window.print()}>
-            {multi.exportPDF}
-          </Button>
-        </Box>
-        <Box displayPrint="none">
-          <Button variant="contained" onClick={generatePDF}>
-            Generate Question Paper
-          </Button>
-        </Box>
-      </Box>
-      <Divider />
+      {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
+      {questions && questions.length > 0 ? (
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-evenly",
+            }}
+          >
+            {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
+            <Box sx={{ mt: 3, mb: 3 }}>
+              {questions && questions.length > 0 && (
+                <Typography variant="h5">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
+              )}
+              {questions && questions.length > 0 && (
+                <Typography variant="h5">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
+              )}
+              {questions && questions.length > 0 && (
+                <Typography variant="h5">
+                  {`${multi.subject}: ${questions[0].question_data.subject}`}
+                </Typography>
+              )}
+              {questions && questions.length > 0 && (
+                <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
+              )}
+            </Box>
+            <Box displayPrint="none">
+              <Button variant="contained" onClick={() => window.print()}>
+                {multi.exportPDF}
+              </Button>
+            </Box>
+            <Box displayPrint="none">
+              <Button variant="contained" onClick={generatePDF}>
+                {multi.generateQuestionPaper}
+              </Button>
+            </Box>
+          </Box>
+          <Divider />
+        </>
+      ) : null}
       {questions && questions.length > 0 ? (
         questions.map((q, key) => <Question q={q} qkey={key} />)
       ) : (
