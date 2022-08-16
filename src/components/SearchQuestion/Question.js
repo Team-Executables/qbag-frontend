@@ -46,7 +46,8 @@ const Question = ({ q, qkey }) => {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally(() => window.location.reload())
     } else {
       axiosInstance
         .post(`questions/vote`, {
@@ -59,7 +60,8 @@ const Question = ({ q, qkey }) => {
         })
         .catch((err) => {
           console.log(err);
-        });
+        })
+        .finally(() => window.location.reload())
     }
   }
 
@@ -135,6 +137,7 @@ const Question = ({ q, qkey }) => {
                   value={l.option}
                   control={<Radio />}
                   label={l.option}
+                  key={l.option}
                 />
               ))}
             </RadioGroup>

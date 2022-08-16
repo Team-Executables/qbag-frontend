@@ -229,7 +229,7 @@ const ListQuestions = () => {
         </>
       ) : null}
       {questions && questions.length > 0 ? (
-        questions.map((q, key) => <Question q={q} qkey={key} />)
+        questions.map((q, key) => <Question q={q} qkey={key} key={q.title} />)
       ) : (
         <Container
           component="main"
