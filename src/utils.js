@@ -133,6 +133,17 @@ export const multilingualSupport = {
         "generatePaper": "Generate Paper",
         "savePaper": "Save Paper",
         "selectedQuestions": "Selected Questions",
+        "easyQuestions": "No. of Easy questions",
+        "mediumQuestions": "No. of Medium questions",
+        "hardQuestions": "No. of Hard questions",
+        "totalQuestions": "Total No. of questions",
+        "totalMarks": "Total Marks",
+        "mcqs": "No. of Multiple Choice Questions",
+        "oneWords": "No. of One Word/Sentence Questions",
+        "fillInTheBlankss": "No. Fill in the Blanks Questions",
+        "matchTheFollowings": "No. Match the Following Questions",
+        "paperName": "Paper Name",
+        "vettedWarning": "The following questions are not vetted by the community, would you still like to continue?"
     },
     "हिन्दी": {
         'language': 'भाषा बदलें',

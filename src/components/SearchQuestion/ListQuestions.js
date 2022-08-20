@@ -34,6 +34,19 @@ const ListQuestions = () => {
 
   const handleBack = () => setActiveStep(activeStep - 1);
 
+  const checkCurrentState = (step) => {
+    switch (step) {
+        case 0:
+            return selectedQuestions.length > 0 ? false : true;
+        case 1:
+            return false;
+        case 2:
+            return true;
+        default:
+            return true;
+    }
+};
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -73,7 +86,7 @@ const ListQuestions = () => {
       case 1:
         return <ReviewQuestions />;
       case 2:
-        return <SavePaper />
+        return <SavePaper searchParams={searchParams} />;
       default:
         throw new Error("Unknown step");
     }
@@ -173,7 +186,7 @@ const ListQuestions = () => {
                 <Button
                   variant="contained"
                   onClick={handleNext}
-                  // disabled={checkCurrentState(activeStep)}
+                  disabled={checkCurrentState(activeStep)}
                 >
                   {activeStep === steps.length - 1
                     ? multi.savePaper

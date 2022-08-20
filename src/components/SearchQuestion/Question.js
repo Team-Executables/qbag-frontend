@@ -74,21 +74,21 @@ const Question = ({ q, qkey }) => {
     // console.log(e.target.checked);
     if (e.target.checked) {
       setSelectedQuestions((selectedQuestions) => {
-        console.log(selectedQuestions);
+        // console.log(selectedQuestions);
         const qs = JSON.parse(JSON.stringify(selectedQuestions));
         qs.push(q.id);
-        console.log(qs);
+        // console.log(qs);
         return qs;
       });
     } else {
       setSelectedQuestions((selectedQuestions) => {
-        console.log(selectedQuestions);
+        // console.log(selectedQuestions);
         let qs = JSON.parse(JSON.stringify(selectedQuestions));
         const index = qs.indexOf(q.id);
         if (index > -1) {
           qs.splice(index, 1);
         }
-        console.log(qs);
+        // console.log(qs);
         return qs;
       });
     }
