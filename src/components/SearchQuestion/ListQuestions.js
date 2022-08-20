@@ -49,7 +49,39 @@ const ListQuestions = () => {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return "Select Questions";
+        return (
+          <>
+            {questions && questions.length > 0 ? (
+              questions.map((q, key) => (
+                <Question q={q} qkey={key} key={q.title} />
+              ))
+            ) : (
+              <Container
+                component="main"
+                maxWidth="sm"
+                sx={{ mb: 4, p: { xs: 0, md: 1 }, textAlign: "center" }}
+              >
+                <Paper
+                  variant="outlined"
+                  sx={{ my: { xs: 3, md: 15 }, p: { xs: 1, md: 3 } }}
+                >
+                  <Typography variant="h5">{multi.noQuestionsFound}</Typography>
+                  <Button
+                    onClick={() => {
+                      navigate("/dashboard/question");
+                    }}
+                    size="small"
+                    variant="contained"
+                    color="primary"
+                    sx={{ mt: 3 }}
+                  >
+                    {multi.contributeQuestions}
+                  </Button>
+                </Paper>
+              </Container>
+            )}
+          </>
+        );
       case 1:
         return "Review Questions";
       case 2:
@@ -303,40 +335,7 @@ const ListQuestions = () => {
           <Divider />
         </>
       ) : null}
-      {questions && questions.length > 0 ? (
-        questions.map((q, key) => (
-          <Question
-            q={q}
-            qkey={key}
-            key={q.title}
-            setSelectedQuestions={setSelectedQuestions}
-          />
-        ))
-      ) : (
-        <Container
-          component="main"
-          maxWidth="sm"
-          sx={{ mb: 4, p: { xs: 0, md: 1 }, textAlign: "center" }}
-        >
-          <Paper
-            variant="outlined"
-            sx={{ my: { xs: 3, md: 15 }, p: { xs: 1, md: 3 } }}
-          >
-            <Typography variant="h5">{multi.noQuestionsFound}</Typography>
-            <Button
-              onClick={() => {
-                navigate("/dashboard/question");
-              }}
-              size="small"
-              variant="contained"
-              color="primary"
-              sx={{ mt: 3 }}
-            >
-              {multi.contributeQuestions}
-            </Button>
-          </Paper>
-        </Container>
-      )}
+      {getStepContent(activeStep)}
     </Box>
   );
 };

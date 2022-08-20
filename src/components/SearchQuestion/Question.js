@@ -1,6 +1,6 @@
 import Match from "./Match";
-import { useRecoilValue } from "recoil";
-import { multilingual } from "../../atoms";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { multilingual, selectedQues } from "../../atoms";
 import axiosInstance from "../../axios";
 
 import VerifiedIcon from "@mui/icons-material/Verified";
@@ -19,10 +19,12 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 
-const Question = ({ q, qkey, setSelectedQuestions }) => {
+const Question = ({ q, qkey }) => {
   const multi = useRecoilValue(multilingual);
   const [upvotes, setUpVotes] = useState(q.upvote);
   const [downvotes, setDownVotes] = useState(q.downvote);
+  const [selectedQuestions, setSelectedQuestions] =
+    useRecoilState(selectedQues);
 
   const difficulty = {
     [multi.easy]: "a",
@@ -33,6 +35,8 @@ const Question = ({ q, qkey, setSelectedQuestions }) => {
   function getKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);
   }
+
+  const isSelected = selectedQuestions.indexOf(q.id);
 
   function handleVote(str, id) {
     if (str === "up") {
@@ -96,7 +100,7 @@ const Question = ({ q, qkey, setSelectedQuestions }) => {
       style={{ backgroundColor: "#e8f5e9", display: "flex", marginTop: 10 }}
     >
       <Box alignSelf="center">
-        <Checkbox onChange={handleCheckboxChange} />
+        <Checkbox checked={isSelected > -1} onChange={handleCheckboxChange} />
       </Box>
       <Box m={1}>
         <Box>
