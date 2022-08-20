@@ -131,6 +131,8 @@ export const multilingualSupport = {
         "selectQuestions": "Select Questions",
         "reviewQuestions": "Review Questions",
         "generatePaper": "Generate Paper",
+        "savePaper": "Save Paper",
+        "selectedQuestions": "Selected Questions",
     },
     "हिन्दी": {
         'language': 'भाषा बदलें',
