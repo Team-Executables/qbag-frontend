@@ -33,6 +33,7 @@ const PastPapers = () => {
     }, []);
 
     const handleClick = (paper_id) => {
+        console.log(paper_id);
         navigate(`/dashboard/question/paper/${paper_id}`)
     }
 

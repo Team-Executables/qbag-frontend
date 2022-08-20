@@ -19,7 +19,7 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 
-const Question = ({ q, qkey }) => {
+const Question = ({ q, qkey, showCheckbox }) => {
   const multi = useRecoilValue(multilingual);
   const [upvotes, setUpVotes] = useState(q.upvote);
   const [downvotes, setDownVotes] = useState(q.downvote);
@@ -99,9 +99,11 @@ const Question = ({ q, qkey }) => {
       elevation={3}
       style={{ backgroundColor: "#e8f5e9", display: "flex", marginTop: 10 }}
     >
-      <Box my={1.5}>
-        <Checkbox checked={isSelected > -1} onChange={handleCheckboxChange} />
-      </Box>
+      {showCheckbox && (
+        <Box my={1.5}>
+          <Checkbox checked={isSelected > -1} onChange={handleCheckboxChange} />
+        </Box>
+      )}
       <Box m={1}>
         <Box>
           <Box

@@ -36,16 +36,16 @@ const ListQuestions = () => {
 
   const checkCurrentState = (step) => {
     switch (step) {
-        case 0:
-            return selectedQuestions.length > 0 ? false : true;
-        case 1:
-            return false;
-        case 2:
-            return true;
-        default:
-            return true;
+      case 0:
+        return selectedQuestions.length > 0 ? false : true;
+      case 1:
+        return false;
+      case 2:
+        return true;
+      default:
+        return true;
     }
-};
+  };
 
   const getStepContent = (step) => {
     switch (step) {
@@ -54,7 +54,7 @@ const ListQuestions = () => {
           <>
             {questions && questions.length > 0 ? (
               questions.map((q, key) => (
-                <Question q={q} qkey={key} key={q.title} />
+                <Question q={q} qkey={key} key={q.title} showCheckbox={true} />
               ))
             ) : (
               <Container
