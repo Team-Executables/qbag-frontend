@@ -5,7 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import Question from "./Question";
 import axiosInstance from "../../axios";
-
+import ReviewQuestions from "./ReviewQuestions";
 // MUI
 import { Box, Paper, Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -23,12 +23,6 @@ const ListQuestions = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [selectedQuestions, setSelectedQuestions] =
     useRecoilState(selectedQues);
-
-  const difficulty = {
-    [multi.easy]: "a",
-    [multi.medium]: "b",
-    [multi.hard]: "c",
-  };
 
   const [questions, setQuestions] = useRecoilState(resQues);
 
@@ -83,7 +77,7 @@ const ListQuestions = () => {
           </>
         );
       case 1:
-        return "Review Questions";
+        return <ReviewQuestions />;
       case 2:
         return "Save Paper";
       default:

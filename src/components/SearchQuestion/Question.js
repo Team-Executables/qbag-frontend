@@ -99,7 +99,7 @@ const Question = ({ q, qkey }) => {
       elevation={3}
       style={{ backgroundColor: "#e8f5e9", display: "flex", marginTop: 10 }}
     >
-      <Box alignSelf="center">
+      <Box my={1.5}>
         <Checkbox checked={isSelected > -1} onChange={handleCheckboxChange} />
       </Box>
       <Box m={1}>
