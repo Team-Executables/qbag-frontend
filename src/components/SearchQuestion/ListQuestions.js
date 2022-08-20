@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { userData, resQues, multilingual } from "../../atoms";
+import { userData, resQues, multilingual, selectedQues } from "../../atoms";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import Question from "./Question";
@@ -10,6 +10,9 @@ import axiosInstance from "../../axios";
 import { Box, Paper, Button, Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
 
 const ListQuestions = () => {
   const navigate = useNavigate();
@@ -17,6 +20,9 @@ const ListQuestions = () => {
   const uData = useRecoilValue(userData);
   // const questions = useRecoilValue(resQues);
   const multi = useRecoilValue(multilingual);
+  const [activeStep, setActiveStep] = useState(0);
+  const [selectedQuestions, setSelectedQuestions] =
+    useRecoilState(selectedQues);
 
   const difficulty = {
     [multi.easy]: "a",
@@ -26,35 +32,58 @@ const ListQuestions = () => {
 
   const [questions, setQuestions] = useRecoilState(resQues);
 
+  const steps = [
+    multi.selectQuestions,
+    multi.reviewQuestions,
+    multi.generatePaper,
+  ];
+
   function getKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);
   }
+
+  const handleNext = () => setActiveStep(activeStep + 1);
+
+  const handleBack = () => setActiveStep(activeStep - 1);
+
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return "Select Questions";
+      case 1:
+        return "Review Questions";
+      case 2:
+        return "Save Paper";
+      default:
+        throw new Error("Unknown step");
+    }
+  };
 
   useEffect(() => {
     if (uData.user_type === "other") {
       navigate("/dashboard/question/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-	const formData = {
-		easy: searchParams.get("easy"),
-		medium: searchParams.get("medium"),
-		hard: searchParams.get("hard"),
-		grade: searchParams.get("grade"),
-		subject: searchParams.get("subject"),
-		board: searchParams.get("board"),
-		langMedium: searchParams.get("langMedium"),
-	}
+    const formData = {
+      easy: searchParams.get("easy"),
+      medium: searchParams.get("medium"),
+      hard: searchParams.get("hard"),
+      grade: searchParams.get("grade"),
+      subject: searchParams.get("subject"),
+      board: searchParams.get("board"),
+      langMedium: searchParams.get("langMedium"),
+    };
 
     axiosInstance
-		.post(`questions/retrieve`, formData)
-		.then((res) => {
-			console.log(res);
-			setQuestions(res.data);
-			console.log(res.data);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+      .post(`questions/retrieve`, formData)
+      .then((res) => {
+        console.log(res);
+        setQuestions(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const generatePDF = () => {
@@ -187,34 +216,43 @@ const ListQuestions = () => {
 
   return (
     <Box>
-      {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
       {questions && questions.length > 0 ? (
         <>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-evenly",
-            }}
-          >
-            {/* <pre>{JSON.stringify(questions, null, 4)}</pre> */}
-            <Box sx={{ mt: 3, mb: 3 }}>
+          <Box sx={{ maxWidth: { md: "50vw" }, margin: "auto" }}>
+            <Box
+              sx={{
+                mt: 3,
+                mb: 3,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+                flexWrap: "wrap",
+              }}
+            >
               {questions && questions.length > 0 && (
-                <Typography variant="h5">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
+                <div>
+                  <Typography variant="body1">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
+                </div>
               )}
               {questions && questions.length > 0 && (
-                <Typography variant="h5">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
+                <div>
+                  <Typography variant="body1">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
+                </div>
               )}
               {questions && questions.length > 0 && (
-                <Typography variant="h5">
-                  {`${multi.subject}: ${questions[0].question_data.subject}`}
-                </Typography>
+                <div>
+                  <Typography variant="body1">
+                    {`${multi.subject}: ${questions[0].question_data.subject}`}
+                  </Typography>
+                </div>
               )}
               {questions && questions.length > 0 && (
-                <Typography variant="h5">{`${multi.numQuestions}: ${questions.length}`}</Typography>
+                <div>
+                  <Typography variant="body1">{`${multi.numQuestions}: ${questions.length}`}</Typography>
+                </div>
               )}
             </Box>
-            <Box displayPrint="none">
+            {/* <Box displayPrint="none">
               <Button variant="contained" onClick={() => window.print()}>
                 {multi.exportPDF}
               </Button>
@@ -223,13 +261,57 @@ const ListQuestions = () => {
               <Button variant="contained" onClick={generatePDF}>
                 {multi.generateQuestionPaper}
               </Button>
+            </Box> */}
+            <Box>
+              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+                {steps.map((label) => (
+                  <Step key={label}>
+                    <StepLabel>{label}</StepLabel>
+                  </Step>
+                ))}
+              </Stepper>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <Box>
+                <Typography variant="body1">
+                  Selected Questions: {selectedQuestions.length}
+                </Typography>
+              </Box>
+              <Box>
+                {activeStep !== 0 && (
+                  <Button onClick={handleBack}>{multi.back}</Button>
+                )}
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  // disabled={checkCurrentState(activeStep)}
+                >
+                  {activeStep === steps.length - 1
+                    ? multi.generatePaper
+                    : multi.next}
+                </Button>
+              </Box>
             </Box>
           </Box>
+
           <Divider />
         </>
       ) : null}
       {questions && questions.length > 0 ? (
-        questions.map((q, key) => <Question q={q} qkey={key} key={q.title} />)
+        questions.map((q, key) => (
+          <Question
+            q={q}
+            qkey={key}
+            key={q.title}
+            setSelectedQuestions={setSelectedQuestions}
+          />
+        ))
       ) : (
         <Container
           component="main"

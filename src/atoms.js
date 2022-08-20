@@ -59,6 +59,11 @@ export const resQues = atom({
   // effects_UNSTABLE: [localStorageEffect("resQues")],
 });
 
+export const selectedQues = atom({
+  key: "selectedQues",
+  default: [],
+});
+
 export const matchPairs = atom({
   key: "matchPairs",
   default: [

@@ -126,7 +126,11 @@ export const multilingualSupport = {
 
         "forgotPasswordError": "Invalid email ID! Please Try Again",
         "forgotPasswordAlertTitle": "Reset Password Link",
-        "forgotPasswordAlertDescription": "A reset password link has been sent on the given email address.\nPlease click on the link to set your new password.\nReset link is valid for 24 hrs"
+        "forgotPasswordAlertDescription": "A reset password link has been sent on the given email address.\nPlease click on the link to set your new password.\nReset link is valid for 24 hrs",
+
+        "selectQuestions": "Select Questions",
+        "reviewQuestions": "Review Questions",
+        "generatePaper": "Generate Paper",
     },
     "हिन्दी": {
         'language': 'भाषा बदलें',
