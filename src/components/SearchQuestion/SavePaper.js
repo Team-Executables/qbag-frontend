@@ -13,6 +13,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../axios";
 import { Grid, Paper } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SavePaper = ({ searchParams }) => {
     let displayData = {
@@ -27,20 +28,29 @@ const SavePaper = ({ searchParams }) => {
         match: 0,
     };
 
+    const navigate = useNavigate()
     const selectedQs = useRecoilValue(selectedQues);
     const questions = useQuestions();
     const [data, setData] = useState(null);
-    const [name, setName] = useState(null);
+    const [name, setName] = useState('');
+    const [nameError, setNameError] = useState(false);
     const [vulnerable, setVulnerable] = useState(false);
     const multi = useRecoilValue(multilingual);
 
     const handleChange = (e) => setName(e.target.value.trim());
 
     const handleSubmit = () => {
+        if(name.length === 0){
+            setNameError(true);
+        }
         axiosInstance
             .post("questions/create-paper", { name, questions: selectedQs })
             .then((res) => {
                 console.log(res);
+                navigate('/dashboard/question/paper')
+            })
+            .catch((err) => {
+                console.log(err);
             });
     };
 
@@ -141,6 +151,7 @@ const SavePaper = ({ searchParams }) => {
                             required
                             id="Name"
                             label={multi.paperName}
+                            error={nameError}
                             name="name"
                             onChange={handleChange}
                             sx={{ maxWidth: "400px", width: "100%" }}
