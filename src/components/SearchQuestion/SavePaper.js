@@ -2,194 +2,164 @@ import useQuestions from "../../hooks/useQuestions";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
 import { multilingual, selectedQues } from "../../atoms";
+import StatsTable from "./StatsTable";
+import CheckUnvettedQuestion from "./CheckUnvettedQuestion";
 
+
+// MUI
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../axios";
+import { Grid, Paper } from "@mui/material";
 
-const SavePaper = () => {
-  let displayData = {
-    easy: 0,
-    medium: 0,
-    hard: 0,
-    totalQues: 0,
-    marks: 0,
-    mcq: 0,
-    oneWord: 0,
-    fillInTheBlanks: 0,
-    match: 0,
-  };
+const SavePaper = ({ searchParams }) => {
+    let displayData = {
+        easy: 0,
+        medium: 0,
+        hard: 0,
+        totalQues: 0,
+        marks: 0,
+        mcq: 0,
+        oneWord: 0,
+        fillInTheBlanks: 0,
+        match: 0,
+    };
 
-  const selectedQs = useRecoilValue(selectedQues);
-  const questions = useQuestions();
-  const [data, setData] = useState(null);
-  const [name, setName] = useState(null);
-  const [vulnerable, setVulnerable] = useState(false);
-  const multi = useRecoilValue(multilingual);
+    const selectedQs = useRecoilValue(selectedQues);
+    const questions = useQuestions();
+    const [data, setData] = useState(null);
+    const [name, setName] = useState(null);
+    const [vulnerable, setVulnerable] = useState(false);
+    const multi = useRecoilValue(multilingual);
 
-  const handleChange = (e) => setName(e.target.value.trim());
+    const handleChange = (e) => setName(e.target.value.trim());
 
-  const handleSubmit = () => {
-    axiosInstance
-      .post("questions/create-paper", { name, questions: selectedQs })
-      .then((res) => {
-        console.log(res);
-      });
-  };
+    const handleSubmit = () => {
+        axiosInstance
+            .post("questions/create-paper", { name, questions: selectedQs })
+            .then((res) => {
+                console.log(res);
+            });
+    };
 
-  useEffect(() => {
-    if (questions.length > 0) {
-      questions.forEach((q) => {
-        displayData.marks += q.question_data.marks;
+    useEffect(() => {
+        console.log(searchParams);
+        console.log();
+        console.log();
+        console.log();
+        if (questions.length > 0) {
+            questions.forEach((q) => {
+                displayData.marks += q.question_data.marks;
 
-        if (q.question_data.type === "a") {
-          displayData.mcq += 1;
-        } else if (q.question_data.type === "b") {
-          displayData.oneWord++;
-        } else if (q.question_data.type === "c") {
-          displayData.fillInTheBlanks++;
-        } else if (q.question_data.type === "d") {
-          displayData.match++;
+                if (q.question_data.type === "a") {
+                    displayData.mcq += 1;
+                } else if (q.question_data.type === "b") {
+                    displayData.oneWord++;
+                } else if (q.question_data.type === "c") {
+                    displayData.fillInTheBlanks++;
+                } else if (q.question_data.type === "d") {
+                    displayData.match++;
+                }
+
+                if (q.question_data.difficulty === "a") {
+                    displayData.easy++;
+                } else if (q.question_data.difficulty === "b") {
+                    displayData.medium++;
+                } else if (q.question_data.difficulty === "c") {
+                    displayData.hard++;
+                }
+
+                if (!q.question_data.setbyTeacher && q.total_votes < 200) {
+                    setVulnerable(true);
+                }
+            });
+            displayData.totalQues = questions.length;
+            setData(displayData);
         }
+    }, [questions]);
 
-        if (q.question_data.difficulty === "a") {
-          displayData.easy++;
-        } else if (q.question_data.difficulty === "b") {
-          displayData.medium++;
-        } else if (q.question_data.difficulty === "c") {
-          displayData.hard++;
-        }
+    return (
+        <>
+            {data ? (
+                <Box
+                    sx={{ marginTop: 3 }}
+                >
+                    <Box sx={{
+                        mt: 5,
+                        mb: 3,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center"
+                    }}>
+                        <StatsTable
+                            reqEasy={searchParams.get("easy")}
+                            reqMedium={searchParams.get("medium")}
+                            reqHard={searchParams.get("hard")}
+                            easy={data.easy}
+                            medium={data.medium}
+                            hard={data.hard}
+                            a={data.mcq}
+                            b={data.oneWord}
+                            c={data.fillInTheBlanks}
+                            d={data.match}
+                        />
+                    </Box>
 
-        if (!q.question_data.setbyTeacher && q.total_votes < 200) {
-          setVulnerable(true);
-        }
-      });
-      displayData.totalQues = questions.length;
-      setData(displayData);
-    }
-  }, [questions]);
+                    {vulnerable && (
+                        <Box sx={{
+                            mt: 3,
+                            mb: 3,
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center"
+                        }}>
 
-  return (
-    <>
-      {data ? (
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginTop: 3,
-          }}
-        >
-          {/* <pre>{JSON.stringify(questions, null, 2)}</pre> */}
-          <Box>
-            <TextField
-              variant="outlined"
-              required
-              id="Name"
-              label={multi.paperName}
-              name="name"
-              onChange={handleChange}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-              sx={{ marginTop: 1, marginLeft: 1 }}
-            >
-              {multi.savePaper}
-            </Button>
-          </Box>
-          {vulnerable && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                marginTop: 3,
-              }}
-            >
-              <Typography display="block" fontSize={14} variant="overline">
-                {multi.vettedWarning}
-              </Typography>
-              <ol>
-                {questions.map((qs) => {
-                  if (!qs.question_data.setbyTeacher && qs.total_votes < 200) {
-                    return (
-                      <Typography
-                        display="block"
-                        fontSize={14}
-                        variant="overline"
-                      >
-                        <li>{qs.question_data.title}</li>
-                      </Typography>
-                    );
-                  }
-                })}
-              </ol>
-            </Box>
-          )}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginTop: 3,
-            }}
-          >
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.easyQuestions}: ${data.easy}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.mediumQuestions}: ${data.medium}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.hardQuestions}: ${data.hard}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.mcqs}: ${data.mcq}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.oneWords}: ${data.oneWord}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.fillInTheBlankss}: ${data.fillInTheBlanks}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.matchTheFollowings}: ${data.match}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.totalQuestions}: ${data.totalQues}`}</Typography>
-            <Typography
-              display="block"
-              fontSize={14}
-              variant="overline"
-            >{`${multi.totalMarks}: ${data.marks}`}</Typography>
-          </Box>
-        </Box>
-      ) : (
-        ""
-      )}
-    </>
-  );
+                            <Paper
+                                variant="outlined"
+                                elevation={8}
+                                sx={{ marginTop: 3, p: 2 }}
+                            >
+                                <Typography variant="h6" gutterBottom sx={{ p: 0, m: 0 }}>
+                                    {multi.vettedWarning}
+                                </Typography>
+                                <CheckUnvettedQuestion ques={questions} />
+                            </Paper>
+                        </Box>
+                    )}
+
+                    <Box sx={{
+                        mt: 10,
+                        mb: 3,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center"
+                    }}>
+                        <TextField
+                            variant="outlined"
+                            required
+                            id="Name"
+                            label={multi.paperName}
+                            name="name"
+                            onChange={handleChange}
+                            sx={{ maxWidth: "400px", width: "100%" }}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleSubmit}
+                            sx={{ marginTop: 1, marginLeft: 1 }}
+                        >
+                            {multi.savePaper}
+                        </Button>
+                    </Box>
+                </Box>
+            ) : (
+                ""
+            )}
+        </>
+    );
 };
 
 export default SavePaper;

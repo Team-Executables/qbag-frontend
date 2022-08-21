@@ -21,7 +21,6 @@ function CheckUnvettedQuestion({ ques }) {
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
     const maxSteps = ques.length;
-    const horizonWidth = 50
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -44,7 +43,8 @@ function CheckUnvettedQuestion({ ques }) {
                 enableMouseEvents
             >
                 {ques.map((qs, index) => (
-                    <Box key={index} sx={{ maxHeight: "250px", m:0, p:0 }} >
+                    // <Box key={index} sx={{ maxHeight: "250px", m:0, p:0 }} >
+                    <Box key={index} sx={{ m:0, p:0 }} >
                         {Math.abs(activeStep - index) <= 2 ? (
                             <Question q={qs} qkey={index} key={index} showCheckbox={false} showvote={false} />
                         ) : null}

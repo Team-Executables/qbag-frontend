@@ -61,7 +61,7 @@ export const multilingualSupport = {
         "grade": "Grade",
         "questionType": "Question Type",
         "mcq": "Multiple Choice Question",
-        "oneWord": "One Word/Sentence",
+        "oneWord": "One Word or Sentence",
         "fillInTheBlanks": "Fill in the Blanks",
         "matchTheFollowing": "Match the Following",
         "difficulty": "Difficulty",
@@ -73,6 +73,7 @@ export const multilingualSupport = {
         "subject": "Subject",
         "typeKeywordsAndPressEnter": "Type Keywords and Press Enter",
         "question": "Question",
+        "questions": "Questions",
         "numQuestions": "No. of questions",
         "key": "Key",
         "value": "Value",
@@ -144,8 +145,11 @@ export const multilingualSupport = {
         "oneWords": "No. of One Word/Sentence Questions",
         "fillInTheBlankss": "No. Fill in the Blanks Questions",
         "matchTheFollowings": "No. Match the Following Questions",
+
         "paperName": "Paper Name",
-        "vettedWarning": "The following questions are not vetted by the community, would you still like to continue?"
+        "vettedWarning": "The following questions are not vetted by the community, would you still like to continue?",
+        "requested": "Requested",
+        "selected": "Selected"
     },
     "हिन्दी": {
         'language': 'भाषा बदलें',
