@@ -89,6 +89,7 @@ export const multilingualSupport = {
         "next": "Next",
 
         "enterQuestion": "Enter Question",
+        "addAnotherQuestion": "Add Another Question",
         "enterQuestionSuccess": "Thank you for your Question.",
         "enterQuestionError": "OOPS! a similar question already exists!",
         "search": "Search",

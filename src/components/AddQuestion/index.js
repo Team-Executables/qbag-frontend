@@ -5,7 +5,10 @@ import ReviewQuestion from "./ReviewQuestion";
 import axiosInstance from "../../axios";
 import { useRecoilValue } from "recoil";
 import { question, matchPairs, MCQoptions, multilingual } from "../../atoms";
+import { useNavigate } from "react-router-dom";
 
+
+// MUI
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
@@ -35,6 +38,8 @@ export default function AddQuestion() {
     //   title: "",
     //   options: [],
     // };
+
+    const navigate = useNavigate();
 
     const [activeStep, setActiveStep] = useState(0);
     const [questionDetails, setQuestionDetails] = useState(
@@ -66,7 +71,7 @@ export default function AddQuestion() {
                         console.log(res);
                         // console.log(res.data);
                         setRespons(res);
-                        
+
                     })
                     .catch((err) => {
                         // console.log(err);
@@ -213,6 +218,17 @@ export default function AddQuestion() {
                                         <Typography variant="subtitle1">
                                             {respons.data.question_data.title}
                                         </Typography>
+                                        <Button
+                                            onClick={() => {
+                                                window.location.reload();
+                                            }}
+                                            size="small"
+                                            variant="contained"
+                                            color="primary"
+                                            sx={{ mt: 3 }}
+                                        >
+                                            {multi.addAnotherQuestion}
+                                        </Button>
                                     </>
                                 ) : respons.status === 409 ? (
                                     <>
@@ -222,6 +238,17 @@ export default function AddQuestion() {
                                         <Typography variant="subtitle1">
                                             {respons.data.similar_question_data.title}
                                         </Typography>
+                                        <Button
+                                            onClick={() => {
+                                                window.location.reload();
+                                            }}
+                                            size="small"
+                                            variant="contained"
+                                            color="primary"
+                                            sx={{ mt: 3 }}
+                                        >
+                                            {multi.addAnotherQuestion}
+                                        </Button>
                                     </>
                                 ) : (
                                     <Skeleton variant="text" />
