@@ -54,7 +54,7 @@ const ListQuestions = () => {
           <>
             {questions && questions.length > 0 ? (
               questions.map((q, key) => (
-                <Question q={q} qkey={key} key={q.title} showCheckbox={true} />
+                <Question q={q} qkey={key} key={q.title} showCheckbox={true} showvote={true} />
               ))
             ) : (
               <Container
@@ -123,7 +123,7 @@ const ListQuestions = () => {
     <Box>
       {questions && questions.length > 0 ? (
         <>
-          <Box sx={{ maxWidth: { md: "50vw" }, margin: "auto" }}>
+          <Box sx={{ maxWidth: { md: "50vw" }, margin: "auto", mb: 3 }}>
             <Box
               sx={{
                 mt: 3,
@@ -136,24 +136,24 @@ const ListQuestions = () => {
             >
               {questions && questions.length > 0 && (
                 <div>
-                  <Typography variant="body1">{`${multi.board}: ${questions[0].question_data.board}`}</Typography>
+                  <Typography variant="body1"><b>{`${multi.board}:`}</b>{` ${questions[0].question_data.board}`}</Typography>
                 </div>
               )}
               {questions && questions.length > 0 && (
                 <div>
-                  <Typography variant="body1">{`${multi.grade}: ${questions[0].question_data.grade}`}</Typography>
+                  <Typography variant="body1"><b>{`${multi.grade}:`}</b>{` ${questions[0].question_data.grade}`}</Typography>
                 </div>
               )}
               {questions && questions.length > 0 && (
                 <div>
                   <Typography variant="body1">
-                    {`${multi.subject}: ${questions[0].question_data.subject}`}
+                    <b>{`${multi.subject}:`}</b>{` ${questions[0].question_data.subject}`}
                   </Typography>
                 </div>
               )}
               {questions && questions.length > 0 && (
                 <div>
-                  <Typography variant="body1">{`${multi.numQuestions}: ${questions.length}`}</Typography>
+                  <Typography variant="body1"><b>{`${multi.numQuestions}:`}</b>{` ${questions.length}`}</Typography>
                 </div>
               )}
             </Box>
@@ -176,7 +176,7 @@ const ListQuestions = () => {
             >
               <Box>
                 <Typography variant="body1">
-                  {multi.selectQuestions}: {selectedQuestions.length}
+                  {multi.selectedQuestions}: {selectedQuestions.length}
                 </Typography>
               </Box>
               <Box>

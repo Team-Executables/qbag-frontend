@@ -130,6 +130,7 @@ export const multilingualSupport = {
         "forgotPasswordAlertDescription": "A reset password link has been sent on the given email address.\nPlease click on the link to set your new password.\nReset link is valid for 24 hrs",
 
         "selectQuestions": "Select Questions",
+        "selectedQuestions": "Questions Selected",
         "reviewQuestions": "Review Questions",
         "generatePaper": "Generate Paper",
         "savePaper": "Save Paper",
