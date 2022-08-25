@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { userData } from "../../atoms";
+import { userData, multilingual } from "../../atoms";
 import axiosInstance from "../../axios";
 import { format } from 'date-fns';
 
@@ -12,6 +12,7 @@ import AssignmentTwoToneIcon from '@mui/icons-material/AssignmentTwoTone';
 const PastPapers = () => {
     const navigate = useNavigate();
     const uData = useRecoilValue(userData);
+    const multi = useRecoilValue(multilingual);
 
     const [paperList, setPaperList] = useState([]);
 
@@ -55,18 +56,18 @@ const PastPapers = () => {
                                 secondary={
                                     <>
                                         <Typography component="span" variant="body2">
-                                            Board: {paper.board} | Class: {paper.grade}
+                                            {multi.board}: {paper.board} | {multi.grade}: {paper.grade}
                                         </Typography>
                                         <br />
                                         <Typography component="span" variant="body2">
-                                            Marks: {paper.total_marks} | Questions: {paper.total_marks}
+                                            {multi.marks}: {paper.total_marks} | {multi.questions}: {paper.total_marks}
                                         </Typography>
                                     </>
                                 }
                             />
                             <ListItemSecondaryAction>
                                 <Typography variant="subtitle2">
-                                    Generated On <br />
+                                    {multi.generated} <br />
                                     {`${format(new Date(paper.export_date), "do MMM, yyyy")}`}
                                 </Typography>
                             </ListItemSecondaryAction>
@@ -77,7 +78,7 @@ const PastPapers = () => {
                     :
 
                     <Typography variant="overline" display="block" gutterBottom>
-                        No question papers generated yet
+                        {multi.noPapersGenerated}
                     </Typography>
                 }
             </List>

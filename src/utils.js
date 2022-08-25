@@ -149,7 +149,7 @@ export const multilingualSupport = {
         "paperName": "Paper Name",
         "vettedWarning": "The following questions are not vetted by the community, would you still like to continue?",
         "requested": "Requested",
-        "selected": "Selected"
+        "selected": "Selected",
     },
     'हिन्दी': {
         'language': 'भाषा बदलो',
@@ -277,7 +277,8 @@ export const multilingualSupport = {
         'paperName': 'कागज का नाम',
         'vettedWarning': 'निम्नलिखित प्रश्नों की समुदाय द्वारा जांच नहीं की जाती है, क्या आप अब भी जारी रखना चाहेंगे?',
         'requested': 'का अनुरोध किया',
-        'selected': 'चयनित'
+        'selected': 'चयनित',
+        "noPapersGenerated": "अभी तक कोई प्रश्न पत्र उत्पन्न नहीं हुआ"
     },
     'ગુજરાતી': {
         'language': 'ભાષા બદલો',
@@ -405,7 +406,8 @@ export const multilingualSupport = {
         'paperName': 'કાગળનું નામ',
         'vettedWarning': 'નીચેના પ્રશ્નો સમુદાય દ્વારા ચકાસાયેલ નથી, શું તમે હજુ પણ ચાલુ રાખવા માંગો છો?',
         'requested': 'વિનંતી કરી',
-        'selected': 'પસંદ કરેલ'
+        'selected': 'પસંદ કરેલ',
+        'noPapersGenerated': 'હજુ સુધી કોઈ પ્રશ્નપત્રો જનરેટ થયા નથી'
     },
     'मराठी': {
         'language': 'भाषा बदला',
@@ -533,7 +535,8 @@ export const multilingualSupport = {
         'paperName': 'कागदाचे नाव',
         'vettedWarning': 'खालील प्रश्नांची समुदायाद्वारे तपासणी केली जात नाही, तरीही तुम्ही सुरू ठेवू इच्छिता?',
         'requested': 'विनंती केली',
-        'selected': 'निवडले'
+        'selected': 'निवडले',
+        'noPapersGenerated': 'अद्याप कोणतीही प्रश्नपत्रिका तयार झालेली नाही'
     },
     'বাংলা': {
         'language': 'ভাষা পরিবর্তন করুন',
@@ -661,7 +664,8 @@ export const multilingualSupport = {
         'paperName': 'কাগজের নাম',
         'vettedWarning': 'নিম্নলিখিত প্রশ্নগুলি সম্প্রদায় দ্বারা যাচাই করা হয় না, আপনি কি এখনও চালিয়ে যেতে চান?',
         'requested': 'অনুরোধ',
-        'selected': 'নির্বাচিত'
+        'selected': 'নির্বাচিত',
+        'noPapersGenerated': 'এখনো কোন প্রশ্নপত্র তৈরি হয়নি'
     },
     'ಕನ್ನಡ': {
         'language': 'ಭಾಷೆ ಬದಲಾಯಿಸಿ',
@@ -789,7 +793,8 @@ export const multilingualSupport = {
         'paperName': 'ಕಾಗದದ ಹೆಸರು',
         'vettedWarning': 'ಈ ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳನ್ನು ಸಮುದಾಯವು ಪರಿಶೀಲಿಸಿಲ್ಲ, ನೀವು ಇನ್ನೂ ಮುಂದುವರಿಸಲು ಬಯಸುವಿರಾ?',
         'requested': 'ವಿನಂತಿಸಿದರು',
-        'selected': 'ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ'
+        'selected': 'ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ',
+        'noPapersGenerated': 'ಇನ್ನೂ ಯಾವುದೇ ಪ್ರಶ್ನೆ ಪತ್ರಿಕೆಗಳನ್ನು ರಚಿಸಲಾಗಿಲ್ಲ'
     },
     'മലയാളം': {
         'language': 'ഭാഷ മാറ്റുക',
@@ -917,7 +922,8 @@ export const multilingualSupport = {
         'paperName': 'പേപ്പർ പേര്',
         'vettedWarning': 'ഇനിപ്പറയുന്ന ചോദ്യങ്ങൾ കമ്മ്യൂണിറ്റി പരിശോധിച്ചിട്ടില്ല, നിങ്ങൾക്ക് ഇപ്പോഴും തുടരാൻ താൽപ്പര്യമുണ്ടോ?',
         'requested': 'അഭ്യർത്ഥിച്ചു',
-        'selected': 'തിരഞ്ഞെടുത്തു'
+        'selected': 'തിരഞ്ഞെടുത്തു',
+        'noPapersGenerated': 'ചോദ്യപേപ്പറുകളൊന്നും ഇതുവരെ സൃഷ്ടിച്ചിട്ടില്ല'
     },
     'नेपाली': {
         'language': 'भाषा परिवर्तन गर्नुहोस्',
@@ -1045,7 +1051,8 @@ export const multilingualSupport = {
         'paperName': 'कागजको नाम',
         'vettedWarning': 'निम्न प्रश्नहरू समुदायद्वारा जाँच गरिएका छैनन्, के तपाईं अझै जारी राख्न चाहनुहुन्छ?',
         'requested': 'अनुरोध गरियो',
-        'selected': 'चयन गरियो'
+        'selected': 'चयन गरियो',
+        'noPapersGenerated': 'अहिलेसम्म कुनै प्रश्नपत्र तयार भएको छैन'
     },
     'ଓଡ଼ିଆ': {
         'language': 'ଭାଷା ପରିବର୍ତ୍ତନ କରନ୍ତୁ |',
@@ -1173,7 +1180,8 @@ export const multilingualSupport = {
         'paperName': 'କାଗଜ ନାମ |',
         'vettedWarning': 'ନିମ୍ନଲିଖିତ ପ୍ରଶ୍ନଗୁଡିକ ସମ୍ପ୍ରଦାୟ ଦ୍ୱାରା ପରୀକ୍ଷିତ ନୁହେଁ, ଆପଣ ତଥାପି ଜାରି ରଖିବାକୁ ଚାହାଁନ୍ତି କି?',
         'requested': 'ଅନୁରୋଧ',
-        'selected': 'ମନୋନୀତ |'
+        'selected': 'ମନୋନୀତ |',
+        'noPapersGenerated': 'ଏପର୍ଯ୍ୟନ୍ତ କ question ଣସି ପ୍ରଶ୍ନ କାଗଜପତ୍ର ସୃଷ୍ଟି ହୋଇନାହିଁ |'
     },
     'ਪੰਜਾਬੀ': {
         'language': 'ਭਾਸ਼ਾ ਬਦਲੋ',
@@ -1301,7 +1309,8 @@ export const multilingualSupport = {
         'paperName': 'ਕਾਗਜ਼ ਦਾ ਨਾਮ',
         'vettedWarning': 'ਹੇਠਾਂ ਦਿੱਤੇ ਸਵਾਲਾਂ ਦੀ ਭਾਈਚਾਰੇ ਦੁਆਰਾ ਜਾਂਚ ਨਹੀਂ ਕੀਤੀ ਗਈ ਹੈ, ਕੀ ਤੁਸੀਂ ਅਜੇ ਵੀ ਜਾਰੀ ਰੱਖਣਾ ਚਾਹੋਗੇ?',
         'requested': 'ਬੇਨਤੀ ਕੀਤੀ',
-        'selected': 'ਚੁਣਿਆ ਹੋਇਆ'
+        'selected': 'ਚੁਣਿਆ ਹੋਇਆ',
+        'noPapersGenerated': 'ਅਜੇ ਤੱਕ ਕੋਈ ਪ੍ਰਸ਼ਨ ਪੱਤਰ ਤਿਆਰ ਨਹੀਂ ਹੋਇਆ ਹੈ'
     },
     'தமிழ்': {
         'language': 'மொழியை மாற்றவும்',
@@ -1429,7 +1438,8 @@ export const multilingualSupport = {
         'paperName': 'காகித பெயர்',
         'vettedWarning': 'பின்வரும் கேள்விகள் சமூகத்தால் சரிபார்க்கப்படவில்லை, நீங்கள் இன்னும் தொடர விரும்புகிறீர்களா?',
         'requested': 'கோரப்பட்டது',
-        'selected': 'தேர்ந்தெடுக்கப்பட்டது'
+        'selected': 'தேர்ந்தெடுக்கப்பட்டது',
+        'noPapersGenerated': 'இன்னும் வினாத்தாள்கள் எதுவும் உருவாக்கப்படவில்லை'
     },
     'తెలుగు': {
         'language': 'భాష మార్చు',
@@ -1557,7 +1567,8 @@ export const multilingualSupport = {
         'paperName': 'పేపర్ పేరు',
         'vettedWarning': 'కింది ప్రశ్నలు సంఘం ద్వారా పరిశీలించబడలేదు, మీరు ఇంకా కొనసాగించాలనుకుంటున్నారా?',
         'requested': 'అభ్యర్థించారు',
-        'selected': 'ఎంపిక చేయబడింది'
+        'selected': 'ఎంపిక చేయబడింది',
+        'noPapersGenerated': 'ఇంకా ప్రశ్న పత్రాలు ఏవీ రూపొందించబడలేదు'
     }
 }
 

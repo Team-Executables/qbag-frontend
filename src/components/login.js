@@ -147,7 +147,7 @@ export default function SignIn() {
                         id: res.data.teacher_id || res.data.other_id,
                         user_id: res.data.user_id,
                         user_type: res.data.user_type,
-                        idproof: `http://127.0.0.1:8000${res.data.idproof}`,
+                        // idproof: `http://qbag-backend.herokuapp.com${res.data.idproof}`,
                     });
 
                     setLogin(true);
