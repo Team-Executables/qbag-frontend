@@ -135,7 +135,6 @@ export const multilingualSupport = {
         "reviewQuestions": "Review Questions",
         "generatePaper": "Generate Paper",
         "savePaper": "Save Paper",
-        "selectedQuestions": "Selected Questions",
         "easyQuestions": "No. of Easy questions",
         "mediumQuestions": "No. of Medium questions",
         "hardQuestions": "No. of Hard questions",

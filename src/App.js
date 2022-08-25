@@ -18,6 +18,7 @@ import QuestionPaper from "./components/PastPapers/QuestionPaper";
 import { teal, amber } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import GeneratedTemplates from "./components/Templates/GeneratedTemplates";
 
 const theme = createTheme({
     palette: {
@@ -57,6 +58,7 @@ function App() {
                     <Route path="list" element={<ListQuestions />} />
                     <Route path="paper" element={<PastPapers />} />
                     <Route path="paper/:id" element={<QuestionPaper />} />
+                    <Route path="templates" element={<GeneratedTemplates />} />
                 </Route>
                 <Route path="/register" element={<Register />} />
                 <Route path="/login" element={<Login />} />

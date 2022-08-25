@@ -18,6 +18,9 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import List from "@mui/material//List";
+import ListItem from "@mui/material/ListItem";
+import Checkbox from "@mui/material/Checkbox";
 
 
 const SearchQuestions = () => {
@@ -81,6 +84,30 @@ const SearchQuestions = () => {
                 console.log(err);
             });
     }
+
+    const [checked, setChecked] = useState(false);
+    const [title, setTitle] = useState("");
+
+    const handleTitle = (event) => { 
+        setTitle(event.target.value);
+    }
+
+    const handleSave = (event) => {
+        event.preventDefault();
+        axiosInstance.post(`questions/save-url-template`, {
+            name: title,
+            template_string: `/dashboard/question/list?easy=${formData.easy}&medium=${formData.medium}&hard=${formData.hard}&grade=${formData.grade}&subject=${formData.subject}&board=${formData.board}&langMedium=${formData.langMedium}`,
+        }).then((res) => {
+            console.log(res);
+            console.log(res.data);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    const handleCheck = (event) => {
+        setChecked(event.target.checked);
+    };
 
     return (
         <Grid container component="main">
@@ -210,6 +237,30 @@ const SearchQuestions = () => {
                         </Button>
                     </Grid>
                 </form>
+                <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center">
+                    <Box sx={{marginTop: "20px"}}>
+                        <Checkbox checked={checked} onChange={handleCheck} inputProps={{ "aria-label": "primary checkbox" }}/>
+                        <Typography variant="p">
+                            Save this search as a Template
+                        </Typography>
+                    </Box>
+                    <Box>
+                        {
+                            checked && <TextField label="Template Name" onChange={handleTitle} value={title}  
+                                sx={{marginTop: "5px"}}/>
+                        }
+                    </Box>
+                    <Box>
+                        {
+                            checked && <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleSave}
+                                sx={{marginTop: "10px"}}
+                            >Save</Button>
+                        }
+                    </Box>
+                </Box>
             </Box>
         </Grid>
     );
