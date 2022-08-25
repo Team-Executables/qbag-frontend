@@ -117,6 +117,14 @@ const EnterQuestion = ({ qType }) => {
     }));
   };
 
+  const resetCustomTranscript = () => {
+    resetTranscript();
+    setQues((ques) => ({
+      ...ques,
+      title: "",
+    }));
+  };
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -139,9 +147,8 @@ const EnterQuestion = ({ qType }) => {
             <ButtonGroup variant="outlined" aria-label="outlined button group">
               <Button onClick={SpeechRecognition.startListening}>Start</Button>
               <Button onClick={stopListening}>Stop</Button>
-              <Button onClick={resetTranscript}>Reset</Button>
+              <Button onClick={resetCustomTranscript}>Reset</Button>
             </ButtonGroup>
-            <p>{transcript}</p>
           </div>
         </Grid>
         <Grid item xs={12}>
