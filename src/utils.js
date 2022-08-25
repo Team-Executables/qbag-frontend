@@ -1560,3 +1560,7 @@ export const multilingualSupport = {
         'selected': 'ఎంపిక చేయబడింది'
     }
 }
+
+const VOTES_THRESHOLD = 4
+
+export default VOTES_THRESHOLD
