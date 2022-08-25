@@ -43,6 +43,7 @@ const SavePaper = ({ searchParams }) => {
     if (name.length === 0) {
       setNameError(true);
     }
+
     axiosInstance
       .post("questions/create-paper", { name, questions: selectedQs })
       .then((res) => {
@@ -52,6 +53,18 @@ const SavePaper = ({ searchParams }) => {
       .catch((err) => {
         console.log(err);
       });
+
+    const promises = selectedQs.map((ele) =>
+      axiosInstance.post(`questions/vote`, {
+        question: ele,
+        vote: 1,
+      })
+    );
+
+    Promise.all(promises).then((d) => {
+      //   const qData = d.map((ele) => ele.data);
+      console.log(d);
+    });
   };
 
   useEffect(() => {
@@ -78,7 +91,9 @@ const SavePaper = ({ searchParams }) => {
           displayData.hard++;
         }
 
-        if (!(q.total_votes >= VOTES_THRESHOLD && q.upvote > (VOTES_THRESHOLD / 2))) {
+        if (
+          !(q.total_votes >= VOTES_THRESHOLD && q.upvote > VOTES_THRESHOLD / 2)
+        ) {
           setVulnerable(true);
         }
       });
