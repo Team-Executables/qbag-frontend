@@ -5,7 +5,6 @@ import ReviewQuestion from "./ReviewQuestion";
 import axiosInstance from "../../axios";
 import { useRecoilValue } from "recoil";
 import { question, matchPairs, MCQoptions, multilingual } from "../../atoms";
-import { useNavigate } from "react-router-dom";
 
 
 // MUI
@@ -38,8 +37,6 @@ export default function AddQuestion() {
     //   title: "",
     //   options: [],
     // };
-
-    const navigate = useNavigate();
 
     const [activeStep, setActiveStep] = useState(0);
     const [questionDetails, setQuestionDetails] = useState(
@@ -150,7 +147,7 @@ export default function AddQuestion() {
     const checkCurrentState = (step) => {
         switch (step) {
             case 0:
-                for (let [key, value] of Object.entries(questionDetails)) {
+                for (let [, value] of Object.entries(questionDetails)) {
                     if (value.length === 0) {
                         return true;
                     }
