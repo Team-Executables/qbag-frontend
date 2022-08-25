@@ -10,9 +10,12 @@ import TextField from "@mui/material/TextField";
 // import InputLabel from "@mui/material/InputLabel";
 // import Select from "@mui/material/Select";
 // import MenuItem from "@mui/material/MenuItem";
+import { ButtonGroup } from '@mui/material';
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { question, MCQoptions, matchPairs, multilingual } from "../../atoms";
+
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 const EnterQuestion = ({ qType }) => {
     const [ques, setQues] = useRecoilState(question);
@@ -22,6 +25,16 @@ const EnterQuestion = ({ qType }) => {
     const [matchFields, setMatchFields] = useRecoilState(matchPairs);
     const multi = useRecoilValue(multilingual);
 
+    const {
+        transcript,
+        listening,
+        resetTranscript,
+        browserSupportsSpeechRecognition
+      } = useSpeechRecognition();
+    
+      if (!browserSupportsSpeechRecognition) {
+        return <span>Browser doesn't support speech recognition.</span>;
+      }
 
     const addMatchField = () => {
         setMatchFields([
@@ -111,6 +124,15 @@ const EnterQuestion = ({ qType }) => {
                         value={ques.title}
                         onChange={handleQuesChange}
                     />
+                    <div>
+                        <p>Microphone: {listening ? 'on' : 'off'}</p>
+                        <ButtonGroup variant="outlined" aria-label="outlined button group">
+                            <Button onClick={SpeechRecognition.startListening}>Start</Button>
+                            <Button onClick={SpeechRecognition.stopListening}>Stop</Button>
+                            <Button onClick={resetTranscript}>Reset</Button>
+                        </ButtonGroup>
+                        <p>{transcript}</p>
+                    </div>
                 </Grid>
                 <Grid item xs={12}>
                     {qType === "a" ? (
