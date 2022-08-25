@@ -34,3 +34,22 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
   * Change password
   * Reset password via link on email
   * View submitted ID
+
+* **Question Creation**
+  * List class members
+  * Teacher:
+    * Create & delete classes
+    * Add & remove students from classes
+  * Student:
+    * Join class using joining code
+    * Leave class
+    
+    
+* **Question Generation**
+  * List class members
+  * Teacher:
+    * Create & delete classes
+    * Add & remove students from classes
+  * Student:
+    * Join class using joining code
+    * Leave class
