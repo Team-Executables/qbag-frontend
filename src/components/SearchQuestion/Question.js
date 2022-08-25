@@ -1,3 +1,4 @@
+import React from "react";
 import Match from "./Match";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { multilingual, selectedQues } from "../../atoms";
@@ -6,6 +7,7 @@ import axiosInstance from "../../axios";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ReportIcon from '@mui/icons-material/Report';
 import {
   Box,
   FormControl,
@@ -17,7 +19,14 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { Button } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Question = ({ q, qkey, showCheckbox, showvote }) => {
   const multi = useRecoilValue(multilingual);
@@ -31,6 +40,16 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
     [multi.medium]: "b",
     [multi.hard]: "c",
   };
+
+  const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
   function getKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);
@@ -153,6 +172,17 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
                       &nbsp;<span>{downvotes}</span>
                     </IconButton>
                   </Box>
+                  <Box
+                    component="span"
+                    m={1}
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                  <IconButton variant="outlined" onClick={handleClickOpen}>
+                    <ReportIcon />
+                  </IconButton>
+                  </Box>
                 </Box>
               </Box>
             )}
@@ -191,6 +221,27 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
             </RadioGroup>
           </FormControl>
         )}
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Report Question</DialogTitle>
+          <DialogContent>
+          <DialogContentText>
+            Please provide a reason for reporting the question below.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="reason"
+            label="Reason for reporting"
+            type="text"
+            fullWidth
+            variant="standard"
+            />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleClose}>Report</Button>
+            </DialogActions>
+          </Dialog>
       </Box>
     </Paper>
   );
