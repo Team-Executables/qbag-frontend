@@ -6,7 +6,7 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 
 <br/>
 
-**Link to the website:**
+**Link to the website:** [https://qbag.netlify.app/](https://qbag.netlify.app/)
 <br/>
 **Link to backend repo:** 
 <br/>
@@ -15,13 +15,13 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 
 
 ### Tech Stack ###
-* React
-* Recoil
-* MUI
-* jspdf
-* axios
-* date-fns
-
+* React v17.0.2
+* Recoil v0.6.1
+* MUI v5.5.1
+* jspdf v2.5.1
+* axios v0.26.1
+* date-fns v2.29.1
+* react-speech-recognition v3.9.1
 
 
 ### Features ###
@@ -36,20 +36,14 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
   * View submitted ID
 
 * **Question Creation**
-  * List class members
-  * Teacher:
-    * Create & delete classes
-    * Add & remove students from classes
-  * Student:
-    * Join class using joining code
-    * Leave class
-    
+  * Similarity check to look for similar questions already present in the database
+  * Inputs accepted in all languages
+  * Special Status (Badge) on questions created by academicians
+  * Questions undergo vetting through crowdsourcing
     
 * **Question Generation**
-  * List class members
-  * Teacher:
-    * Create & delete classes
-    * Add & remove students from classes
-  * Student:
-    * Join class using joining code
-    * Leave class
+  * Filtering by variety of fields like board, class, subject, etc.
+  * Upvote/Downvote questions to participate in vetting
+  * Download Question Paper as PDF
+  * Print Question Paper
+  * Save Question Paper for reference
