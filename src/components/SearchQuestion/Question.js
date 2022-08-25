@@ -44,15 +44,15 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
 
 
 
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
 
 
     const [openDownvoteReason, setOpenDownvoteReason] = useState(false);
@@ -92,20 +92,22 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
     }
 
     function handleDownVote(id) {
-        axiosInstance
-            .post(`questions/vote`, {
-                question: id,
-                vote: 0,
-                reason: reason,
-            })
-            .then((res) => {
-                setDownVotes((d) => d + 1);
-                console.log(res.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-            .finally(() => document.location.reload(true));
+        if (reason.length > 0) {
+            axiosInstance
+                .post(`questions/vote`, {
+                    question: id,
+                    vote: 0,
+                    "reason": reason,
+                })
+                .then((res) => {
+                    setDownVotes((d) => d + 1);
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+                .finally(() => document.location.reload(true));
+        }
     }
 
     const handleCheckboxChange = (e) => {
@@ -185,13 +187,13 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
                                             color="primary"
                                             aria-label="downvote"
                                             component="span"
-                                            onClick={() => {setQues_id(q.id); handleClickOpenDownvoteReason()}}
+                                            onClick={() => { setQues_id(q.id); handleClickOpenDownvoteReason() }}
                                         >
                                             <ThumbDownIcon />
                                             &nbsp;<span>{downvotes}</span>
                                         </IconButton>
                                     </Box>
-                                    <Box
+                                    {/* <Box
                                         component="span"
                                         m={1}
                                         display="flex"
@@ -201,7 +203,7 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
                                         <IconButton variant="outlined" onClick={handleClickOpen}>
                                             <ReportIcon />
                                         </IconButton>
-                                    </Box>
+                                    </Box> */}
                                 </Box>
                             </Box>
                         )}
@@ -269,19 +271,22 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
                         <DialogContentText>
                             Please provide a reason for downvoting the question
                         </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="reasonDownvote"
-                            label="Reason for downvoting"
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                        />
+                        <Box pt={2}>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="reasonDownvote"
+                                label="Reason for downvoting"
+                                type="text"
+                                fullWidth
+                                variant="outlined"
+                                onChange={(e) => setReason(e.target.value)}
+                            />
+                        </Box>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseDownvoteReason}>Cancel</Button>
-                        <Button onClick={() => { handleDownVote(ques_id) }}>Submit</Button>
+                        <Button variant="contained" onClick={() => { handleDownVote(ques_id) }}>Submit</Button>
                     </DialogActions>
                 </Dialog>
             </Box>
