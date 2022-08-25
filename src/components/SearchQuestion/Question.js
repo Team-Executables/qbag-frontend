@@ -229,8 +229,10 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
                     </Typography>
                 )}
                 {q.question_data.type === "a" && (
-                    <FormControl component="fieldset">
-                        <RadioGroup value={q.option_data[0].option}>
+                    <FormControl>
+                        <RadioGroup value={
+                            q.option_data.find(opt => opt.correct).option
+                        }>
                             {q.option_data.map((l) => (
                                 <FormControlLabel
                                     value={l.option}

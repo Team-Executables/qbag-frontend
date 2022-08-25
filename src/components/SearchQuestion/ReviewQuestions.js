@@ -215,7 +215,9 @@ const ReviewQuestions = () => {
                                 )}
                             {q.question_data.type === "a" && (
                                 <FormControl component="fieldset">
-                                    <RadioGroup value={q.option_data[0].option}>
+                                    <RadioGroup value={
+                                        q.option_data.find(opt => opt.correct).option
+                                    }>
                                         {q.option_data.map((l) => (
                                             <FormControlLabel
                                                 value={l.option}
