@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useQuestions from "../../hooks/useQuestions";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
@@ -12,8 +13,8 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axiosInstance from "../../axios";
-import { Grid, Paper } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Paper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SavePaper = ({ searchParams }) => {
     let displayData = {

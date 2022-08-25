@@ -43,7 +43,7 @@ const SearchQuestions = () => {
 
     const [formData, updateFormData] = useState(initialFormData);
 
-    const [resQ, setResQ] = useRecoilState(resQues);
+    const [,setResQ] = useRecoilState(resQues);
     const multi = useRecoilValue(multilingual);
 
     const handleChange = (e) => {
