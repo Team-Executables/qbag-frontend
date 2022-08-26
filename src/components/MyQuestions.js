@@ -183,7 +183,7 @@ const MyQuestions = () => {
                     </Box>
                     <Box displayPrint="none" sx={{ mt: 3, mb: 3 }}>
                         <Button variant="contained" onClick={generatePDF}>
-                            Generate Paper Containing My Questions
+                            {multi.generateQuestionPaper}
                         </Button>
                     </Box>
                     <Divider />

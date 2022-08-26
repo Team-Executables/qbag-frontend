@@ -268,10 +268,10 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
 
 
                 <Dialog open={openDownvoteReason} onClose={handleCloseDownvoteReason}>
-                    <DialogTitle>Reason for Downvote</DialogTitle>
+                    <DialogTitle>{multi.downvoteModalHead}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Please provide a reason for downvoting the question
+                            {multi.downvoteModalSubHead}
                         </DialogContentText>
                         <Box pt={2}>
                             <TextField
@@ -287,8 +287,8 @@ const Question = ({ q, qkey, showCheckbox, showvote }) => {
                         </Box>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleCloseDownvoteReason}>Cancel</Button>
-                        <Button variant="contained" onClick={() => { handleDownVote(ques_id) }}>Submit</Button>
+                        <Button onClick={handleCloseDownvoteReason}>{multi.cancel}</Button>
+                        <Button variant="contained" onClick={() => { handleDownVote(ques_id) }}>{multi.submit}</Button>
                     </DialogActions>
                 </Dialog>
             </Box>

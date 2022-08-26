@@ -60,7 +60,7 @@ const GeneratedTemplates = () => {
 
                     :
                 <Typography variant="overline" display="block" gutterBottom>
-                    No Templates Saved
+                    {multi.noTemplatesSaved}
                 </Typography>
                 }
             </List>

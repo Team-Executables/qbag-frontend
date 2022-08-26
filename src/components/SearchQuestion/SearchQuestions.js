@@ -241,7 +241,7 @@ const SearchQuestions = () => {
                     <Box sx={{marginTop: "20px"}}>
                         <Checkbox checked={checked} onChange={handleCheck} inputProps={{ "aria-label": "primary checkbox" }}/>
                         <Typography variant="p">
-                            Save this search as a Template
+                            {multi.savePrompt}
                         </Typography>
                     </Box>
                     <Box>
@@ -257,7 +257,7 @@ const SearchQuestions = () => {
                                 color="primary"
                                 onClick={handleSave}
                                 sx={{marginTop: "10px"}}
-                            >Save</Button>
+                            >{multi.save}</Button>
                         }
                     </Box>
                 </Box>
