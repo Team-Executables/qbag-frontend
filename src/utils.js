@@ -160,6 +160,8 @@ export const multilingualSupport = {
         "downvoteModalHead": "Reason for Downvote",
         "downvoteModalSubHead": "Please provide a reason for downvoting the question",
         "cancel": "Cancel",
+
+        "extraQuestions": "% of Extra Questions",
     },
     'हिन्दी': {
         'language': 'भाषा बदलो',

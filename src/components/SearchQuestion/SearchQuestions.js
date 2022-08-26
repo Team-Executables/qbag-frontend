@@ -18,8 +18,6 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import List from "@mui/material//List";
-import ListItem from "@mui/material/ListItem";
 import Checkbox from "@mui/material/Checkbox";
 
 
@@ -42,6 +40,7 @@ const SearchQuestions = () => {
         grade: "",
         subject: "",
         langMedium: "",
+        extraQuestions: ""
     });
 
     const [formData, updateFormData] = useState(initialFormData);
@@ -77,7 +76,7 @@ const SearchQuestions = () => {
                 console.log(res.data);
                 navigate({
                     pathname: "/dashboard/question/list",
-                    search: `?easy=${formData.easy}&medium=${formData.medium}&hard=${formData.hard}&grade=${formData.grade}&subject=${formData.subject}&board=${formData.board}&langMedium=${formData.langMedium}`
+                    search: `?easy=${formData.easy}&medium=${formData.medium}&hard=${formData.hard}&grade=${formData.grade}&subject=${formData.subject}&board=${formData.board}&langMedium=${formData.langMedium}&additional_ques=${formData.extraQuestions}`,
                 })
             })
             .catch((err) => {
@@ -221,6 +220,17 @@ const SearchQuestions = () => {
                                     ))}
                                 </Select>
                             </FormControl>
+                        </Grid>
+                        <Grid item justify="center" marginX="auto">
+                            <TextField
+                                variant="outlined"
+                                fullWidth
+                                id="extraQuestions"
+                                label={multi.extraQuestions}
+                                name="extraQuestions"
+                                autoComplete="extraQuestions"
+                                onChange={handleChange}
+                            />
                         </Grid>
                     </Grid>
                     <Grid container justify="center">
