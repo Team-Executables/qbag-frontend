@@ -97,6 +97,8 @@ const SearchQuestions = () => {
             name: title,
             template_string: `/dashboard/question/list?easy=${formData.easy}&medium=${formData.medium}&hard=${formData.hard}&grade=${formData.grade}&subject=${formData.subject}&board=${formData.board}&langMedium=${formData.langMedium}`,
         }).then((res) => {
+            setTitle('');
+            setChecked(false);
             console.log(res);
             console.log(res.data);
         }).catch((err) => {
