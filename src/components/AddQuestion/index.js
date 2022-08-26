@@ -200,7 +200,10 @@ export default function AddQuestion() {
       })
       .catch(function (error) {
         console.log(error);
-      });
+      })
+      .finally(() => {
+        navigate("/dashboard/question/");
+      })
   };
 
   const getStepContent = (step) => {

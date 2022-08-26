@@ -56,7 +56,7 @@ const PastPapers = () => {
                                 secondary={
                                     paper.noQues ? 
                                     <Typography component="span" variant="body2">
-                                        We are sorry! No questions found for this paper. They may have been marked invalid by the community and hence deleted from our servers.
+                                        {multi.sorryNote}
                                     </Typography> : 
                                     <>
                                         <Typography component="span" variant="body2">

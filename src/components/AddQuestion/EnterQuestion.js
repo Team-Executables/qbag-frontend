@@ -97,7 +97,7 @@ const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
   const [mathInput, setMathInput] = React.useState("");
   const ref = useRef();
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return <span>{multi.noSpeechSupport}</span>;
   }
 
   const handleFiles = (files) => {
@@ -413,19 +413,19 @@ const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
               <DownloadIcon
                 style={{ position: "relative", top: "8px" }}
               ></DownloadIcon>
-              Download Sample
+              {multi.downloadSample}
             </CSVLink>
           </Box>
           <FileUpload
             required
             value={file}
             onChange={setFile}
-            buttonText="Upload CSV File"
+            buttonText={multi.uploadCSV}
             title="Upload/Drag and Drop Valid CSV File"
           />
           <Box textAlign="center" marginY={2}>
             <Button variant="outlined" onClick={bulkUploadSubmit}>
-              Submit file
+              {multi.submitFile}
             </Button>
           </Box>
           {/* <ReactFileReader
