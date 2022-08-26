@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";

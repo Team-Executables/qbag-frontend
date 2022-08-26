@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import useQuestions from "../../hooks/useQuestions";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";

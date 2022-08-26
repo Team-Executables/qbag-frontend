@@ -1,6 +1,6 @@
 import * as React from "react";
 import Question from "./Question";
-import { autoPlay } from "react-swipeable-views-utils";
+// import { autoPlay } from "react-swipeable-views-utils";
 import SwipeableViews from "react-swipeable-views";
 import { useRecoilValue } from "recoil";
 import { multilingual } from "../../atoms";
@@ -14,7 +14,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import VOTES_THRESHOLD from "../../utils";
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 function CheckUnvettedQuestion({ ques }) {
   const multi = useRecoilValue(multilingual);

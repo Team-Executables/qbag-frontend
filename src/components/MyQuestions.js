@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { userData, multilingual } from "../atoms";
 import axiosInstance from "../axios";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import Question from "./SearchQuestion/Question";
 import { jsPDF } from "jspdf";
 
 //MUI
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 
@@ -20,7 +21,7 @@ const MyQuestions = () => {
     const multi = useRecoilValue(multilingual);
     const [questions, setQuestions] = useState([]);
 
-    let { id } = useParams();
+    // let { id } = useParams();
 
 
     useEffect(() => {

@@ -264,7 +264,7 @@ export default function Register() {
       form_data.append("employment", formData.employment);
       form_data.append("password", formData.password);
       form_data.append("user_type", formData.user_type);
-      form_data.append("idproof", formData.id_proof[0]);
+      // form_data.append("idproof", formData.id_proof[0]);
 
       if (formData.user_type === "other") {
         form_data.append("education", othersData.education);

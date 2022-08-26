@@ -14,10 +14,10 @@ import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
 import { useState, useRef } from "react";
 import { question, MCQoptions, matchPairs, multilingual } from "../../atoms";
-import { CSVLink, CSVDownload } from "react-csv";
+import { CSVLink } from "react-csv";
 import DownloadIcon from "@mui/icons-material/Download";
-import ReactFileReader from "react-file-reader";
-import UploadFileIcon from "@mui/icons-material/UploadFile";
+// import ReactFileReader from "react-file-reader";
+// import UploadFileIcon from "@mui/icons-material/UploadFile";
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -94,15 +94,15 @@ const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
   const [value, setValue] = React.useState(0);
-  const [mathInput, setMathInput] = React.useState("");
+  const [mathInput, ] = React.useState("");
   const ref = useRef();
   if (!browserSupportsSpeechRecognition) {
     return <span>{multi.noSpeechSupport}</span>;
   }
 
-  const handleFiles = (files) => {
-    console.log(files);
-  };
+  // const handleFiles = (files) => {
+  //   console.log(files);
+  // };
 
   const addMatchField = () => {
     setMatchFields([

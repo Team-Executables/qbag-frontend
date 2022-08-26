@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { multilingual } from "../../atoms";
 import { multilingualSupport } from "../../utils";

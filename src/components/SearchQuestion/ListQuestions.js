@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { userData, resQues, multilingual, selectedQues } from "../../atoms";
@@ -18,7 +19,7 @@ import StepLabel from "@mui/material/StepLabel";
 
 const ListQuestions = () => {
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, ] = useSearchParams();
     const uData = useRecoilValue(userData);
     const multi = useRecoilValue(multilingual);
     const [loading, setLoading] = useState(true);

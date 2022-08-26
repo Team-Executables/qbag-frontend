@@ -158,7 +158,7 @@ export default function AddQuestion() {
   const checkCurrentState = (step) => {
     switch (step) {
       case 0:
-        for (let [key, value] of Object.entries(questionDetails)) {
+        for (let [, value] of Object.entries(questionDetails)) {
           if (value.length === 0) {
             return true;
           }
