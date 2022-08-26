@@ -7,7 +7,9 @@ import axiosInstance from "../../axios";
 import ReviewQuestions from "./ReviewQuestions";
 import SavePaper from "./SavePaper";
 // MUI
-import { Box, Paper, Button, Container, Stack, Skeleton } from "@mui/material";
+import { Box, Paper, Button, Container, Skeleton } from "@mui/material";
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Stepper from "@mui/material/Stepper";
@@ -20,11 +22,13 @@ const ListQuestions = () => {
     const uData = useRecoilValue(userData);
     const multi = useRecoilValue(multilingual);
     const [loading, setLoading] = useState(true);
+    const [keywordsData, setKeywordsData] = useState([])
     const [activeStep, setActiveStep] = useState(0);
     const selectedQuestions = useRecoilValue(selectedQues);
 
     const [questions, setQuestions] = useRecoilState(resQues);
-
+    const [listFilterQuestions, setListFilterQuestions] = useState(questions)
+    const [chipKey, setChipKey] = useState(null)
     const steps = [
         multi.selectQuestions,
         multi.reviewQuestions,
@@ -34,6 +38,33 @@ const ListQuestions = () => {
     const handleNext = () => setActiveStep(activeStep + 1);
 
     const handleBack = () => setActiveStep(activeStep - 1);
+
+    function handleClick(key) {
+        alert("Works")
+        if(key === "All") {
+            setChipKey(null)
+            return
+        }
+        setChipKey(key)
+        
+        const filteredQ = questions.map(q => {
+            const keywords = q.keyword_data
+            const filterKeywords = keywords.find(element => element.keyword === key);
+            if (filterKeywords) {
+                return q;
+            } else {
+                return null
+            }
+        })
+        var finalQs = filteredQ.filter(function (el) {
+            return el !== null;
+        });
+        console.log({ finalQs });
+        console.log({ finalQs });
+        console.log({ finalQs });
+
+        setListFilterQuestions(finalQs);
+    }
 
     const checkCurrentState = (step) => {
         switch (step) {
@@ -54,10 +85,14 @@ const ListQuestions = () => {
                 return (
                     <>
                         {questions && questions.length > 0
-                            ? (
-                                questions.map((q, key) => (
-                                    <Question q={q} qkey={key} key={q.title} showCheckbox={true} showvote={true} />
-                                ))
+                            ?
+                            (
+                                chipKey ?
+                                    listFilterQuestions.map((q, key) => (
+                                        <Question q={q} qkey={key} key={q.title} showCheckbox={true} showvote={true} />
+                                    )) : questions.map((q, key) => (
+                                        <Question q={q} qkey={key} key={q.title} showCheckbox={true} showvote={true} />
+                                    ))
                             )
                             : (!loading && questions && questions.length === 0
                                 ?
@@ -145,6 +180,10 @@ const ListQuestions = () => {
             .then((res) => {
                 console.log(res);
                 setQuestions(res.data);
+
+                const keywords = res.data.map((q) => q.keyword_data.map((keydata) => keydata.keyword)[0])
+                setKeywordsData(keywords)
+
                 console.log(res.data);
                 setLoading(false)
             })
@@ -153,6 +192,10 @@ const ListQuestions = () => {
                 console.log(err);
             });
     }, []);
+
+
+
+
 
     return (
         <Box>
@@ -192,6 +235,7 @@ const ListQuestions = () => {
                                 </div>
                             )}
                         </Box>
+
                         <Box displayPrint="none">
                             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                                 {steps.map((label) => (
@@ -232,6 +276,18 @@ const ListQuestions = () => {
                     </Box>
 
                     <Divider />
+                    {!activeStep && <Box sx={{ my: 3 }}>
+                        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+                            {
+                                <>
+                                    <Chip color="primary" variant="outlined" sx={{ mx: 0.5, my: 0.5 }} label={"All"} onClick={() => handleClick("All")} />
+                                    {keywordsData.map((ke) =>
+                                        <Chip color="primary" variant="outlined" sx={{ mx: 0.5, my: 0.5 }} label={ke} onClick={() => handleClick(ke)} />
+                                    )}
+                                </>
+                            }
+                        </Box>
+                    </Box>}
                 </>
             ) : null}
             {getStepContent(activeStep)}
