@@ -404,7 +404,7 @@ const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6">Bulk Upload Questions</Typography>
-          {/* <Box textAlign="center" marginY={2}>
+          <Box textAlign="center" marginY={2}>
             <CSVLink
               style={{ textDecoration: "none", color: "black" }}
               data={csvData}
@@ -415,7 +415,7 @@ const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
               ></DownloadIcon>
               Download Sample
             </CSVLink>
-          </Box> */}
+          </Box>
           <FileUpload
             required
             value={file}
