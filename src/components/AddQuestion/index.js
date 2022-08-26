@@ -90,7 +90,7 @@ export default function AddQuestion() {
     if (questionDetails.type === "b" || questionDetails.type === "c") {
       if (activeStep + 1 === steps.length) {
         const mathOrText =
-          q.title.length === 0 ? q.title : localStorage.getItem("mathInput");
+          q.title.length === 0 ? localStorage.getItem("mathInput") : q.title;
         let objToSend = {
           ...questionDetails,
           ...q,
@@ -121,7 +121,7 @@ export default function AddQuestion() {
       let que = JSON.parse(JSON.stringify(q));
       que["options"] = [];
       const mathOrText =
-        q.title.length === 0 ? q.title : localStorage.getItem("mathInput");
+        q.title.length === 0 ? localStorage.getItem("mathInput") : q.title;
       if (activeStep + 1 === steps.length) {
         let objToSend = {
           ...questionDetails,
@@ -222,9 +222,11 @@ export default function AddQuestion() {
                     <Typography variant="h5" gutterBottom>
                       {multi.enterQuestionSuccess}
                     </Typography>
-                    <Typography variant="subtitle1">
+                    {/* <Typography variant="subtitle1"> */}
+                    <math-field read-only>
                       {respons.data.question_data.title}
-                    </Typography>
+                    </math-field>
+                    {/* </Typography> */}
                     <Button
                       onClick={() => {
                         window.location.reload();
