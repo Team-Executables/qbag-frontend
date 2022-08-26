@@ -54,6 +54,10 @@ const PastPapers = () => {
                             <ListItemText
                                 primary={paper.name}
                                 secondary={
+                                    paper.noQues ? 
+                                    <Typography component="span" variant="body2">
+                                        We are sorry! No questions found for this paper. They may have been marked invalid by the community and hence deleted from our servers.
+                                    </Typography> : 
                                     <>
                                         <Typography component="span" variant="body2">
                                             {multi.board}: {paper.board} | {multi.grade}: {paper.grade}
@@ -65,12 +69,12 @@ const PastPapers = () => {
                                     </>
                                 }
                             />
-                            <ListItemSecondaryAction>
+                            {!paper.noQues && <ListItemSecondaryAction>
                                 <Typography variant="subtitle2">
                                     {multi.generated} <br />
                                     {`${format(new Date(paper.export_date), "do MMM, yyyy")}`}
                                 </Typography>
-                            </ListItemSecondaryAction>
+                            </ListItemSecondaryAction>}
                         </ListItem>
                     </Paper>
                 ))
