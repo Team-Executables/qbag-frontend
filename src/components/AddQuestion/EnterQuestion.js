@@ -14,6 +14,10 @@ import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { question, MCQoptions, matchPairs, multilingual } from "../../atoms";
+import { CSVLink, CSVDownload } from "react-csv";
+import DownloadIcon from '@mui/icons-material/Download';
+import ReactFileReader from 'react-file-reader';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -27,6 +31,13 @@ const EnterQuestion = ({ qType }) => {
   const [matchFields, setMatchFields] = useRecoilState(matchPairs);
   const multi = useRecoilValue(multilingual);
 
+  const csvData = [
+    ["type","marks","difficulty","keywords","title","option1","correct1","option2","correct2","option3","correct3"," option4", "correct4"],
+    ["a","1","easy","trignometry; angles; triangles","sum of angles of a triangle","90","0","180","1","360","0"],
+    ["b","2","medium","mental math; addition","1+1=?","2"],
+    ["c","5","hard","algebra; BODMAS","7-3=?","4"]
+  ];
+
   const {
     transcript,
     listening,
@@ -36,6 +47,10 @@ const EnterQuestion = ({ qType }) => {
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
+  }
+
+  const handleFiles = files => {
+    console.log(files)
   }
 
   const addMatchField = () => {
@@ -142,14 +157,14 @@ const EnterQuestion = ({ qType }) => {
             value={ques.title}
             onChange={handleQuesChange}
           />
-          <div>
+          <Box sx={{ m: 2 }}>
             <p>Microphone: {listening ? "ON" : "OFF"}</p>
             <ButtonGroup variant="outlined" aria-label="outlined button group">
               <Button onClick={SpeechRecognition.startListening}>Start</Button>
               <Button onClick={stopListening}>Stop</Button>
               <Button onClick={resetCustomTranscript}>Reset</Button>
             </ButtonGroup>
-          </div>
+          </Box>
         </Grid>
         <Grid item xs={12}>
           {qType === "a" ? (
@@ -258,6 +273,17 @@ const EnterQuestion = ({ qType }) => {
               </div>
             </div>
           )}
+        </Grid>
+        <Grid item xs={12}>
+        <Typography variant="h6">
+            Bulk Upload Questions
+          </Typography>
+          <CSVLink style={{textDecoration: 'none'}} data={csvData} filename={"Example Questions.csv"}><DownloadIcon style={{position: 'relative', top: '8px'}}></DownloadIcon>Download Sample</CSVLink>
+          <ReactFileReader fileTypes={[".csv",".xls"]} base64={true} multipleFiles={false} handleFiles={handleFiles}>
+          <Box textAlign='center'>
+                <Button variant="outlined"><UploadFileIcon></UploadFileIcon>Upload</Button>
+            </Box>
+          </ReactFileReader>
         </Grid>
       </Grid>
     </>
