@@ -47,6 +47,7 @@ export const multilingualSupport = {
         "dontHaveAnAccountSignUp": "Don't have an account? Sign Up",
         "alreadyHaveAnAccountSignIn": "Already have an account? Sign in",
 
+
         "addQuestion": "Add Question",
         "searchQuestion": "Search Question",
         "generateQuestionPaper": "Generate Question Paper",
@@ -151,6 +152,14 @@ export const multilingualSupport = {
         "vettedWarning": "The following questions are not vetted by the community, would you still like to continue?",
         "requested": "Requested",
         "selected": "Selected",
+        "noPapersGenerated": "No Question Papers are generated yet",
+        "noTemplatesSaved": "You have not saved any templates",
+        "savePrompt": "Save this search as a Template",
+        "save": "Save",
+
+        "downvoteModalHead": "Reason for Downvote",
+        "downvoteModalSubHead": "Please provide a reason for downvoting the question",
+        "cancel": "Cancel",
     },
     'हिन्दी': {
         'language': 'भाषा बदलो',
