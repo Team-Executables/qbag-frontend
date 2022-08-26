@@ -22,6 +22,7 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { useSearchParams } from "react-router-dom";
 
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -54,6 +55,7 @@ const EnterQuestion = ({ qType }) => {
   const [tags, setTags] = useState([...tagz.splice(1)]);
   const [matchFields, setMatchFields] = useRecoilState(matchPairs);
   const multi = useRecoilValue(multilingual);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const csvData = [
     [
@@ -200,21 +202,13 @@ const EnterQuestion = ({ qType }) => {
       "aria-controls": `simple-tabpanel-${index}`,
     };
   }
-
-  window.addEventListener("DOMContentLoaded", (event) => {
+  setTimeout(() => {
     const mf = document.getElementById("formula");
-
     mf.addEventListener("input", (ev) => {
-      console.log(ev.target.value);
-      //   const l = ev.target.value;
-      //   console.log(l);
-      setMathInput(ev.target.value);
-      setQues((ques) => ({
-        ...ques,
-        title: mathInput,
-      }));
+      console.log(JSON.stringify(ev.target.value));
+      localStorage.setItem("mathInput", ev.target.value);
     });
-  });
+  }, 0);
 
   //   const handleMathChange = (e) => {
   //     console.log(ques.title);
@@ -259,7 +253,7 @@ const EnterQuestion = ({ qType }) => {
             aria-label="basic tabs example"
           >
             <Tab label="Math input" {...a11yProps(0)} />
-            <Tab label="Text to Speech" {...a11yProps(1)} />
+            <Tab label="Speech to text" {...a11yProps(1)} />
           </Tabs>
           <TabPanel value={value} index={0}>
             <div
