@@ -14,6 +14,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import Toolbar from "@mui/material/Toolbar";
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+
 
 const drawerWidth = 240;
 
@@ -25,6 +29,8 @@ const Dashboard = ({ mobileOpen, handleDrawerToggle }) => {
         { text: multi.addQuestion, route: "question" },
         { text: multi.searchQuestion, route: "question/search" },
         { text: multi.viewPastPapers, route: "question/paper" },
+        { text: "My Templates", route: "question/templates" },
+        { text: "My Questions", route: "question/myquestions" },
     ];
 
     const log = useRecoilValue(isLoggedIn);
@@ -50,7 +56,9 @@ const Dashboard = ({ mobileOpen, handleDrawerToggle }) => {
                                 onClick={() => navigate(`/dashboard/${btn.route}`)}
                             >
                                 <ListItemIcon>
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                    { 
+                                        index === 0 ? <InboxIcon /> : index === 1 ? <MailIcon /> : index === 2 ? <AssignmentIcon /> : index === 3 ? <BookmarksIcon /> : <ContactSupportIcon />
+                                    }
                                 </ListItemIcon>
                                 <ListItemText primary={btn.text} />
                             </ListItem>
