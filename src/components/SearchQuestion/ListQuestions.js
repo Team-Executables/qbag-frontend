@@ -138,6 +138,7 @@ const ListQuestions = () => {
             subject: searchParams.get("subject"),
             board: searchParams.get("board"),
             langMedium: searchParams.get("langMedium"),
+            additional_ques: parseInt(searchParams.get("additional_ques")),
         };
 
         axiosInstance

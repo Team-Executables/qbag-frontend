@@ -8,7 +8,7 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 
 **Link to the website:** [https://qbag.netlify.app/](https://qbag.netlify.app/)
 <br/>
-**Link to backend repo:** 
+**Link to backend repo:** [https://github.com/Team-Executables/qbag-backend](https://github.com/Team-Executables/qbag-backend)
 <br/>
 **Link to the project presentation:** [https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf](https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf)
 <br/>
@@ -22,6 +22,9 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 * axios v0.26.1
 * date-fns v2.29.1
 * react-speech-recognition v3.9.1
+* react-csv: v2.2.2
+* react-file-reader: v1.1.4
+* react-material-file-upload: v0.0.4
 
 
 ### Features ###
@@ -40,10 +43,16 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
   * Inputs accepted in all languages
   * Special Status (Badge) on questions created by academicians
   * Questions undergo vetting through crowdsourcing
+  * Speech to text recognition for uploading questions
+  * Bulk Upload of questions in .csv/.xls format
+  * Math Input in question creation
     
 * **Question Generation**
   * Filtering by variety of fields like board, class, subject, etc.
   * Upvote/Downvote questions to participate in vetting
+  * Provision of feedback on voting for questions
   * Download Question Paper as PDF
   * Print Question Paper
   * Save Question Paper for reference
+  * Save previously added questions
+  * Save input parameters as template
