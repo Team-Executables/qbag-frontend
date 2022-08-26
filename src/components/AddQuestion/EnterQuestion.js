@@ -12,16 +12,40 @@ import TextField from "@mui/material/TextField";
 // import MenuItem from "@mui/material/MenuItem";
 import { ButtonGroup } from "@mui/material";
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState, useRef } from "react";
 import { question, MCQoptions, matchPairs, multilingual } from "../../atoms";
 import { CSVLink, CSVDownload } from "react-csv";
-import DownloadIcon from '@mui/icons-material/Download';
-import ReactFileReader from 'react-file-reader';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
+import DownloadIcon from "@mui/icons-material/Download";
+import ReactFileReader from "react-file-reader";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
 const EnterQuestion = ({ qType }) => {
   const [ques, setQues] = useRecoilState(question);
@@ -32,10 +56,36 @@ const EnterQuestion = ({ qType }) => {
   const multi = useRecoilValue(multilingual);
 
   const csvData = [
-    ["type","marks","difficulty","keywords","title","option1","correct1","option2","correct2","option3","correct3"," option4", "correct4"],
-    ["a","1","easy","trignometry; angles; triangles","sum of angles of a triangle","90","0","180","1","360","0"],
-    ["b","2","medium","mental math; addition","1+1=?","2"],
-    ["c","5","hard","algebra; BODMAS","7-3=?","4"]
+    [
+      "type",
+      "marks",
+      "difficulty",
+      "keywords",
+      "title",
+      "option1",
+      "correct1",
+      "option2",
+      "correct2",
+      "option3",
+      "correct3",
+      " option4",
+      "correct4",
+    ],
+    [
+      "a",
+      "1",
+      "easy",
+      "trignometry; angles; triangles",
+      "sum of angles of a triangle",
+      "90",
+      "0",
+      "180",
+      "1",
+      "360",
+      "0",
+    ],
+    ["b", "2", "medium", "mental math; addition", "1+1=?", "2"],
+    ["c", "5", "hard", "algebra; BODMAS", "7-3=?", "4"],
   ];
 
   const {
@@ -44,14 +94,16 @@ const EnterQuestion = ({ qType }) => {
     resetTranscript,
     browserSupportsSpeechRecognition,
   } = useSpeechRecognition();
-
+  const [value, setValue] = React.useState(0);
+  const [mathInput, setMathInput] = React.useState("");
+  const ref = useRef();
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
 
-  const handleFiles = files => {
-    console.log(files)
-  }
+  const handleFiles = (files) => {
+    console.log(files);
+  };
 
   const addMatchField = () => {
     setMatchFields([
@@ -140,6 +192,40 @@ const EnterQuestion = ({ qType }) => {
     }));
   };
 
+  const handleTabChange = (event, newValue) => setValue(newValue);
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
+    };
+  }
+
+  window.addEventListener("DOMContentLoaded", (event) => {
+    const mf = document.getElementById("formula");
+
+    mf.addEventListener("input", (ev) => {
+      console.log(ev.target.value);
+      //   const l = ev.target.value;
+      //   console.log(l);
+      setMathInput(ev.target.value);
+      setQues((ques) => ({
+        ...ques,
+        title: mathInput,
+      }));
+    });
+  });
+
+  //   const handleMathChange = (e) => {
+  //     console.log(ques.title);
+  //     // setQues((ques) => ({
+  //     //   ...ques,
+  //     //   title: mathInput,
+  //     // }));
+  //   };
+
+  console.log(ref);
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -147,6 +233,7 @@ const EnterQuestion = ({ qType }) => {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
+          {/* <<<<<<< Updated upstream
           <TextField
             required
             id="title"
@@ -165,6 +252,56 @@ const EnterQuestion = ({ qType }) => {
               <Button onClick={resetCustomTranscript}>Reset</Button>
             </ButtonGroup>
           </Box>
+======= */}
+          <Tabs
+            value={value}
+            onChange={handleTabChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="Math input" {...a11yProps(0)} />
+            <Tab label="Text to Speech" {...a11yProps(1)} />
+          </Tabs>
+          <TabPanel value={value} index={0}>
+            <div
+              style={{
+                border: "1px solid rgba(0, 0, 0, .3)",
+                borderRadius: "5px",
+              }}
+            >
+              <math-field
+                id="formula"
+                virtual-keyboard-mode="manual"
+              ></math-field>
+            </div>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <TextField
+              ref={ref}
+              required
+              id="title"
+              name="title"
+              label={multi.question}
+              fullWidth
+              variant="standard"
+              value={ques.title}
+              disabled={mathInput.length !== 0}
+              onChange={handleQuesChange}
+            />
+            <div>
+              <p>Microphone: {listening ? "ON" : "OFF"}</p>
+              <ButtonGroup
+                variant="outlined"
+                aria-label="outlined button group"
+              >
+                <Button onClick={SpeechRecognition.startListening}>
+                  Start
+                </Button>
+                <Button onClick={stopListening}>Stop</Button>
+                <Button onClick={resetCustomTranscript}>Reset</Button>
+              </ButtonGroup>
+            </div>
+          </TabPanel>
+          {/* >>>>>>> Stashed changes */}
         </Grid>
         <Grid item xs={12}>
           {qType === "a" ? (
@@ -275,13 +412,27 @@ const EnterQuestion = ({ qType }) => {
           )}
         </Grid>
         <Grid item xs={12}>
-        <Typography variant="h6">
-            Bulk Upload Questions
-          </Typography>
-          <CSVLink style={{textDecoration: 'none'}} data={csvData} filename={"Example Questions.csv"}><DownloadIcon style={{position: 'relative', top: '8px'}}></DownloadIcon>Download Sample</CSVLink>
-          <ReactFileReader fileTypes={[".csv",".xls"]} base64={true} multipleFiles={false} handleFiles={handleFiles}>
-          <Box textAlign='center'>
-                <Button variant="outlined"><UploadFileIcon></UploadFileIcon>Upload</Button>
+          <Typography variant="h6">Bulk Upload Questions</Typography>
+          <CSVLink
+            style={{ textDecoration: "none" }}
+            data={csvData}
+            filename={"Example Questions.csv"}
+          >
+            <DownloadIcon
+              style={{ position: "relative", top: "8px" }}
+            ></DownloadIcon>
+            Download Sample
+          </CSVLink>
+          <ReactFileReader
+            fileTypes={[".csv", ".xls"]}
+            base64={true}
+            multipleFiles={false}
+            handleFiles={handleFiles}
+          >
+            <Box textAlign="center">
+              <Button variant="outlined">
+                <UploadFileIcon></UploadFileIcon>Upload
+              </Button>
             </Box>
           </ReactFileReader>
         </Grid>
