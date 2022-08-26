@@ -40,7 +40,6 @@ const ListQuestions = () => {
     const handleBack = () => setActiveStep(activeStep - 1);
 
     function handleClick(key) {
-        alert("Works")
         if(key === "All") {
             setChipKey(null)
             return
