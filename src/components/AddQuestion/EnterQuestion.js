@@ -67,7 +67,7 @@ const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
       "correct2",
       "option3",
       "correct3",
-      " option4",
+      "option4",
       "correct4",
     ],
     [
