@@ -6,7 +6,7 @@ import axiosInstance from "../../axios";
 import { useRecoilValue } from "recoil";
 import { question, matchPairs, MCQoptions, multilingual } from "../../atoms";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 // MUI
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -49,6 +49,7 @@ export default function AddQuestion() {
   const mp = useRecoilValue(matchPairs);
   const mcqs = useRecoilValue(MCQoptions);
   const multi = useRecoilValue(multilingual);
+  const [file, setFile] = useState([]);
 
   const steps = [
     multi.questionDetails,
@@ -172,6 +173,36 @@ export default function AddQuestion() {
     }
   };
 
+  const bulkUploadSubmit = () => {
+    var data = new FormData();
+
+    data.append("file", file[0]);
+    data.append("grade", questionDetails.grade);
+    data.append("board", questionDetails.board);
+    data.append("medium", questionDetails.medium);
+    data.append("subject", questionDetails.subject);
+
+    var config = {
+      method: "post",
+      url: "http://127.0.0.1:8000/questions/bulkupload",
+      headers: {
+        Authorization: localStorage.getItem("access_token")
+          ? `Bearer ${localStorage.getItem("access_token")}`
+          : null,
+        "Content-Type": "multipart/form-data",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -184,7 +215,14 @@ export default function AddQuestion() {
           />
         );
       case 1:
-        return <EnterQuestion qType={questionDetails.type} />;
+        return (
+          <EnterQuestion
+            qType={questionDetails.type}
+            bulkUploadSubmit={bulkUploadSubmit}
+            file={file}
+            setFile={setFile}
+          />
+        );
       case 2:
         return <ReviewQuestion qType={questionDetails.type} />;
       default:

@@ -19,10 +19,9 @@ import DownloadIcon from "@mui/icons-material/Download";
 import ReactFileReader from "react-file-reader";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import * as React from "react";
-import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { useSearchParams } from "react-router-dom";
+import FileUpload from "react-material-file-upload";
 
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -48,15 +47,13 @@ function TabPanel(props) {
   );
 }
 
-const EnterQuestion = ({ qType }) => {
+const EnterQuestion = ({ qType, bulkUploadSubmit, file, setFile }) => {
   const [ques, setQues] = useRecoilState(question);
   const [mcqs, setMcqs] = useRecoilState(MCQoptions);
   const tagz = mcqs.map((m) => m.option);
   const [tags, setTags] = useState([...tagz.splice(1)]);
   const [matchFields, setMatchFields] = useRecoilState(matchPairs);
   const multi = useRecoilValue(multilingual);
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const csvData = [
     [
       "type",
@@ -407,17 +404,31 @@ const EnterQuestion = ({ qType }) => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6">Bulk Upload Questions</Typography>
-          <CSVLink
-            style={{ textDecoration: "none" }}
-            data={csvData}
-            filename={"Example Questions.csv"}
-          >
-            <DownloadIcon
-              style={{ position: "relative", top: "8px" }}
-            ></DownloadIcon>
-            Download Sample
-          </CSVLink>
-          <ReactFileReader
+          {/* <Box textAlign="center" marginY={2}>
+            <CSVLink
+              style={{ textDecoration: "none", color: "black" }}
+              data={csvData}
+              filename={"Example Questions.csv"}
+            >
+              <DownloadIcon
+                style={{ position: "relative", top: "8px" }}
+              ></DownloadIcon>
+              Download Sample
+            </CSVLink>
+          </Box> */}
+          <FileUpload
+            required
+            value={file}
+            onChange={setFile}
+            buttonText="Upload CSV File"
+            title="Upload/Drag and Drop Valid CSV File"
+          />
+          <Box textAlign="center" marginY={2}>
+            <Button variant="outlined" onClick={bulkUploadSubmit}>
+              Submit file
+            </Button>
+          </Box>
+          {/* <ReactFileReader
             fileTypes={[".csv", ".xls"]}
             base64={true}
             multipleFiles={false}
@@ -428,7 +439,7 @@ const EnterQuestion = ({ qType }) => {
                 <UploadFileIcon></UploadFileIcon>Upload
               </Button>
             </Box>
-          </ReactFileReader>
+          </ReactFileReader> */}
         </Grid>
       </Grid>
     </>
