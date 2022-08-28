@@ -1,4 +1,4 @@
-# QBaG (Question Bank Generator)
+# QBaG: Question Bank Generator
 
 _QBaG: Question Bank Generator uses a crowdsourcing approach to create a question bank of objective questions and offers academicians and paper setters an interface to create questions and papers using our automated and reliable system. Contributed questions are reviewed by experts as and put through a series of automated checks. The questions can be generated based on desired criteria like the board, subject, marks, difficulty, topic, medium, and language, etc. The final question paper can be exported to PDF and can be saved in the application itself for future use._
 
@@ -12,7 +12,7 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 <br/>
 **Link to the project presentation:** [https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf](https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf)
 <br/>
-
+<br/>
 
 ### Tech Stack ###
 * React v17.0.2
@@ -24,6 +24,7 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 * react-speech-recognition v3.9.1
 * react-material-file-upload: v0.0.4
 
+<br/>
 
 ### Features ###
 * **Responsive Design**
