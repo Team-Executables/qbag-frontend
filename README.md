@@ -22,8 +22,6 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 * axios v0.26.1
 * date-fns v2.29.1
 * react-speech-recognition v3.9.1
-* react-csv: v2.2.2
-* react-file-reader: v1.1.4
 * react-material-file-upload: v0.0.4
 
 
