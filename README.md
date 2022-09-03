@@ -10,7 +10,7 @@ _A [backend api](https://github.com/Team-Executables/qbag-backend) has been buil
 <br/>
 **Link to backend repo:** [https://github.com/Team-Executables/qbag-backend](https://github.com/Team-Executables/qbag-backend)
 <br/>
-**Link to the project presentation:** [https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf](https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf)
+**Link to the project presentation:** [Question Bank Generator.pdf](https://github.com/Team-Executables/qbag-frontend/blob/main/Question%20Bank%20Generator.pdf)
 <br/>
 <br/>
 
